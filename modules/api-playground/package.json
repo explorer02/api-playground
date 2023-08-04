@@ -1,9 +1,9 @@
 {
   "name": "@explorer02/api-playground",
-  "version": "1.0.0",
+  "version": "1.0.7",
   "description": "API Playground component",
-  "main": "index.tsx",
-  "private": false,
+  "main": "dist/index.js",
+  "types": "types/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,5 +21,24 @@
   "bugs": {
     "url": "https://github.com/explorer02/api-playground/issues"
   },
-  "homepage": "https://github.com/explorer02/api-playground#readme"
+  "homepage": "https://github.com/explorer02/api-playground#readme",
+  "dependencies": {
+    "@sprinklrjs/spaceweb": "12.14.4",
+    "@sprinklrjs/spaceweb-themes": "12.14.4",
+    "rtl-css-js": "^1.16.1",
+    "typescript": "5.1.6",
+    "react-use": "17.4.0",
+    "monaco-editor": "0.40.0",
+    "@monaco-editor/react": "^4.5.1",
+    "react-icons": "4.10.1",
+    "@apollo/client": "3.6.8",
+    "graphql": "^16.7.1"
+  },
+  "peerDependencies": {
+    "@types/node": "20.4.6",
+    "@types/react": "18.2.18",
+    "@types/react-dom": "18.2.7",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  }
 }

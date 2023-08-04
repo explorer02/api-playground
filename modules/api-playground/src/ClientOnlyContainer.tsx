@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { ContainerWithStyles } from './Container';
+import { ContainerWithStyles } from './ContainerWithStyles';
 
 import { APIPlaygroundProps } from './types';
 
-export const APIPlayground = (props: APIPlaygroundProps) => {
+export const ClientOnlyContainer = (props: APIPlaygroundProps) => {
   const [isMounted, setMounted] = useState(false);
 
   useEffect(() => {

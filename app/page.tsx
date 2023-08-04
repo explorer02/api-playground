@@ -1,6 +1,6 @@
 'use client';
 
-import { APIPlayground } from '@/modules/api-playground';
+import { APIPlayground } from '@/modules/api-playground/dist';
 
 import { GAME_CONFIG } from './config';
 

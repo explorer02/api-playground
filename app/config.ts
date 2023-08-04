@@ -1,5 +1,4 @@
-import { Game } from '@/modules/api-playground/constants/game';
-import { GameConfig } from '@/modules/api-playground/types';
+import { Game, GameConfig } from '@/modules/api-playground';
 
 export const GAME_CONFIG: GameConfig[] = [
   {
