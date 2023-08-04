@@ -1,0 +1,25 @@
+{
+  "name": "@explorer02/api-playground",
+  "version": "1.0.0",
+  "description": "API Playground component",
+  "main": "index.tsx",
+  "private": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/explorer02/api-playground.git"
+  },
+  "keywords": [
+    "api-playground",
+    "playground",
+    "api"
+  ],
+  "author": "Ajay Bhardwaj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/explorer02/api-playground/issues"
+  },
+  "homepage": "https://github.com/explorer02/api-playground#readme"
+}
