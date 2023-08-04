@@ -9,7 +9,7 @@ import { LiaDownloadSolid } from 'react-icons/lia';
 import { PiBracketsCurly } from 'react-icons/pi';
 
 //utils
-import { downloadJSON } from '../../utils/downloadJSON';
+import { downloadJSON } from '@/utils/downloadJSON';
 
 //types
 import { IconType } from 'react-icons';
