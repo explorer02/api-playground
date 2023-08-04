@@ -6,39 +6,52 @@ import { useCallback, useMemo, useState } from 'react';
 // components
 import { Box } from '@sprinklrjs/spaceweb/box';
 import { SideNav } from './components/SideNav';
-
-//hooks
-import { useSideNavItems } from './hooks/useSideNavItems';
+import { StaticDataViewer } from './components/StaticDataViewer';
 
 //constants
-import { Game, SubGame } from './constants/game';
+import { Game } from './constants/game';
 
-export const APIPlayground = (): JSX.Element => {
-  const [activeGame, setActiveGame] = useState<Game>(Game.CURRENT_USER);
-  const [activeSubGame, setActiveSubGame] = useState<SubGame>();
+//types
+import { APIPlaygroundProps } from './types';
 
-  const onNavItemClick = useCallback((game: Game, subGame?: SubGame) => {
-    setActiveGame(game);
-    setActiveSubGame(subGame);
+export const APIPlayground = ({ config, className }: APIPlaygroundProps): JSX.Element => {
+  const [activeNavItem, setActiveNavItem] = useState<string>(config[0].id);
+  // const [activeSubGame, setActiveSubGame] = useState<SubGame>();
+
+  // const onNavItemClick = useCallback((game: Game, subGame?: SubGame) => {
+  //   setActiveGame(game);
+  // setActiveSubGame(subGame);
+  // }, []);
+
+  const onNavItemClick = useCallback((navItem: string) => {
+    setActiveNavItem(navItem);
   }, []);
 
-  const sideNavItems = useSideNavItems();
-  const Component = useMemo(() => {
-    const activeNavItem = sideNavItems.find(item => item.id === activeGame)!;
-    if (activeSubGame) {
-      return activeNavItem.children!.find(child => child.id === activeSubGame)!.Component;
-    }
-    return activeNavItem.Component;
-  }, [activeGame, activeSubGame, sideNavItems]);
+  const activeGameConfig = useMemo(() => {
+    return config.find(c => c.id === activeNavItem)!;
+  }, [activeNavItem, config]);
+
+  // const Component = useMemo(() => {
+  //   const activeNavItem = sideNavItems.find(item => item.id === activeGame)!;
+  //   if (activeSubGame) {
+  //     return activeNavItem.children!.find(child => child.id === activeSubGame)!.Component;
+  //   }
+  //   return activeNavItem.Component;
+  // }, [activeGame, activeSubGame, sideNavItems]);
+
+  const activeGame = activeGameConfig.type;
+
+  let el;
+  if (activeGame === Game.STATIC_DATA) {
+    el = <StaticDataViewer config={activeGameConfig} />;
+  }
 
   return (
-    <Box className="w-full flex gap-8 h-full">
+    <Box className={['w-full flex gap-8 h-full', className]}>
       <Box className="flex-none">
-        <SideNav activeGame={activeGame} activeSubGame={activeSubGame} onNavItemClick={onNavItemClick} />
+        <SideNav config={config} activeNavItem={activeNavItem} onNavItemClick={onNavItemClick} />
       </Box>
-      <Box className="flex-1">
-        <Component />
-      </Box>
+      <Box className="flex-1">{el}</Box>
     </Box>
   );
 };

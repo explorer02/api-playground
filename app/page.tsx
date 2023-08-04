@@ -1,20 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { PageWrapper } from './PageWrapper';
+import { APIPlayground } from '@/modules/api-playground';
+
+import { GAME_CONFIG } from './config';
 
 const Page = (): JSX.Element | null => {
-  const [isMounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (isMounted) {
-    return <PageWrapper />;
-  }
-
-  return null;
+  return <APIPlayground config={GAME_CONFIG} className="h-screen p-16" />;
 };
 
 export default Page;

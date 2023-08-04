@@ -4,47 +4,42 @@ import { useCallback, MouseEvent } from 'react';
 // components
 import { Box } from '@sprinklrjs/spaceweb/box';
 import { Typography } from '@sprinklrjs/spaceweb/typography';
-
-//hooks
-import { useSideNavItems } from '../hooks/useSideNavItems';
-
-//constants
-import { Game, SubGame } from '../constants/game';
+import { GameConfig } from '../types';
 
 type Props = {
-  activeGame: Game;
-  activeSubGame: SubGame | undefined;
-  onNavItemClick: (g: Game, s: SubGame) => void;
+  config: GameConfig[];
+  activeNavItem: string;
+  onNavItemClick: (id: string) => void;
 };
 
-export const SideNav = ({ activeGame, activeSubGame, onNavItemClick }: Props): JSX.Element => {
-  const sideNavItems = useSideNavItems();
-
+export const SideNav = ({ config, activeNavItem, onNavItemClick }: Props): JSX.Element => {
   const handleItemClick = useCallback(
     (ev: MouseEvent<HTMLDivElement>) => {
-      const { game, subgame } = ev.currentTarget.dataset;
-      onNavItemClick(game as Game, subgame as SubGame);
+      const { id } = ev.currentTarget.dataset;
+      if (id) {
+        onNavItemClick(id);
+      }
     },
     [onNavItemClick]
   );
 
   return (
-    <Box className="flex flex-col border-1 border-solid spr-border-03 rounded-8 overflow-hidden">
-      {sideNavItems.map(navItem => (
-        <Box key={navItem.id}>
+    <Box className="flex flex-col border-1 border-solid spr-border-03 rounded-8 overflow-hidden w-48">
+      {config.map(config => (
+        <Box key={config.id}>
           <Box
             className={[
               'px-4 py-3 cursor-pointer border-0 border-solid spr-border-03',
-              navItem.id === activeGame ? 'spr-ui-04 spr-text-05' : 'hover:spr-ui-02',
-              navItem.children?.length ? '' : 'border-b-1',
+              config.id === activeNavItem ? 'spr-ui-04 spr-text-05' : 'hover:spr-ui-02',
+              // config.children?.length ? '' : 'border-b-1',
             ]}
             onClick={handleItemClick}
-            data-game={navItem.id}
+            data-id={config.id}
           >
-            <Typography variant="body-16">{navItem.label}</Typography>
+            <Typography variant="body-16">{config.title}</Typography>
           </Box>
           <Box>
-            {navItem.children?.map(child => (
+            {/* {navItem.children?.map(child => (
               <Box
                 key={child.id}
                 className={[
@@ -57,7 +52,7 @@ export const SideNav = ({ activeGame, activeSubGame, onNavItemClick }: Props): J
               >
                 <Typography variant="body-16">{child.label}</Typography>
               </Box>
-            ))}
+            ))} */}
           </Box>
         </Box>
       ))}

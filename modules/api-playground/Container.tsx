@@ -9,16 +9,14 @@ import '@sprinklrjs/spaceweb-themes/utilities.min.css';
 import '@sprinklrjs/spaceweb-themes/styles/normalize.min.css';
 import '@sprinklrjs/spaceweb-themes/styles/globals.min.css';
 
-import { Box } from '@sprinklrjs/spaceweb/box';
-import { APIPlayground } from 'modules/api-playground';
+import { APIPlayground } from './APIPlayground';
+import { APIPlaygroundProps } from './types';
 
-export const PageWrapper = (): JSX.Element => {
+export const ContainerWithStyles = (props: APIPlaygroundProps): JSX.Element => {
   return (
     <SpacewebProvider direction="ltr" theme={light}>
       <StyleProvider>
-        <Box className="h-screen p-16">
-          <APIPlayground />
-        </Box>
+        <APIPlayground {...props} />
       </StyleProvider>
     </SpacewebProvider>
   );

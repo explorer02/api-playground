@@ -24,7 +24,8 @@
     "react-use": "17.4.0",
     "monaco-editor": "0.40.0",
     "@monaco-editor/react": "^4.5.1",
-    "react-icons": "4.10.1"
+    "react-icons": "4.10.1",
+    "@apollo/client": "3.6.8"
   },
   "resolutions": {
     "@types/react": "18.2.18",
