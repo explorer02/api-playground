@@ -1,24 +1,19 @@
 //lib
-import { MouseEvent, useCallback, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import * as monaco from 'monaco-editor';
 import { useCopyToClipboard } from 'react-use';
 
 //components
-import { RiFileCopyFill } from 'react-icons/ri';
-import { LiaDownloadSolid } from 'react-icons/lia';
-import { PiBracketsCurly } from 'react-icons/pi';
+import { VscCode } from 'react-icons/vsc';
+import { VscBracketDot } from 'react-icons/vsc';
+import { VscSave } from 'react-icons/vsc';
 
 //utils
 import { downloadJSON } from '@/utils/downloadJSON';
 
 //types
 import { IconType } from 'react-icons';
-
-type Action = {
-  id: string;
-  label: string;
-  Icon: IconType;
-};
+import { Action } from './types';
 
 const ACTION_TYPE = {
   FORMAT: 'FORMAT',
@@ -27,30 +22,34 @@ const ACTION_TYPE = {
 };
 
 const ACTIONS = [
-  { id: ACTION_TYPE.FORMAT, label: 'Format', Icon: PiBracketsCurly },
-  { id: ACTION_TYPE.COPY, label: 'Copy', Icon: RiFileCopyFill },
-  { id: ACTION_TYPE.DOWNLOAD, label: 'Download', Icon: LiaDownloadSolid },
+  { id: ACTION_TYPE.FORMAT, label: 'Format', Icon: VscCode },
+  { id: ACTION_TYPE.COPY, label: 'Copy', Icon: VscBracketDot },
+  { id: ACTION_TYPE.DOWNLOAD, label: 'Download', Icon: VscSave },
 ];
+
+type Params = {
+  title: string;
+  onActionClick?: (action: string) => void;
+};
 
 type ReturnType = {
   onMount: (mEditor: monaco.editor.IStandaloneCodeEditor) => void;
   actions: Action[];
-  onActionClick: (ev: MouseEvent<HTMLElement>) => void;
+  onActionClick: (action: string) => void;
 };
 
-export const useMonacoActions = ({ initialContent, title }: { initialContent?: string; title: string }): ReturnType => {
+export const useMonacoActions = ({ title, onActionClick: onParentActionClick }: Params): ReturnType => {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
 
   const onMount = useCallback((mEditor: monaco.editor.IStandaloneCodeEditor) => {
     editorRef.current = mEditor;
-    // editor.getAction('editor.action.formatDocument').run()
   }, []);
 
   const [_, copyToClipboard] = useCopyToClipboard();
 
   const onActionClick = useCallback(
-    (ev: MouseEvent<HTMLElement>) => {
-      switch (ev.currentTarget.dataset.id) {
+    (action: string) => {
+      switch (action) {
         case ACTION_TYPE.COPY: {
           const content = editorRef.current?.getValue();
           copyToClipboard(content ?? '');
@@ -66,10 +65,10 @@ export const useMonacoActions = ({ initialContent, title }: { initialContent?: s
           editorRef.current?.focus();
           break;
         default:
-          break;
+          onParentActionClick?.(action);
       }
     },
-    [copyToClipboard, title]
+    [copyToClipboard, onParentActionClick, title]
   );
 
   return { actions: ACTIONS, onMount, onActionClick };

@@ -9,5 +9,5 @@ type Props = {
 export const StaticDataViewer = ({ config }: Props) => {
   const stringifiedData = useMemo(() => JSON.stringify(config.data, null, 4), [config.data]);
 
-  return <Snippet content={stringifiedData} title={config.title} readOnly={ config.readOnly} />;
+  return <Snippet content={stringifiedData} title={config.title} readOnly={config.readOnly} />;
 };

@@ -1,4 +1,5 @@
 import { Game, GameConfig } from '@/modules/api-playground';
+import { CLIENT } from './constants';
 
 export const GAME_CONFIG: GameConfig[] = [
   {
@@ -9,5 +10,12 @@ export const GAME_CONFIG: GameConfig[] = [
       age: 24,
     },
     title: 'Current User',
+  },
+  {
+    id: 'apollo_cache',
+    type: Game.CACHE_VIEWER,
+    title: 'Cache Viewer',
+    client: CLIENT,
+    readOnly: true,
   },
 ];

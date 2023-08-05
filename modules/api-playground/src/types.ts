@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 
 import { Game } from './constants/game';
 
@@ -18,7 +18,8 @@ export type StaticGameConfig = CommonGameConfig & {
 
 export type CacheViewerConfig = CommonGameConfig & {
   type: Game.CACHE_VIEWER;
-  client: ApolloClient<InMemoryCache>;
+  client: ApolloClient<NormalizedCacheObject>;
+  readOnly?: boolean;
 };
 
 export type GameConfig = StaticGameConfig | CacheViewerConfig;

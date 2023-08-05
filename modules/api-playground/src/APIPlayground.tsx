@@ -7,6 +7,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { Box } from '@sprinklrjs/spaceweb/box';
 import { SideNav } from './components/SideNav';
 import { StaticDataViewer } from './components/StaticDataViewer';
+import { CacheViewer } from './components/cacheViewer';
 
 //constants
 import { Game } from './constants/game';
@@ -44,6 +45,8 @@ export const APIPlayground = ({ config, className }: APIPlaygroundProps): JSX.El
   let el;
   if (activeGame === Game.STATIC_DATA) {
     el = <StaticDataViewer config={activeGameConfig} />;
+  } else if (activeGame === Game.CACHE_VIEWER) {
+    el = <CacheViewer config={activeGameConfig} />;
   }
 
   return (
