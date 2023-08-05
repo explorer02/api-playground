@@ -14,7 +14,9 @@ type Props = {
 export const CacheViewer = ({ config }: Props) => {
   const { title, readOnly } = config;
 
-  const { data, onTabClick, selectedTabIdx, tabs, onActionClick, rightActions } = useCacheViewer({ config });
+  const { data, onTabClick, selectedTabIdx, tabs, onActionClick, rightActions, ctaActions, onMount } = useCacheViewer({
+    config,
+  });
 
   return (
     <Snippet
@@ -25,7 +27,9 @@ export const CacheViewer = ({ config }: Props) => {
       selectedTabIdx={selectedTabIdx}
       onTabClick={onTabClick}
       rightActions={rightActions}
+      ctaActions={ctaActions}
       onActionClick={onActionClick}
+      onMount={onMount}
     />
   );
 };

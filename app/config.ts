@@ -16,6 +16,12 @@ export const GAME_CONFIG: GameConfig[] = [
     type: Game.CACHE_VIEWER,
     title: 'Cache Viewer',
     client: CLIENT,
-    readOnly: true,
+    // readOnly: true,
+  },
+  {
+    id: 'query_executor',
+    type: Game.QUERY_EXECUTOR,
+    title: 'Query Executor',
+    client: CLIENT,
   },
 ];

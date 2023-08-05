@@ -3,7 +3,7 @@ import { MouseEvent, useCallback, useMemo } from 'react';
 
 //components
 import { Box } from '@sprinklrjs/spaceweb/box';
-import { IconButton } from '@sprinklrjs/spaceweb/button';
+import { Button, IconButton } from '@sprinklrjs/spaceweb/button';
 
 //types
 import { Action } from '../types';
@@ -27,19 +27,34 @@ export const RightActions = ({ actions, onActionClick, className }: Props): JSX.
 
   return (
     <Box className={['flex gap-2 justify-end', className]}>
-      {actions.map(({ Icon, label, id }) => (
-        <IconButton
-          key={id}
-          tooltipContent={label}
-          bordered
-          shape="square"
-          size="xs"
-          onClick={handleActionClick}
-          data-id={id}
-        >
-          <Icon size={16} stroke="black" strokeWidth={0.3} />
-        </IconButton>
-      ))}
+      {actions.map(({ Icon, label, id, cta }) => {
+        if (cta) {
+          return (
+            <Button
+              key={id}
+              startEnhancer={Icon ? <Icon /> : undefined}
+              size="xs"
+              onClick={handleActionClick}
+              data-id={id}
+            >
+              {label}
+            </Button>
+          );
+        }
+        return (
+          <IconButton
+            key={id}
+            tooltipContent={label}
+            bordered
+            shape="square"
+            size="xs"
+            onClick={handleActionClick}
+            data-id={id}
+          >
+            {Icon ? <Icon size={16} stroke="black" strokeWidth={0.3} /> : null}
+          </IconButton>
+        );
+      })}
     </Box>
   );
 };

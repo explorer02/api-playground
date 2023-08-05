@@ -4,7 +4,7 @@ import * as monaco from 'monaco-editor';
 import { useCopyToClipboard } from 'react-use';
 
 //components
-import { VscCode } from 'react-icons/vsc';
+import { VscCopy } from 'react-icons/vsc';
 import { VscBracketDot } from 'react-icons/vsc';
 import { VscSave } from 'react-icons/vsc';
 
@@ -12,7 +12,6 @@ import { VscSave } from 'react-icons/vsc';
 import { downloadJSON } from '@/utils/downloadJSON';
 
 //types
-import { IconType } from 'react-icons';
 import { Action } from './types';
 
 const ACTION_TYPE = {
@@ -22,14 +21,15 @@ const ACTION_TYPE = {
 };
 
 const ACTIONS = [
-  { id: ACTION_TYPE.FORMAT, label: 'Format', Icon: VscCode },
-  { id: ACTION_TYPE.COPY, label: 'Copy', Icon: VscBracketDot },
+  { id: ACTION_TYPE.FORMAT, label: 'Format', Icon: VscBracketDot },
+  { id: ACTION_TYPE.COPY, label: 'Copy', Icon: VscCopy },
   { id: ACTION_TYPE.DOWNLOAD, label: 'Download', Icon: VscSave },
 ];
 
 type Params = {
   title: string;
   onActionClick?: (action: string) => void;
+  onParentMount?: (mEditor: monaco.editor.IStandaloneCodeEditor) => void;
 };
 
 type ReturnType = {
@@ -38,12 +38,16 @@ type ReturnType = {
   onActionClick: (action: string) => void;
 };
 
-export const useMonacoActions = ({ title, onActionClick: onParentActionClick }: Params): ReturnType => {
+export const useMonacoActions = ({ title, onActionClick: onParentActionClick, onParentMount }: Params): ReturnType => {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
 
-  const onMount = useCallback((mEditor: monaco.editor.IStandaloneCodeEditor) => {
-    editorRef.current = mEditor;
-  }, []);
+  const onMount = useCallback(
+    (mEditor: monaco.editor.IStandaloneCodeEditor) => {
+      editorRef.current = mEditor;
+      onParentMount?.(mEditor);
+    },
+    [onParentMount]
+  );
 
   const [_, copyToClipboard] = useCopyToClipboard();
 

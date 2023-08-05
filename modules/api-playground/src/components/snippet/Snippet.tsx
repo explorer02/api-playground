@@ -1,5 +1,6 @@
 //lib
 import { useMemo } from 'react';
+import * as monaco from 'monaco-editor';
 
 //components
 import MonacoEditor from '@monaco-editor/react';
@@ -25,11 +26,14 @@ type Props = {
   readOnly?: boolean;
   language?: string;
 
+  onMount?: (mEditor: monaco.editor.IStandaloneCodeEditor) => void;
+
   tabs?: Tab[];
   selectedTabIdx?: number;
   onTabClick?: (idx: number) => void;
 
   rightActions?: Action[];
+  ctaActions?: Action[];
   onActionClick?: (action: string) => void;
 };
 
@@ -39,18 +43,29 @@ export const Snippet = ({
   className,
   readOnly,
   language,
+
+  onMount: onParentMount,
+
   tabs,
   selectedTabIdx,
   onTabClick,
 
   rightActions: _rightActions,
+  ctaActions,
   onActionClick,
 }: Props): JSX.Element => {
   const monacoConfig = useMemo(() => getMonacoConfig({ readOnly }), [readOnly]);
 
-  const { onMount, onActionClick: handleActionClick, actions } = useMonacoActions({ title, onActionClick });
+  const {
+    onMount,
+    onActionClick: handleActionClick,
+    actions,
+  } = useMonacoActions({ title, onActionClick, onParentMount });
 
-  const rightActions = useMemo(() => [...(_rightActions ?? []), ...actions], [_rightActions, actions]);
+  const rightActions = useMemo(
+    () => [...(_rightActions ?? []), ...actions, ...(ctaActions ?? [])],
+    [_rightActions, actions, ctaActions]
+  );
 
   return (
     <Box className={['h-full w-full flex flex-col p-3 border-1 border-solid rounded-8 spr-border-03', className]}>

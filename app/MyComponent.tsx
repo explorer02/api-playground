@@ -1,8 +1,7 @@
-import { gql, useLazyQuery } from '@apollo/client';
-import { parse, print } from 'graphql/language';
-import { CLIENT } from './constants';
+import { gql, useLazyQuery, useQuery } from '@apollo/client';
+import { useState } from 'react';
 
-const FRAGMENT = gql`
+const FRAGMENT_CHARACTER = gql`
   fragment Character on Character {
     id
     name
@@ -17,38 +16,85 @@ const FETCH_CHARACTERS = gql`
       }
     }
   }
-  ${FRAGMENT}
+  ${FRAGMENT_CHARACTER}
+`;
+
+const FRAGMENT_LOCATION = gql`
+  fragment Location on Location {
+    id
+    name
+  }
+`;
+
+const FETCH_LOCATIONS = gql`
+  query FetchLocations($page: Int) {
+    locations(page: $page) {
+      results {
+        ...Location
+      }
+    }
+  }
+  ${FRAGMENT_LOCATION}
 `;
 
 // console.log(print(FETCH_CHARACTERS), print(parse(TEMP)));
 
-export const MyComponent = () => {
-  const [fetcher, { data, loading }] = useLazyQuery(FETCH_CHARACTERS);
+const MyComponent = () => {
+  const [charFetcher, charResult] = useLazyQuery(FETCH_CHARACTERS, { ssr: false });
+  const [locFetcher, locResult] = useLazyQuery(FETCH_LOCATIONS, { ssr: false });
 
-  // console.log({
-  //   data,
-  //   loading,
-  //   cache: CLIENT.cache.extract(),
-  //   CLIENT,
-  //   parsedQuery: CLIENT.queryManager.queries.size ? print([...CLIENT.queryManager.queries][0][1].document) : undefined,
-  // });
+  const { data } = useQuery(FETCH_LOCATIONS, { variables: { page: 4 } });
 
-  // console.log(CLIENT.queryManager.queries.size ? print([...CLIENT.queryManager.queries][0][1].document) : undefined);
-
-  // console.log(CLIENT.queryManager.queries.size ? [...CLIENT.queryManager.queries][0][1].variables : undefined);
-
-  const onFetch = () => {
+  const onFetchChars = () => {
     const randomPage = Math.floor(Math.random() * 20);
-    fetcher({
+    charFetcher({
       variables: {
-        page: randomPage,
+        page: 4 || randomPage,
+      },
+    });
+  };
+  const onFetchLocations = () => {
+    const randomPage = Math.floor(Math.random() * 20);
+    locFetcher({
+      variables: {
+        page: 4 || randomPage,
       },
     });
   };
 
   return (
-    <button className="border-solid border-1 padding-4" onClick={onFetch}>
-      Click Me
-    </button>
+    <>
+      <button
+        onClick={onFetchChars}
+        style={{ border: '1px solid', padding: '12px', background: 'blue', color: 'white', borderRadius: '8px' }}
+      >
+        Fetch Chars
+      </button>
+      <button
+        onClick={onFetchLocations}
+        style={{ border: '1px solid', padding: '12px', background: 'blue', color: 'white', borderRadius: '8px' }}
+      >
+        Fetch locs
+      </button>
+      <div>{JSON.stringify(data ?? {})}</div>
+    </>
   );
 };
+
+const Wrapper = () => {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <MyComponent key={count} />
+      <button
+        onClick={() => setCount(c => c + 1)}
+        style={{ border: '1px solid', padding: '12px', background: 'blue', color: 'white', borderRadius: '8px' }}
+      >
+        Click To ReRender
+      </button>
+    </>
+  );
+};
+
+export { Wrapper as MyComponent };

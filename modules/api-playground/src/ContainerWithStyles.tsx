@@ -10,13 +10,17 @@ import '@sprinklrjs/spaceweb-themes/styles/normalize.min.css';
 import '@sprinklrjs/spaceweb-themes/styles/globals.min.css';
 
 import { APIPlayground } from './APIPlayground';
+import { SnackbarProvider } from './context/SnackbarContext';
+
 import { APIPlaygroundProps } from './types';
 
 export const ContainerWithStyles = (props: APIPlaygroundProps): JSX.Element => {
   return (
     <SpacewebProvider direction="ltr" theme={light}>
       <StyleProvider>
-        <APIPlayground {...props} />
+        <SnackbarProvider>
+          <APIPlayground {...props} />
+        </SnackbarProvider>
       </StyleProvider>
     </SpacewebProvider>
   );

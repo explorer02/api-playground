@@ -8,5 +8,6 @@ export type Tab = {
 export type Action = {
   id: string;
   label: string;
-  Icon: IconType;
+  Icon?: IconType;
+  cta?: boolean;
 };

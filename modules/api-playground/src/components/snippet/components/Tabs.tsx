@@ -25,7 +25,7 @@ export const Tabs = ({ tabs, selectedTabIdx = 0, onTabClick, className }: Props)
   );
 
   return (
-    <ButtonGroup className={className} selected={selectedTabIdx} onClick={onTabSwitch}>
+    <ButtonGroup className={className} selected={selectedTabIdx} onClick={onTabSwitch} size="sm">
       {tabs.map(tab => (
         <Button key={tab.id}>{tab.label}</Button>
       ))}

@@ -8,6 +8,7 @@ import { Box } from '@sprinklrjs/spaceweb/box';
 import { SideNav } from './components/SideNav';
 import { StaticDataViewer } from './components/StaticDataViewer';
 import { CacheViewer } from './components/cacheViewer';
+import { QueryExecutor } from './components/queryExecutor';
 
 //constants
 import { Game } from './constants/game';
@@ -47,6 +48,8 @@ export const APIPlayground = ({ config, className }: APIPlaygroundProps): JSX.El
     el = <StaticDataViewer config={activeGameConfig} />;
   } else if (activeGame === Game.CACHE_VIEWER) {
     el = <CacheViewer config={activeGameConfig} />;
+  } else if (activeGame === Game.QUERY_EXECUTOR) {
+    el = <QueryExecutor config={activeGameConfig} />;
   }
 
   return (

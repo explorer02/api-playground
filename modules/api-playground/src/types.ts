@@ -22,7 +22,24 @@ export type CacheViewerConfig = CommonGameConfig & {
   readOnly?: boolean;
 };
 
-export type GameConfig = StaticGameConfig | CacheViewerConfig;
+export type QueryExecutorConfig = CommonGameConfig & {
+  type: Game.QUERY_EXECUTOR;
+  client: ApolloClient<NormalizedCacheObject>;
+  config?: {
+    input?: {
+      title?: string;
+    };
+    variable?: {
+      title?: string;
+    };
+    output?: {
+      title?: string;
+      readOnly?: boolean;
+    };
+  };
+};
+
+export type GameConfig = StaticGameConfig | CacheViewerConfig | QueryExecutorConfig;
 
 export { ApolloClient };
 
