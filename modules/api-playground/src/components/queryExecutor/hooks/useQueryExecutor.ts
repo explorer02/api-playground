@@ -51,7 +51,7 @@ export const useQueryExecutor = ({ config }: Params): ReturnType => {
     const variables = JSON.parse(variableEditorRef.current?.getValue() ?? '');
 
     setLoading(true);
-    const response = await client.query({ query, variables });
+    const response = await client.query({ query, variables, fetchPolicy: 'network-only' });
     setLoading(false);
     outputEditorRef.current?.setValue(prettifyJSON(response.data) ?? response.error?.message);
   }, [client, inputEditorRef, outputEditorRef, variableEditorRef]);

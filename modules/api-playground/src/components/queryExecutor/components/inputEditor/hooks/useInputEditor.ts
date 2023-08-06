@@ -4,9 +4,6 @@ import * as monaco from 'monaco-editor';
 import { parse } from 'graphql';
 import { OnChange, OnMount } from '@monaco-editor/react';
 
-//types
-import { QueryExecutorConfig } from '@/types';
-
 type Params = {
   parentOnMount?: OnMount;
   onSubmit: () => void;
@@ -31,21 +28,18 @@ export const useInputEditor = ({ parentOnMount, onSubmit }: Params): ReturnType 
     }
   }, []);
 
-  const onKeyDown = useCallback(
-    (ev: monaco.IKeyboardEvent) => {
-      if (ev.metaKey && ev.keyCode === monaco.KeyCode.Enter && !latestErrors.current) {
-        onSubmit();
-      }
-    },
-    [onSubmit]
-  );
-
   const onMount = useCallback<OnMount>(
     (mEditor, _monaco) => {
       editorRef.current = mEditor;
       parentOnMount?.(mEditor, _monaco);
+      editorRef.current.onKeyDown(ev => {
+        if (ev.metaKey && ev.keyCode === monaco.KeyCode.Enter && !latestErrors.current) {
+          onSubmit();
+          ev.stopPropagation();
+        }
+      });
     },
-    [parentOnMount]
+    [onSubmit, parentOnMount]
   );
 
   const latestErrors = useRef(errors);

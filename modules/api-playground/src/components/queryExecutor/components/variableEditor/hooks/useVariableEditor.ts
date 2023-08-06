@@ -27,21 +27,18 @@ export const useVariableEditor = ({ parentOnMount, onSubmit }: Params): ReturnTy
     }
   }, []);
 
-  const onKeyDown = useCallback(
-    (ev: monaco.IKeyboardEvent) => {
-      if (ev.metaKey && ev.keyCode === monaco.KeyCode.Enter && !latestErrors.current) {
-        onSubmit();
-      }
-    },
-    [onSubmit]
-  );
-
   const onMount = useCallback<OnMount>(
     (mEditor, _monaco) => {
       editorRef.current = mEditor;
       parentOnMount?.(mEditor, _monaco);
+      editorRef.current.onKeyDown(ev => {
+        if (ev.metaKey && ev.keyCode === monaco.KeyCode.Enter && !latestErrors.current) {
+          onSubmit();
+          ev.stopPropagation();
+        }
+      });
     },
-    [parentOnMount]
+    [onSubmit, parentOnMount]
   );
 
   const latestErrors = useRef(errors);
