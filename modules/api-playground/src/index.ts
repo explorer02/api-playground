@@ -1,4 +1,5 @@
-export { ClientOnlyContainer as APIPlayground } from './ClientOnlyContainer';
+export { APIPlayground } from './containers/withStyles';
+export { APIPlayground as APIPlaygroundWithoutStyleProviders } from './containers/withoutStyles';
 
 export { Game } from './constants/game';
 

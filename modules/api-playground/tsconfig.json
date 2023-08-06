@@ -13,11 +13,11 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": false,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "declaration": true, // Generate declaration files (*.d.ts)
     "declarationDir": "./types", // Output directory for declaration files
     "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export

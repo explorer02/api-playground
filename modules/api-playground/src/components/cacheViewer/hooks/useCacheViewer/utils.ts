@@ -1,7 +1,7 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 
 const recursivelyExpandData = (data: Record<string, any>, cache: NormalizedCacheObject): Record<string, any> => {
-  if (typeof data !== 'object') {
+  if (typeof data !== 'object' || !data) {
     return data;
   }
 
