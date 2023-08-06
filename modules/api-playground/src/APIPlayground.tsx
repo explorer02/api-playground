@@ -9,9 +9,10 @@ import { SideNav } from './components/SideNav';
 import { StaticDataViewer } from './components/StaticDataViewer';
 import { CacheViewer } from './components/cacheViewer';
 import { QueryExecutor } from './components/queryExecutor';
+import { MutationExecutor } from './components/mutationExecutor';
 
 //constants
-import { Game } from './constants/game';
+import { Template } from './constants/template';
 
 //types
 import { APIPlaygroundProps } from './types';
@@ -44,12 +45,14 @@ export const APIPlayground = ({ config, className }: APIPlaygroundProps): JSX.El
   const activeGame = activeGameConfig.type;
 
   let el;
-  if (activeGame === Game.STATIC_DATA) {
+  if (activeGame === Template.STATIC_DATA) {
     el = <StaticDataViewer config={activeGameConfig} />;
-  } else if (activeGame === Game.CACHE_VIEWER) {
+  } else if (activeGame === Template.CACHE_VIEWER) {
     el = <CacheViewer config={activeGameConfig} />;
-  } else if (activeGame === Game.QUERY_EXECUTOR) {
+  } else if (activeGame === Template.QUERY_EXECUTOR) {
     el = <QueryExecutor config={activeGameConfig} />;
+  } else if (activeGame === Template.MUTATION_EXECUTOR) {
+    el = <MutationExecutor config={activeGameConfig} />;
   }
 
   return (

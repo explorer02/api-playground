@@ -1,12 +1,12 @@
 export { APIPlayground } from './containers/withStyles';
 export { APIPlayground as APIPlaygroundWithoutStyleProviders } from './containers/withoutStyles';
 
-export { Game } from './constants/game';
+export { Template } from './constants/template';
 
 export {
   APIPlaygroundProps,
-  GameConfig,
-  StaticGameConfig,
+  TemplateConfig,
+  StaticDataConfig,
   CacheViewerConfig,
   QueryExecutorConfig,
   ApolloClient,

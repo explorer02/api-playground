@@ -15,12 +15,16 @@ import { useMonacoActions } from './useMonacoActions';
 //utils
 import { getMonacoConfig } from './utils';
 
+//constants
+import { Language } from '@/constants/language';
+
 //types
 import { ClassName } from '@sprinklrjs/spaceweb';
 import { Action, Tab } from './types';
 
-type EditorProps = Pick<MonacoEditorProps, 'onMount' | 'onChange' | 'language'> & {
+type EditorProps = Pick<MonacoEditorProps, 'onMount' | 'onChange'> & {
   readOnly?: boolean;
+  language?: Language;
 };
 
 type Props = {
@@ -70,7 +74,12 @@ const Snippet = ({
     onMount,
     onActionClick: handleActionClick,
     actions,
-  } = useMonacoActions({ title, onActionClick, onParentMount: editorProps?.onMount });
+  } = useMonacoActions({
+    title,
+    onActionClick,
+    onParentMount: editorProps?.onMount,
+    language: editorProps?.language ?? Language.JSON,
+  });
 
   const rightActions = useMemo(
     () => [...(_actions ?? []), ...actions].sort((a1, a2) => (a1.type === 'cta' ? 1 : -1)),
@@ -101,7 +110,7 @@ const Snippet = ({
       <Box className="flex-1 relative">
         <MonacoEditor
           {...editorProps}
-          language={editorProps?.language ?? 'json'}
+          language={editorProps?.language ?? Language.JSON}
           options={monacoConfig}
           onMount={onMount}
           key={selectedTabIdx}

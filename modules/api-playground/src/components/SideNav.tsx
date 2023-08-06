@@ -4,10 +4,10 @@ import { useCallback, MouseEvent } from 'react';
 // components
 import { Box } from '@sprinklrjs/spaceweb/box';
 import { Typography } from '@sprinklrjs/spaceweb/typography';
-import { GameConfig } from '../types';
+import { TemplateConfig } from '../types';
 
 type Props = {
-  config: GameConfig[];
+  config: TemplateConfig[];
   activeNavItem: string;
   onNavItemClick: (id: string) => void;
 };

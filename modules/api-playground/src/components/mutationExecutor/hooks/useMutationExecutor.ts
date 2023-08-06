@@ -1,5 +1,5 @@
 //lib
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import * as monaco from 'monaco-editor';
 import { OnMount } from '@monaco-editor/react';
 import { parse } from 'graphql';
@@ -8,16 +8,13 @@ import { parse } from 'graphql';
 import { prettifyJSON } from '@/utils/prettifyJSON';
 
 //types
-import { QueryExecutorConfig } from '@/types';
-import { OnQuerySelect } from '../types';
+import { MutationExecutorConfig } from '@/types';
 
 type Params = {
-  config: QueryExecutorConfig;
+  config: MutationExecutorConfig;
 };
 
 type ReturnType = {
-  onQuerySelect: OnQuerySelect;
-
   onInputMount: OnMount;
   onVariableMount: OnMount;
   onOutputMount: OnMount;
@@ -37,7 +34,7 @@ const useMount = () => {
   return { editorRef, onMount };
 };
 
-export const useQueryExecutor = ({ config }: Params): ReturnType => {
+export const useMutationExecutor = ({ config }: Params): ReturnType => {
   const [loading, setLoading] = useState(false);
 
   const { client } = config;
@@ -60,22 +57,12 @@ export const useQueryExecutor = ({ config }: Params): ReturnType => {
     setLoading(false);
   }, [client, inputEditorRef, outputEditorRef, variableEditorRef]);
 
-  const onQuerySelect = useCallback<OnQuerySelect>(
-    ({ query, output, variables }) => {
-      inputEditorRef.current?.setValue(query);
-      variableEditorRef.current?.setValue(variables ?? '');
-      outputEditorRef.current?.setValue(output ?? '');
-    },
-    [inputEditorRef, outputEditorRef, variableEditorRef]
-  );
-
   return {
     onInputMount,
     onVariableMount,
     onOutputMount,
 
     onSubmit,
-    onQuerySelect,
 
     loading,
   };

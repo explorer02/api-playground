@@ -2,6 +2,7 @@
 import { useCallback, useRef } from 'react';
 import * as monaco from 'monaco-editor';
 import { useCopyToClipboard } from 'react-use';
+import { OnMount } from '@monaco-editor/react';
 
 //components
 import { VscCopy } from 'react-icons/vsc';
@@ -9,11 +10,14 @@ import { VscBracketDot } from 'react-icons/vsc';
 import { VscSave } from 'react-icons/vsc';
 
 //utils
-import { downloadJSON } from '@/utils/downloadJSON';
+import { downloadFile } from '@/utils/downloadFile';
+import { prettifyGQL } from '@/utils/prettifyGQL';
+
+//constants
+import { Language } from '@/constants/language';
 
 //types
 import { Action } from './types';
-import { OnMount } from '@monaco-editor/react';
 
 const ACTION_TYPE = {
   FORMAT: 'FORMAT',
@@ -31,6 +35,7 @@ type Params = {
   title: string;
   onActionClick?: (action: string) => void;
   onParentMount?: OnMount;
+  language: Language;
 };
 
 type ReturnType = {
@@ -39,7 +44,12 @@ type ReturnType = {
   onActionClick: (action: string) => void;
 };
 
-export const useMonacoActions = ({ title, onActionClick: onParentActionClick, onParentMount }: Params): ReturnType => {
+export const useMonacoActions = ({
+  title,
+  onActionClick: onParentActionClick,
+  onParentMount,
+  language,
+}: Params): ReturnType => {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
 
   const onMount = useCallback<OnMount>(
@@ -60,20 +70,37 @@ export const useMonacoActions = ({ title, onActionClick: onParentActionClick, on
           copyToClipboard(content ?? '');
           break;
         }
+
         case ACTION_TYPE.DOWNLOAD: {
           const content = editorRef.current?.getValue();
-          downloadJSON(content ?? '', `${title}.json`);
+          downloadFile(content ?? '', title, language);
           break;
         }
+
         case ACTION_TYPE.FORMAT:
-          editorRef.current?.getAction('editor.action.formatDocument')?.run();
-          editorRef.current?.focus();
+          {
+            switch (language) {
+              case Language.GRAPHQL: {
+                try {
+                  editorRef.current?.setValue(prettifyGQL(editorRef.current.getValue()));
+                } catch {}
+                break;
+              }
+
+              default: {
+                editorRef.current?.getAction('editor.action.formatDocument')?.run();
+                editorRef.current?.focus();
+                break;
+              }
+            }
+          }
           break;
+
         default:
           onParentActionClick?.(action);
       }
     },
-    [copyToClipboard, onParentActionClick, title]
+    [copyToClipboard, language, onParentActionClick, title]
   );
 
   return { actions: ACTIONS, onMount, onActionClick };

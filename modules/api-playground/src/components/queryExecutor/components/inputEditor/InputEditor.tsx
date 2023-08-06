@@ -8,23 +8,23 @@ import { Snippet } from '@/components/snippet';
 //hooks
 import { useInputEditor } from './hooks/useInputEditor';
 
+//constants
+import { Language } from '@/constants/language';
+
 //types
-import { QueryExecutorConfig } from '@/types';
 import { ClassName } from '@sprinklrjs/spaceweb';
 
 type Props = {
-  config: QueryExecutorConfig;
+  title?: string;
   onSubmit: () => void;
   onMount?: OnMount;
   className?: ClassName;
 };
 
-export const InputEditor = ({ config, onSubmit, onMount: parentOnMount, className }: Props) => {
-  const { config: { input } = {} } = config;
-
+export const InputEditor = ({ title, onSubmit, onMount: parentOnMount, className }: Props) => {
   const { onMount, onChange, errors } = useInputEditor({ onSubmit, parentOnMount });
 
-  const editorProps = useMemo(() => ({ onChange, onMount, language: 'graqhql' }), [onChange, onMount]);
+  const editorProps = useMemo(() => ({ onChange, onMount, language: Language.GRAPHQL }), [onChange, onMount]);
 
-  return <Snippet editorProps={editorProps} title={input?.title ?? 'Query'} className={className} errors={errors} />;
+  return <Snippet editorProps={editorProps} title={title ?? 'Query'} className={className} errors={errors} />;
 };

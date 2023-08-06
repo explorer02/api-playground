@@ -33,8 +33,10 @@ export const useInputEditor = ({ parentOnMount, onSubmit }: Params): ReturnType 
       editorRef.current = mEditor;
       parentOnMount?.(mEditor, _monaco);
       editorRef.current.onKeyDown(ev => {
-        if (ev.metaKey && ev.keyCode === monaco.KeyCode.Enter && !latestErrors.current) {
-          onSubmit();
+        if (ev.metaKey && ev.keyCode === monaco.KeyCode.Enter) {
+          if (!latestErrors.current) {
+            onSubmit();
+          }
           ev.stopPropagation();
         }
       });

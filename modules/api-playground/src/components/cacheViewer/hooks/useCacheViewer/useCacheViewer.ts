@@ -93,7 +93,7 @@ export const useCacheViewer = ({ config }: Params): ReturnType => {
   );
 
   const actions = useMemo(
-    () => (readOnly && !tabIdx ? [REFRESH_ACTION] : [REFRESH_ACTION, UPDATE_CACHE_ACTION]),
+    () => (readOnly || tabIdx ? [REFRESH_ACTION] : [REFRESH_ACTION, UPDATE_CACHE_ACTION]),
     [readOnly, tabIdx]
   );
 

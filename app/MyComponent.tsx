@@ -77,7 +77,7 @@ const MyComponent = () => {
       >
         Fetch locs
       </button>
-      <div>{JSON.stringify(data ?? {})}</div>
+      {/* <div>{JSON.stringify(data ?? {})}</div> */}
     </>
   );
 };

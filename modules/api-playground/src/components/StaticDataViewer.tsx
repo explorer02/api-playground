@@ -8,10 +8,10 @@ import { Snippet } from './snippet';
 import { prettifyJSON } from '@/utils/prettifyJSON';
 
 //types
-import { StaticGameConfig } from '../types';
+import { StaticDataConfig } from '../types';
 
 type Props = {
-  config: StaticGameConfig;
+  config: StaticDataConfig;
 };
 
 const StaticDataViewer = ({ config }: Props) => {

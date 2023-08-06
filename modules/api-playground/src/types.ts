@@ -1,29 +1,30 @@
 import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 
-import { Game } from './constants/game';
+import { Template } from './constants/template';
+import { Language } from './constants/language';
 
 import { ClassName } from '@sprinklrjs/spaceweb';
 
-type CommonGameConfig = {
+type CommonConfig = {
   id: string;
   title: string;
 };
 
-export type StaticGameConfig = CommonGameConfig & {
-  type: Game.STATIC_DATA;
+export type StaticDataConfig = CommonConfig & {
+  type: Template.STATIC_DATA;
   data: object | string;
-  language?: string;
+  language?: Language;
   readOnly?: boolean;
 };
 
-export type CacheViewerConfig = CommonGameConfig & {
-  type: Game.CACHE_VIEWER;
+export type CacheViewerConfig = CommonConfig & {
+  type: Template.CACHE_VIEWER;
   client: ApolloClient<NormalizedCacheObject>;
   readOnly?: boolean;
 };
 
-export type QueryExecutorConfig = CommonGameConfig & {
-  type: Game.QUERY_EXECUTOR;
+export type QueryExecutorConfig = CommonConfig & {
+  type: Template.QUERY_EXECUTOR;
   client: ApolloClient<NormalizedCacheObject>;
   config?: {
     input?: {
@@ -39,11 +40,28 @@ export type QueryExecutorConfig = CommonGameConfig & {
   };
 };
 
-export type GameConfig = StaticGameConfig | CacheViewerConfig | QueryExecutorConfig;
+export type MutationExecutorConfig = CommonConfig & {
+  type: Template.MUTATION_EXECUTOR;
+  client: ApolloClient<NormalizedCacheObject>;
+  config?: {
+    input?: {
+      title?: string;
+    };
+    variable?: {
+      title?: string;
+    };
+    output?: {
+      title?: string;
+      readOnly?: boolean;
+    };
+  };
+};
+
+export type TemplateConfig = StaticDataConfig | CacheViewerConfig | QueryExecutorConfig | MutationExecutorConfig;
 
 export { ApolloClient };
 
 export type APIPlaygroundProps = {
-  config: GameConfig[];
+  config: TemplateConfig[];
   className?: ClassName;
 };

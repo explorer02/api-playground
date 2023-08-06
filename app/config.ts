@@ -1,10 +1,10 @@
-import { Game, GameConfig } from '@/modules/api-playground';
+import { Template, TemplateConfig } from '@/modules/api-playground';
 import { CLIENT } from './constants';
 
-export const GAME_CONFIG: GameConfig[] = [
+export const TEMPLATE_CONFIG: TemplateConfig[] = [
   {
     id: 'current_user',
-    type: Game.STATIC_DATA,
+    type: Template.STATIC_DATA,
     data: {
       name: 'Ajay Bhardwaj',
       age: 24,
@@ -13,15 +13,21 @@ export const GAME_CONFIG: GameConfig[] = [
   },
   {
     id: 'apollo_cache',
-    type: Game.CACHE_VIEWER,
+    type: Template.CACHE_VIEWER,
     title: 'Cache Viewer',
     client: CLIENT,
     // readOnly: true,
   },
   {
     id: 'query_executor',
-    type: Game.QUERY_EXECUTOR,
+    type: Template.QUERY_EXECUTOR,
     title: 'Query Executor',
+    client: CLIENT,
+  },
+  {
+    id: 'mutation_executor',
+    type: Template.MUTATION_EXECUTOR,
+    title: 'Mutation Executor',
     client: CLIENT,
   },
 ];
