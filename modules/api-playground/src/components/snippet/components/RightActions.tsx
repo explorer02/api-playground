@@ -1,5 +1,5 @@
 //lib
-import { MouseEvent, useCallback, useMemo } from 'react';
+import { MouseEvent, memo, useCallback, useMemo } from 'react';
 
 //components
 import { Box } from '@sprinklrjs/spaceweb/box';
@@ -13,9 +13,10 @@ type Props = {
   actions: Action[];
   onActionClick: (action: string) => void;
   className?: ClassName;
+  loading?: boolean;
 };
 
-export const RightActions = ({ actions, onActionClick, className }: Props): JSX.Element => {
+const RightActions = ({ actions, onActionClick, className, loading }: Props): JSX.Element => {
   const handleActionClick = useCallback(
     (ev: MouseEvent<HTMLElement>) => {
       if (ev.currentTarget.dataset.id) {
@@ -27,8 +28,8 @@ export const RightActions = ({ actions, onActionClick, className }: Props): JSX.
 
   return (
     <Box className={['flex gap-2 justify-end', className]}>
-      {actions.map(({ Icon, label, id, cta }) => {
-        if (cta) {
+      {actions.map(({ Icon, label, id, type }) => {
+        if (type === 'cta') {
           return (
             <Button
               key={id}
@@ -36,6 +37,7 @@ export const RightActions = ({ actions, onActionClick, className }: Props): JSX.
               size="xs"
               onClick={handleActionClick}
               data-id={id}
+              isLoading={loading}
             >
               {label}
             </Button>
@@ -50,6 +52,7 @@ export const RightActions = ({ actions, onActionClick, className }: Props): JSX.
             size="xs"
             onClick={handleActionClick}
             data-id={id}
+            isLoading={loading}
           >
             {Icon ? <Icon size={16} stroke="black" strokeWidth={0.3} /> : null}
           </IconButton>
@@ -58,3 +61,7 @@ export const RightActions = ({ actions, onActionClick, className }: Props): JSX.
     </Box>
   );
 };
+
+const MemoizedRightActions = memo(RightActions);
+
+export { MemoizedRightActions as RightActions };

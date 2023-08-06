@@ -9,5 +9,5 @@ export type Action = {
   id: string;
   label: string;
   Icon?: IconType;
-  cta?: boolean;
+  type?: 'cta' | 'icon';
 };

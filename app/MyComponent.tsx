@@ -44,6 +44,7 @@ const MyComponent = () => {
   const [locFetcher, locResult] = useLazyQuery(FETCH_LOCATIONS, { ssr: false });
 
   const { data } = useQuery(FETCH_LOCATIONS, { variables: { page: 4 } });
+  useQuery(FETCH_LOCATIONS, { variables: { page: 4 } });
 
   const onFetchChars = () => {
     const randomPage = Math.floor(Math.random() * 20);

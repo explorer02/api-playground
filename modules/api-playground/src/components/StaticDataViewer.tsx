@@ -1,13 +1,32 @@
-import { useMemo } from 'react';
-import { StaticGameConfig } from '../types';
+//lib
+import { memo, useMemo } from 'react';
+
+//components
 import { Snippet } from './snippet';
+
+//utils
+import { prettifyJSON } from '@/utils/prettifyJSON';
+
+//types
+import { StaticGameConfig } from '../types';
 
 type Props = {
   config: StaticGameConfig;
 };
 
-export const StaticDataViewer = ({ config }: Props) => {
-  const stringifiedData = useMemo(() => JSON.stringify(config.data, null, 4), [config.data]);
+const StaticDataViewer = ({ config }: Props) => {
+  const { data, title, language, readOnly } = config;
 
-  return <Snippet content={stringifiedData} title={config.title} readOnly={config.readOnly} />;
+  const stringifiedData = useMemo(() => prettifyJSON(data), [data]);
+
+  const editorProps = useMemo(
+    () => ({ value: stringifiedData, readOnly, language }),
+    [language, readOnly, stringifiedData]
+  );
+
+  return <Snippet editorProps={editorProps} title={title} />;
 };
+
+const MemoizedStaticDataViewer = memo(StaticDataViewer);
+
+export { MemoizedStaticDataViewer as StaticDataViewer };

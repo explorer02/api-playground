@@ -1,4 +1,5 @@
 //components
+import { memo, useMemo } from 'react';
 import { Snippet } from '../snippet';
 
 //hooks
@@ -11,25 +12,30 @@ type Props = {
   config: CacheViewerConfig;
 };
 
-export const CacheViewer = ({ config }: Props) => {
+const CacheViewer = ({ config }: Props) => {
   const { title, readOnly } = config;
 
-  const { data, onTabClick, selectedTabIdx, tabs, onActionClick, rightActions, ctaActions, onMount } = useCacheViewer({
+  const { data, onTabClick, selectedTabIdx, tabs, onActionClick, actions, onMount } = useCacheViewer({
     config,
   });
 
+  const editorProps = useMemo(() => ({ value: data, readOnly, onMount }), [data, onMount, readOnly]);
+
   return (
     <Snippet
-      content={data}
+      editorProps={editorProps}
       title={title}
-      readOnly={readOnly}
+      // ----- //
       tabs={tabs}
       selectedTabIdx={selectedTabIdx}
       onTabClick={onTabClick}
-      rightActions={rightActions}
-      ctaActions={ctaActions}
+      // ----- //
+      actions={actions}
       onActionClick={onActionClick}
-      onMount={onMount}
     />
   );
 };
+
+const MemoizedCacheViewer = memo(CacheViewer);
+
+export { MemoizedCacheViewer as CacheViewer };

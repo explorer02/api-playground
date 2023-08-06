@@ -8,6 +8,7 @@ import { useSnackbar } from '@/context/SnackbarContext';
 
 //utils
 import { getExpandedData } from './utils';
+import { prettifyJSON } from '@/utils/prettifyJSON';
 
 //types
 import { Tab, Action } from 'components/snippet/types';
@@ -18,37 +19,36 @@ const TABS = [
   { id: 'expanded', label: 'Expanded' },
 ];
 
-const ACTIONS = {
-  REFRESH: 'REFRESH',
-  UPDATE: 'UPDATE',
-} as const;
+enum ActionType {
+  REFRESH = 'REFRESH',
+  UPDATE = 'UPDATE',
+}
 
-const RIGHT_ACTIONS: Action[] = [
-  {
-    id: ACTIONS.REFRESH,
-    label: 'Refresh',
-    Icon: VscSync,
-  },
-];
+const REFRESH_ACTION: Action = {
+  id: ActionType.REFRESH,
+  label: 'Refresh',
+  Icon: VscSync,
+  type: 'icon',
+};
 
-const CTA_ACTIONS: Action[] = [
-  {
-    id: ACTIONS.UPDATE,
-    label: 'Update',
-    cta: true,
-  },
-];
+const UPDATE_CACHE_ACTION: Action = {
+  id: ActionType.UPDATE,
+  label: 'Update',
+  type: 'cta',
+};
 
 type Params = {
   config: CacheViewerConfig;
 };
 type ReturnType = {
+  data: string;
+
   tabs: Tab[];
   selectedTabIdx: number;
   onTabClick: (idx: number) => void;
-  data: string;
-  rightActions: Action[];
-  ctaActions: Action[] | undefined;
+
+  actions: Action[];
+
   onActionClick: (action: string) => void;
   onMount: (mEditor: monaco.editor.IStandaloneCodeEditor) => void;
 };
@@ -67,18 +67,18 @@ export const useCacheViewer = ({ config }: Params): ReturnType => {
     editorRef.current = mEditor;
   }, []);
 
-  const stringifiedData = useMemo(() => JSON.stringify(client.cache.extract(), null, 4), [client.cache, count]);
+  const stringifiedData = useMemo(() => prettifyJSON(client.cache.extract()), [client.cache, count]);
 
   const expandedData = useMemo(() => getExpandedData(client), [client, count]);
-  const expandedStringifiedData = useMemo(() => JSON.stringify(expandedData, null, 4), [expandedData]);
+  const expandedStringifiedData = useMemo(() => prettifyJSON(expandedData), [expandedData]);
 
   const tabData = [stringifiedData, expandedStringifiedData];
 
   const onActionClick = useCallback(
     (action: string) => {
-      if (action === ACTIONS.REFRESH) {
+      if (action === ActionType.REFRESH) {
         setCount(c => c + 1);
-      } else if (action === ACTIONS.UPDATE) {
+      } else if (action === ActionType.UPDATE) {
         try {
           const parsedCache = JSON.parse(editorRef.current?.getValue() ?? '');
           client.cache.restore(parsedCache);
@@ -92,14 +92,21 @@ export const useCacheViewer = ({ config }: Params): ReturnType => {
     [client.cache, onError, onSuccess]
   );
 
+  const actions = useMemo(
+    () => (readOnly && !tabIdx ? [REFRESH_ACTION] : [REFRESH_ACTION, UPDATE_CACHE_ACTION]),
+    [readOnly, tabIdx]
+  );
+
   return {
+    data: tabData[tabIdx],
+
     selectedTabIdx: tabIdx,
     onTabClick: setTabIdx,
     tabs: TABS,
-    data: tabData[tabIdx],
-    rightActions: RIGHT_ACTIONS,
-    ctaActions: readOnly ? undefined : CTA_ACTIONS,
+
+    actions,
     onActionClick,
+
     onMount,
   };
 };

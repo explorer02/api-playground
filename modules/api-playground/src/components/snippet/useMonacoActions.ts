@@ -13,6 +13,7 @@ import { downloadJSON } from '@/utils/downloadJSON';
 
 //types
 import { Action } from './types';
+import { OnMount } from '@monaco-editor/react';
 
 const ACTION_TYPE = {
   FORMAT: 'FORMAT',
@@ -29,11 +30,11 @@ const ACTIONS = [
 type Params = {
   title: string;
   onActionClick?: (action: string) => void;
-  onParentMount?: (mEditor: monaco.editor.IStandaloneCodeEditor) => void;
+  onParentMount?: OnMount;
 };
 
 type ReturnType = {
-  onMount: (mEditor: monaco.editor.IStandaloneCodeEditor) => void;
+  onMount: OnMount;
   actions: Action[];
   onActionClick: (action: string) => void;
 };
@@ -41,10 +42,10 @@ type ReturnType = {
 export const useMonacoActions = ({ title, onActionClick: onParentActionClick, onParentMount }: Params): ReturnType => {
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
 
-  const onMount = useCallback(
-    (mEditor: monaco.editor.IStandaloneCodeEditor) => {
+  const onMount = useCallback<OnMount>(
+    (mEditor, _monaco) => {
       editorRef.current = mEditor;
-      onParentMount?.(mEditor);
+      onParentMount?.(mEditor, _monaco);
     },
     [onParentMount]
   );
