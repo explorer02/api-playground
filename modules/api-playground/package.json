@@ -34,14 +34,14 @@
     "@monaco-editor/react": "^4.5.1",
     "react-icons": "4.10.1",
     "@apollo/client": "3.6.8",
-    "graphql": "^16.7.1"
-  },
-  "peerDependencies": {
-    "@types/node": "20.4.6",
+    "graphql": "^16.7.1",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "peerDependencies": {
+    "@types/node": "20.4.6"
   },
   "devDependencies": {
     "resolve-tspaths": "^0.8.14",

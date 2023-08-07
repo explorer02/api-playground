@@ -1,4 +1,4 @@
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, DocumentNode, NormalizedCacheObject } from '@apollo/client';
 
 import { Template } from './constants/template';
 import { Language } from './constants/language';
@@ -55,9 +55,17 @@ export type MutationExecutorConfig = CommonConfig & {
       readOnly?: boolean;
     };
   };
+  mutations?: { id: string; label: string; node: DocumentNode; variables: object }[];
 };
 
-export type TemplateConfig = StaticDataConfig | CacheViewerConfig | QueryExecutorConfig | MutationExecutorConfig;
+type PlainTemplates = StaticDataConfig | CacheViewerConfig | QueryExecutorConfig | MutationExecutorConfig;
+
+export type NestedTemplateConfig = CommonConfig & {
+  type: Template.NESTED_TEMPLATE;
+  templates: PlainTemplates[];
+};
+
+export type TemplateConfig = PlainTemplates | NestedTemplateConfig;
 
 export { ApolloClient };
 

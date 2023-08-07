@@ -9,6 +9,7 @@ import { prettifyJSON } from '@/utils/prettifyJSON';
 
 //types
 import { MutationExecutorConfig } from '@/types';
+import { OnMutationSelect } from '../types';
 
 type Params = {
   config: MutationExecutorConfig;
@@ -22,6 +23,8 @@ type ReturnType = {
   onSubmit: () => void;
 
   loading: boolean;
+
+  onMutationSelect: OnMutationSelect;
 };
 
 const useMount = () => {
@@ -57,6 +60,15 @@ export const useMutationExecutor = ({ config }: Params): ReturnType => {
     setLoading(false);
   }, [client, inputEditorRef, outputEditorRef, variableEditorRef]);
 
+  const onMutationSelect = useCallback<OnMutationSelect>(
+    ({ mutation, output, variables }) => {
+      inputEditorRef.current?.setValue(mutation);
+      variableEditorRef.current?.setValue(variables ?? '');
+      outputEditorRef.current?.setValue(output ?? '');
+    },
+    [inputEditorRef, outputEditorRef, variableEditorRef]
+  );
+
   return {
     onInputMount,
     onVariableMount,
@@ -65,5 +77,7 @@ export const useMutationExecutor = ({ config }: Params): ReturnType => {
     onSubmit,
 
     loading,
+
+    onMutationSelect,
   };
 };
