@@ -31,7 +31,7 @@ export const SideNav = ({ config, activeNavItem, activeSubNavItem, onNavItemClic
   );
 
   return (
-    <Box className="flex flex-col border-1 border-solid spr-border-03 rounded-8 overflow-hidden w-48 spr-ui-01">
+    <Box className="flex flex-col border-1 border-b-0 border-solid spr-border-03 rounded-8 overflow-hidden w-48 spr-ui-01">
       {config.map(config => (
         <Box key={config.id}>
           <Box

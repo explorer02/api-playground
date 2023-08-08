@@ -7,7 +7,7 @@ import { Box } from '@sprinklrjs/spaceweb/box';
 import { Typography } from '@sprinklrjs/spaceweb/typography';
 import { RightActions } from './components/RightActions';
 import { Tabs } from './components/Tabs';
-import { Loader } from '@sprinklrjs/spaceweb/loader';
+import { FullSizeLoader } from './components/FullSizeLoader';
 
 //hooks
 import { useMonacoActions } from './useMonacoActions';
@@ -44,12 +44,6 @@ type Props = {
 
   loading?: boolean;
 };
-
-const FullSizeLoader = () => (
-  <Box className="absolute inset-0 flex items-center justify-center">
-    <Loader size={8} />
-  </Box>
-);
 
 const Snippet = ({
   title,

@@ -4,6 +4,8 @@ import { Template } from './constants/template';
 import { Language } from './constants/language';
 
 import { ClassName } from '@sprinklrjs/spaceweb';
+import { FormFieldType } from './constants/formFieldTypes';
+import { FormErrors, FormValues } from './components/form/types';
 
 type CommonConfig = {
   id: string;
@@ -58,7 +60,23 @@ export type MutationExecutorConfig = CommonConfig & {
   mutations?: { id: string; label: string; node: DocumentNode; variables: object }[];
 };
 
-type PlainTemplates = StaticDataConfig | CacheViewerConfig | QueryExecutorConfig | MutationExecutorConfig;
+export type CustomQueryConfig = CommonConfig & {
+  type: Template.CUSTOM_QUERY;
+  formLayout: FormLayout;
+  fieldConfigMap: FieldConfigMap;
+  query: DocumentNode;
+  getQueryVariables: (o: FormValues) => object;
+  validator?: (o: FormValues) => FormErrors;
+  initialValues?: FormValues;
+  client: ApolloClient<NormalizedCacheObject>;
+};
+
+type PlainTemplates =
+  | StaticDataConfig
+  | CacheViewerConfig
+  | QueryExecutorConfig
+  | MutationExecutorConfig
+  | CustomQueryConfig;
 
 export type NestedTemplateConfig = CommonConfig & {
   type: Template.NESTED_TEMPLATE;
@@ -73,3 +91,27 @@ export type APIPlaygroundProps = {
   config: TemplateConfig[];
   className?: ClassName;
 };
+
+/***************************** FORM CONFIG ***************************************/
+
+export type FormLayout = {
+  horizontal?: boolean;
+  fields?: (string | FormLayout)[];
+};
+
+export type FieldConfig = {
+  type: FormFieldType;
+  id: string;
+  label: string;
+  required?: boolean;
+  placeholder?: string;
+  readOnly?: boolean;
+};
+
+export type FieldConfigMap = Record<string, FieldConfig>;
+
+/***************************** UTILITY TYPES ***************************************/
+
+export type Action<Type extends string, Payload extends object | undefined = undefined> = Payload extends undefined
+  ? { type: Type }
+  : { type: Type; payload: Payload };
