@@ -65,10 +65,27 @@ export type CustomQueryConfig = CommonConfig & {
   formLayout: FormLayout;
   fieldConfigMap: FieldConfigMap;
   query: DocumentNode;
-  getQueryVariables: (o: FormValues) => object;
+  getVariables: (o: FormValues) => object;
   validator?: (o: FormValues) => FormErrors;
   initialValues?: FormValues;
   client: ApolloClient<NormalizedCacheObject>;
+  outputConfig?: {
+    readOnly?: boolean;
+  };
+};
+
+export type CustomMutationConfig = CommonConfig & {
+  type: Template.CUSTOM_MUTATION;
+  formLayout: FormLayout;
+  fieldConfigMap: FieldConfigMap;
+  mutation: DocumentNode;
+  getVariables: (o: FormValues) => object;
+  validator?: (o: FormValues) => FormErrors;
+  initialValues?: FormValues;
+  client: ApolloClient<NormalizedCacheObject>;
+  outputConfig?: {
+    readOnly?: boolean;
+  };
 };
 
 type PlainTemplates =
@@ -76,7 +93,8 @@ type PlainTemplates =
   | CacheViewerConfig
   | QueryExecutorConfig
   | MutationExecutorConfig
-  | CustomQueryConfig;
+  | CustomQueryConfig
+  | CustomMutationConfig;
 
 export type NestedTemplateConfig = CommonConfig & {
   type: Template.NESTED_TEMPLATE;

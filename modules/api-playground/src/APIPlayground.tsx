@@ -11,6 +11,7 @@ import { CacheViewer } from './components/cacheViewer';
 import { QueryExecutor } from './components/queryExecutor';
 import { MutationExecutor } from './components/mutationExecutor';
 import { CustomQuery } from './components/customQuery';
+import { CustomMutation } from './components/customMutation';
 
 //constants
 import { Template } from './constants/template';
@@ -49,6 +50,8 @@ export const APIPlayground = ({ config, className }: APIPlaygroundProps): JSX.El
     el = <MutationExecutor config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
   } else if (activeTemplate === Template.CUSTOM_QUERY) {
     el = <CustomQuery config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
+  } else if (activeTemplate === Template.CUSTOM_MUTATION) {
+    el = <CustomMutation config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
   }
 
   return (

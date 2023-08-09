@@ -14,5 +14,8 @@ export {
   MutationExecutorConfig,
   NestedTemplateConfig,
   CustomQueryConfig,
+  CustomMutationConfig,
   ApolloClient,
 } from './types';
+
+export { FieldConfigMapBuilder } from './utils/FieldConfigMapBuilder';

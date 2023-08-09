@@ -1,5 +1,5 @@
 // lib
-import { memo, useCallback } from 'react';
+import { ComponentType, memo, useCallback } from 'react';
 
 // components
 import { Box } from '@sprinklrjs/spaceweb/box';
@@ -12,8 +12,9 @@ import { Button } from '@sprinklrjs/spaceweb/button';
 //types
 import { FieldConfigMap, FormLayout } from '@/types';
 import { ActionType, OnFormAction } from './actionType';
+import { FormErrors, FormFieldComponentProps, FormValues } from './types';
 
-const FIELD_TYPE_VS_COMPONENT = {
+const FIELD_TYPE_VS_COMPONENT: Record<FormFieldType, ComponentType<FormFieldComponentProps>> = {
   [FormFieldType.TEXT]: TextInput,
   [FormFieldType.NUMBER]: NumberInput,
   [FormFieldType.JSON]: JSONInput,
@@ -22,8 +23,8 @@ const FIELD_TYPE_VS_COMPONENT = {
 type FormProps = {
   layout: FormLayout;
   fieldConfigMap: FieldConfigMap;
-  values: object;
-  errors: Record<string, string>;
+  values: FormValues;
+  errors: FormErrors;
   onAction: OnFormAction;
   loading?: boolean;
 };
@@ -40,7 +41,15 @@ const Arranger = ({ layout, fieldConfigMap, errors, values, onAction }: FormProp
           const config = fieldConfigMap[field];
           const Component = FIELD_TYPE_VS_COMPONENT[config.type];
 
-          return <Component key={config.id} {...config} onAction={onAction} error={errors[config.id]} />;
+          return (
+            <Component
+              key={config.id}
+              {...config}
+              onAction={onAction}
+              error={errors[config.id]}
+              value={values[config.id]}
+            />
+          );
         }
         return (
           // eslint-disable-next-line react/jsx-key -- let it be default

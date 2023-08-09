@@ -1,10 +1,21 @@
 import { gql } from '@apollo/client';
-import { FormFieldType, Template, TemplateConfig } from '@/modules/api-playground';
+import { FieldConfigMapBuilder, FormFieldType, Template, TemplateConfig } from '@/modules/api-playground';
 import { CLIENT } from './constants';
 
 const FETCH_LOCATIONS = gql`
   query FetchLocations($page: Int) {
     locations(page: $page) {
+      results {
+        id
+        name
+      }
+    }
+  }
+`;
+
+const CREATE_LOCATIONS = gql`
+  query CreateLocation($page: Int) {
+    createLocation(page: $page) {
       results {
         id
         name
@@ -48,12 +59,48 @@ export const TEMPLATE_CONFIG: TemplateConfig[] = [
     title: 'Custom Query',
     client: CLIENT,
     query: FETCH_LOCATIONS,
-    fieldConfigMap: {
-      page: { id: 'page', label: 'Page No.', type: FormFieldType.NUMBER, required: true },
-      data: { id: 'data', label: 'Data', type: FormFieldType.JSON },
-    },
+    fieldConfigMap: new FieldConfigMapBuilder()
+      .addField({
+        id: 'page',
+        label: 'Page No.',
+        type: FormFieldType.NUMBER,
+        required: true,
+      })
+      .addField({
+        id: 'data',
+        label: 'Data',
+        type: FormFieldType.JSON,
+      })
+      .build(),
     formLayout: { fields: ['page', 'data'] },
-    getQueryVariables: obj => {
+    getVariables: obj => {
+      return { page: obj.page };
+    },
+  },
+  {
+    id: 'custom_mutation',
+    type: Template.CUSTOM_MUTATION,
+    title: 'Custom Mutation',
+    client: CLIENT,
+    mutation: CREATE_LOCATIONS,
+    initialValues: {
+      page: 4,
+    },
+    fieldConfigMap: new FieldConfigMapBuilder()
+      .addField({
+        id: 'page',
+        label: 'Page No.',
+        type: FormFieldType.NUMBER,
+        required: true,
+      })
+      .addField({
+        id: 'data',
+        label: 'Data',
+        type: FormFieldType.JSON,
+      })
+      .build(),
+    formLayout: { fields: ['page', 'data'] },
+    getVariables: obj => {
       return { page: obj.page };
     },
   },

@@ -1,10 +1,11 @@
 //lib
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { VscSync } from 'react-icons/vsc';
-import * as monaco from 'monaco-editor';
+import { OnMount } from '@monaco-editor/react';
 
 //hooks
 import { useSnackbar } from '@/context/SnackbarContext';
+import { useMonacoMount } from '@/hooks/useMonacoMount';
 
 //utils
 import { getExpandedData } from './utils';
@@ -50,7 +51,7 @@ type ReturnType = {
   actions: Action[];
 
   onActionClick: (action: string) => void;
-  onMount: (mEditor: monaco.editor.IStandaloneCodeEditor) => void;
+  onMount: OnMount;
 };
 
 export const useCacheViewer = ({ config }: Params): ReturnType => {
@@ -61,11 +62,7 @@ export const useCacheViewer = ({ config }: Params): ReturnType => {
 
   const { onError, onSuccess } = useSnackbar();
 
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
-
-  const onMount = useCallback((mEditor: monaco.editor.IStandaloneCodeEditor) => {
-    editorRef.current = mEditor;
-  }, []);
+  const { editorRef, onMount } = useMonacoMount();
 
   const stringifiedData = useMemo(() => prettifyJSON(client.cache.extract()), [client.cache, count]);
 
@@ -89,7 +86,7 @@ export const useCacheViewer = ({ config }: Params): ReturnType => {
         }
       }
     },
-    [client.cache, onError, onSuccess]
+    [client.cache, editorRef, onError, onSuccess]
   );
 
   const actions = useMemo(

@@ -3,10 +3,10 @@ import { OnFormAction } from './actionType';
 
 type FieldValue = string | number;
 
-export type FormFieldComponentProps<T extends FieldValue = string> = Omit<FieldConfig, 'type' | 'initialValue'> & {
+export type FormFieldComponentProps = Omit<FieldConfig, 'type' | 'initialValue'> & {
   id: string;
   onAction: OnFormAction;
-  value?: T;
+  value?: FieldValue;
   error?: string;
 };
 

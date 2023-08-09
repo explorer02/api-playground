@@ -18,7 +18,7 @@ const NumberInput = ({
   required,
   value,
   placeholder,
-}: FormFieldComponentProps<number>) => {
+}: FormFieldComponentProps) => {
   const { onBlur, onChange } = useFormField(id, onAction);
 
   const handleChange = useCallback(

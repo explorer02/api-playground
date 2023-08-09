@@ -1,8 +1,10 @@
 //lib
 import { useCallback, useRef, useState } from 'react';
-import * as monaco from 'monaco-editor';
 import { OnMount } from '@monaco-editor/react';
 import { parse } from 'graphql';
+
+//hooks
+import { useMonacoMount } from '@/hooks/useMonacoMount';
 
 //utils
 import { prettifyJSON } from '@/utils/prettifyJSON';
@@ -27,24 +29,14 @@ type ReturnType = {
   onMutationSelect: OnMutationSelect;
 };
 
-const useMount = () => {
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
-
-  const onMount = useCallback<OnMount>(mEditor => {
-    editorRef.current = mEditor;
-  }, []);
-
-  return { editorRef, onMount };
-};
-
 export const useMutationExecutor = ({ config }: Params): ReturnType => {
   const [loading, setLoading] = useState(false);
 
   const { client } = config;
 
-  const { editorRef: inputEditorRef, onMount: onInputMount } = useMount();
-  const { editorRef: variableEditorRef, onMount: onVariableMount } = useMount();
-  const { editorRef: outputEditorRef, onMount: onOutputMount } = useMount();
+  const { editorRef: inputEditorRef, onMount: onInputMount } = useMonacoMount();
+  const { editorRef: variableEditorRef, onMount: onVariableMount } = useMonacoMount();
+  const { editorRef: outputEditorRef, onMount: onOutputMount } = useMonacoMount();
 
   const onSubmit = useCallback(async () => {
     const query = parse(inputEditorRef.current?.getValue() ?? '');

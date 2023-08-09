@@ -9,11 +9,11 @@ import { useMonacoMount } from '@/hooks/useMonacoMount';
 import { prettifyJSON } from '@/utils/prettifyJSON';
 
 //types
-import { CustomQueryConfig } from '@/types';
+import { CustomMutationConfig } from '@/types';
 import { FormValues } from '@/components/form/types';
 
 type Params = {
-  config: CustomQueryConfig;
+  config: CustomMutationConfig;
 };
 
 type ReturnType = {
@@ -22,26 +22,26 @@ type ReturnType = {
   onOutputEditorMount: OnMount;
 };
 
-export const useCustomQuery = ({ config }: Params): ReturnType => {
+export const useCustomMutation = ({ config }: Params): ReturnType => {
   const [loading, setLoading] = useState(false);
 
   const { editorRef: outputEditorRef, onMount: onOutputEditorMount } = useMonacoMount();
 
-  const { getVariables, query, client } = config;
+  const { getVariables, mutation, client } = config;
 
   const onSubmit = useCallback(
     async (vals: FormValues) => {
       const variables = getVariables(vals);
       setLoading(true);
       try {
-        const { data, error } = await client.query({ query, variables, fetchPolicy: 'network-only' });
-        outputEditorRef.current?.setValue(prettifyJSON(data) ?? error?.message);
+        const { data, errors } = await client.mutate({ mutation, variables });
+        outputEditorRef.current?.setValue(prettifyJSON(data) ?? errors?.[0]?.message);
       } catch (e: any) {
         outputEditorRef.current?.setValue(e?.message);
       }
       setLoading(false);
     },
-    [client, getVariables, outputEditorRef, query]
+    [client, getVariables, mutation, outputEditorRef]
   );
 
   return { loading, onSubmit, onOutputEditorMount };

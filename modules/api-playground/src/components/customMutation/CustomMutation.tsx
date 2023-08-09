@@ -1,18 +1,18 @@
 //components
 import { Box } from '@sprinklrjs/spaceweb/box';
-import { OutputEditor } from './components/OutputEditor';
+import { OutputEditor } from '../customQuery/components/OutputEditor';
 import { Form, useForm } from '../form';
 
 //hooks
-import { useCustomQuery } from './hooks/useCustomQuery';
+import { useCustomMutation } from './hooks/useCustomMutation';
 
 //types
-import { CustomQueryConfig } from '@/types';
+import { CustomMutationConfig } from '@/types';
 
-export const CustomQuery = ({ config }: { config: CustomQueryConfig }) => {
+export const CustomMutation = ({ config }: { config: CustomMutationConfig }) => {
   const { fieldConfigMap, formLayout, validator, initialValues, outputConfig } = config;
 
-  const { loading, onSubmit, onOutputEditorMount } = useCustomQuery({ config });
+  const { loading, onSubmit, onOutputEditorMount } = useCustomMutation({ config });
 
   const { onAction, values, errors } = useForm({ fieldConfigMap, validator, initialValues, onSubmit });
 

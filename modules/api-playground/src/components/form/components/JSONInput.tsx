@@ -9,6 +9,7 @@ import { FullSizeLoader } from '@/components/snippet/components/FullSizeLoader';
 
 //hooks
 import { useFormField } from '../hooks/useFormField';
+import { useValidateJSON } from '@/hooks/useValidateJSON';
 
 //utils
 import { getMonacoConfig } from '@/components/snippet/utils';
@@ -24,17 +25,24 @@ const JSONInput = ({ id, label, onAction, error, readOnly, required, value }: Fo
 
   const monacoConfig = useMemo(() => getMonacoConfig({ readOnly }), [readOnly]);
 
-  const valueRef = useRef(value);
+  const valueRef = useRef(value?.toString());
+
+  const { errors: validationErrors, handleChange } = useValidateJSON({ onChange });
 
   return (
     <FormControl error={error} onBlur={onBlur} required={required} label={label}>
-      <Box className="py-2 rounded-8 spr-ui-01">
+      <Box
+        className={[
+          'py-2 rounded-8 spr-ui-01 border-1 border-solid',
+          validationErrors ? ({ theme }) => ({ borderColor: theme.spr.supportError }) : 'spr-border-03',
+        ]}
+      >
         <MonacoEditor
           language={Language.JSON}
           options={monacoConfig}
           height={300}
           loading={<FullSizeLoader />}
-          onChange={onChange}
+          onChange={handleChange}
           value={valueRef.current}
         />
       </Box>

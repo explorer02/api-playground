@@ -1,7 +1,10 @@
 //lib
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef } from 'react';
 import * as monaco from 'monaco-editor';
 import { OnChange, OnMount } from '@monaco-editor/react';
+
+//hooks
+import { useValidateJSON } from '@/hooks/useValidateJSON';
 
 type Params = {
   parentOnMount?: OnMount;
@@ -15,17 +18,9 @@ type ReturnType = {
 };
 
 export const useVariableEditor = ({ parentOnMount, onSubmit }: Params): ReturnType => {
-  const [errors, setErrors] = useState(true);
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
+  const { errors, handleChange } = useValidateJSON();
 
-  const onChange = useCallback<OnChange>(content => {
-    try {
-      const parsedVariables = JSON.parse(content ?? '');
-      setErrors(false);
-    } catch {
-      setErrors(true);
-    }
-  }, []);
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
 
   const onMount = useCallback<OnMount>(
     (mEditor, _monaco) => {
@@ -48,7 +43,7 @@ export const useVariableEditor = ({ parentOnMount, onSubmit }: Params): ReturnTy
 
   return {
     errors,
-    onChange,
+    onChange: handleChange,
     onMount,
   };
 };
