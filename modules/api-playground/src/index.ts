@@ -16,6 +16,7 @@ export {
   CustomQueryConfig,
   CustomMutationConfig,
   ApolloClient,
+  FetchAndMutateConfig,
 } from './types';
 
 export { FieldConfigMapBuilder } from './utils/FieldConfigMapBuilder';

@@ -12,6 +12,7 @@ import { QueryExecutor } from './components/queryExecutor';
 import { MutationExecutor } from './components/mutationExecutor';
 import { CustomQuery } from './components/customQuery';
 import { CustomMutation } from './components/customMutation';
+import { FetchAndMutate } from './components/fetchAndMutate';
 
 //constants
 import { Template } from './constants/template';
@@ -52,6 +53,8 @@ export const APIPlayground = ({ config, className }: APIPlaygroundProps): JSX.El
     el = <CustomQuery config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
   } else if (activeTemplate === Template.CUSTOM_MUTATION) {
     el = <CustomMutation config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
+  } else if (activeTemplate === Template.FETCH_AND_MUTATE) {
+    el = <FetchAndMutate config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
   }
 
   return (

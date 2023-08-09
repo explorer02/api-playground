@@ -28,16 +28,17 @@ const RightActions = ({ actions, onActionClick, className, loading }: Props): JS
 
   return (
     <Box className={['flex gap-2 justify-end', className]}>
-      {actions.map(({ Icon, label, id, type }) => {
+      {actions.map(({ Icon, label, id, type, disabled }) => {
         if (type === 'cta') {
           return (
             <Button
               key={id}
-              startEnhancer={Icon ? <Icon /> : undefined}
+              endEnhancer={Icon ? <Icon /> : undefined}
               size="xs"
               onClick={handleActionClick}
               data-id={id}
               isLoading={loading}
+              disabled={disabled}
             >
               {label}
             </Button>
@@ -53,6 +54,7 @@ const RightActions = ({ actions, onActionClick, className, loading }: Props): JS
             onClick={handleActionClick}
             data-id={id}
             isLoading={loading}
+            disabled={disabled}
           >
             {Icon ? <Icon size={16} stroke="black" strokeWidth={0.3} /> : null}
           </IconButton>

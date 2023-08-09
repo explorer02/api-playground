@@ -88,13 +88,35 @@ export type CustomMutationConfig = CommonConfig & {
   };
 };
 
+export type FetchAndMutateConfig = CommonConfig & {
+  type: Template.FETCH_AND_MUTATE;
+  fetchConfig: {
+    formLayout: FormLayout;
+    fieldConfigMap: FieldConfigMap;
+    query: DocumentNode;
+    getVariables: (o: FormValues) => object;
+    validator?: (o: FormValues) => FormErrors;
+    initialValues?: FormValues;
+    output?: { title?: string };
+    cta?: { label: string };
+  };
+  mutateConfig: {
+    mutation: DocumentNode;
+    getVariables: (o: object) => object;
+    validator?: (o: object) => FormErrors;
+    output?: { title?: string };
+  };
+  client: ApolloClient<NormalizedCacheObject>;
+};
+
 type PlainTemplates =
   | StaticDataConfig
   | CacheViewerConfig
   | QueryExecutorConfig
   | MutationExecutorConfig
   | CustomQueryConfig
-  | CustomMutationConfig;
+  | CustomMutationConfig
+  | FetchAndMutateConfig;
 
 export type NestedTemplateConfig = CommonConfig & {
   type: Template.NESTED_TEMPLATE;

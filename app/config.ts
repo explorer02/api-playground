@@ -104,6 +104,42 @@ export const TEMPLATE_CONFIG: TemplateConfig[] = [
       return { page: obj.page };
     },
   },
+  {
+    id: 'fetch_and_mutate',
+    type: Template.FETCH_AND_MUTATE,
+    title: 'Fetch And Mutate',
+    fetchConfig: {
+      fieldConfigMap: new FieldConfigMapBuilder()
+        .addField({
+          id: 'page',
+          label: 'Page No.',
+          type: FormFieldType.NUMBER,
+          required: true,
+        })
+        .addField({
+          id: 'data',
+          label: 'Data',
+          type: FormFieldType.JSON,
+        })
+        .build(),
+      formLayout: { fields: ['page', 'data'] },
+      getVariables: obj => {
+        return { page: obj.page };
+      },
+      query: FETCH_LOCATIONS,
+      cta: { label: 'Send' },
+      output: { title: 'Locations' },
+    },
+    mutateConfig: {
+      mutation: CREATE_LOCATIONS,
+      getVariables: obj => {
+        console.log(obj);
+        return { page: (obj as any).page };
+      },
+      output: { title: 'Responsess' },
+    },
+    client: CLIENT,
+  },
   // {
   //   id: 'first',
   //   type: Template.NESTED_TEMPLATE,

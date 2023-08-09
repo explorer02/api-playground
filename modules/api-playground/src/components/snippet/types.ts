@@ -10,4 +10,5 @@ export type Action = {
   label: string;
   Icon?: IconType;
   type?: 'cta' | 'icon';
+  disabled?: boolean;
 };

@@ -15,9 +15,9 @@ const InnerComponent = () => {
 const Page = (): JSX.Element | null => {
   return (
     <div style={{ background: '#dddddd55' }}>
-      <ApolloProvider client={CLIENT}>
+      {/* <ApolloProvider client={CLIENT}>
         <MyComponent />
-      </ApolloProvider>
+      </ApolloProvider> */}
       <InnerComponent />
     </div>
   );
