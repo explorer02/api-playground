@@ -1,6 +1,5 @@
 //lib
 import { useCallback, useRef } from 'react';
-import * as monaco from 'monaco-editor';
 import { useCopyToClipboard } from 'react-use';
 import { OnMount } from '@monaco-editor/react';
 
@@ -18,6 +17,7 @@ import { Language } from '@/constants/language';
 
 //types
 import { Action } from './types';
+import { MonacoEditorType } from '@/monaco';
 
 const ACTION_TYPE = {
   FORMAT: 'FORMAT',
@@ -50,7 +50,7 @@ export const useMonacoActions = ({
   onParentMount,
   language,
 }: Params): ReturnType => {
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
+  const editorRef = useRef<MonacoEditorType>();
 
   const onMount = useCallback<OnMount>(
     (mEditor, _monaco) => {

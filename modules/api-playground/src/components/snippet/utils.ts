@@ -1,6 +1,6 @@
-import { editor } from 'monaco-editor';
+import { MonacoEditorOptions } from '@/monaco';
 
-const DEFAULT_CONFIG: editor.IStandaloneEditorConstructionOptions = {
+const DEFAULT_CONFIG: MonacoEditorOptions = {
   scrollbar: {
     verticalScrollbarSize: 8,
     useShadows: false,
@@ -32,7 +32,7 @@ export const getMonacoConfig = ({
 }: {
   readOnly?: boolean;
   darkMode?: boolean;
-}): editor.IStandaloneEditorConstructionOptions => {
+}): MonacoEditorOptions => {
   return {
     ...DEFAULT_CONFIG,
     ...(readOnly ? { domReadOnly: true, readOnly: true } : undefined),

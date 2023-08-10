@@ -1,9 +1,10 @@
 import { useCallback, useRef } from 'react';
-import * as monaco from 'monaco-editor';
 import { OnMount } from '@monaco-editor/react';
 
+import { MonacoEditorType } from '@/monaco';
+
 export const useMonacoMount = () => {
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
+  const editorRef = useRef<MonacoEditorType>();
 
   const onMount = useCallback<OnMount>(mEditor => {
     editorRef.current = mEditor;

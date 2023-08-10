@@ -125,8 +125,6 @@ export type NestedTemplateConfig = CommonConfig & {
 
 export type TemplateConfig = PlainTemplates | NestedTemplateConfig;
 
-export { ApolloClient };
-
 export type APIPlaygroundProps = {
   config: TemplateConfig[];
   className?: ClassName;

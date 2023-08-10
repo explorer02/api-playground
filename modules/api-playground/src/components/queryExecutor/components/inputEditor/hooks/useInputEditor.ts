@@ -1,8 +1,10 @@
 //lib
 import { useCallback, useRef, useState } from 'react';
-import * as monaco from 'monaco-editor';
 import { parse } from 'graphql';
 import { OnChange, OnMount } from '@monaco-editor/react';
+
+//types
+import { MonacoEditorType } from '@/monaco';
 
 type Params = {
   parentOnMount?: OnMount;
@@ -17,7 +19,7 @@ type ReturnType = {
 
 export const useInputEditor = ({ parentOnMount, onSubmit }: Params): ReturnType => {
   const [errors, setErrors] = useState(true);
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
+  const editorRef = useRef<MonacoEditorType>();
 
   const onChange = useCallback<OnChange>(content => {
     try {
@@ -32,8 +34,8 @@ export const useInputEditor = ({ parentOnMount, onSubmit }: Params): ReturnType 
     (mEditor, _monaco) => {
       editorRef.current = mEditor;
       parentOnMount?.(mEditor, _monaco);
-      editorRef.current.onKeyDown(ev => {
-        if (ev.metaKey && ev.keyCode === monaco.KeyCode.Enter) {
+      editorRef.current?.onKeyDown(ev => {
+        if (ev.metaKey && ev.keyCode === 3) {
           if (!latestErrors.current) {
             onSubmit();
           }

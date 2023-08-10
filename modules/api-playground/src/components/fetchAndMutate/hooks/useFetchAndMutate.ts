@@ -80,7 +80,7 @@ export const useFetchAndMutate = ({ config }: Params): ReturnType => {
           setMutating(true);
           try {
             const { data, errors } = await client.mutate({ mutation, variables: mutationVariables });
-            queryOutputEditorRef.current?.setValue(prettifyJSON(data) ?? errors?.[0]?.message);
+            mutationOutputEditorRef.current?.setValue(prettifyJSON(data) ?? errors?.[0]?.message);
           } catch (e: any) {
             mutationOutputEditorRef.current?.setValue(e?.message);
           }
