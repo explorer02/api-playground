@@ -5,7 +5,7 @@ import { VariableEditor } from '../queryExecutor//components/variableEditor';
 import { OutputEditor } from '../queryExecutor/components/outputEditor';
 import { MutationSelector } from './components/mutationSelector';
 import { VscSend } from 'react-icons/vsc';
-import { Button } from '@sprinklrjs/spaceweb/button';
+import { Button } from '@/spaceweb/button';
 
 //hooks
 import { useMutationExecutor } from './hooks/useMutationExecutor';

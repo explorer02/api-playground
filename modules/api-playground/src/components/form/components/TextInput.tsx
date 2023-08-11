@@ -2,11 +2,13 @@
 import { ChangeEvent, memo, useCallback } from 'react';
 
 //components
-import { Input } from '@sprinklrjs/spaceweb/input';
+import { Input } from '@/spaceweb/input';
 import { FormControl } from './FormControl';
 
 //hooks
 import { useFormField } from '../hooks/useFormField';
+
+//types
 import { FormFieldComponentProps } from '../types';
 
 const TextInput = ({ id, label, onAction, error, readOnly, required, value, placeholder }: FormFieldComponentProps) => {
@@ -23,7 +25,7 @@ const TextInput = ({ id, label, onAction, error, readOnly, required, value, plac
     <FormControl onBlur={onBlur} label={label} required={required} error={error}>
       <Input
         onChange={handleChange}
-        intent={error ? 'error' : 'default'}
+        error={!!error}
         value={value}
         placeholder={placeholder ?? label}
         disabled={readOnly}

@@ -2,7 +2,7 @@
 import { ChangeEvent, memo, useCallback } from 'react';
 
 //components
-import { Input } from '@sprinklrjs/spaceweb/input';
+import { Input } from '@/spaceweb/input';
 import { FormControl } from './FormControl';
 
 //hooks
@@ -37,7 +37,7 @@ const NumberInput = ({
       <Input
         type="number"
         onChange={handleChange}
-        intent={error ? 'error' : 'default'}
+        error={!!error}
         value={value}
         placeholder={placeholder ?? label}
         disabled={readOnly}

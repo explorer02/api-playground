@@ -7,7 +7,7 @@ import { FormFieldType } from '@/constants/formFieldTypes';
 import { TextInput } from './components/TextInput';
 import { NumberInput } from './components/NumberInput';
 import { JSONInput } from './components/JSONInput';
-import { Button } from '@sprinklrjs/spaceweb/button';
+import { Button } from '@/spaceweb/button/Button';
 
 //types
 import { FieldConfigMap, FormLayout } from '@/types';
@@ -83,7 +83,7 @@ const Form = ({ layout, fieldConfigMap, values, errors, onAction, loading }: For
         onAction={onAction}
       />
       <Box className="flex justify-center mt-8">
-        <Button onClick={onSubmit} isLoading={loading}>
+        <Button onClick={onSubmit} loading={loading}>
           Submit
         </Button>
       </Box>

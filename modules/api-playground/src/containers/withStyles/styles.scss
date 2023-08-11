@@ -1,0 +1,12 @@
+.explorer-container,
+.explorer-container > * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.explorer-container {
+  .min-w-0 {
+    min-width: none;
+  }
+}

@@ -28,7 +28,7 @@ export const useVariableEditor = ({ parentOnMount, onSubmit }: Params): ReturnTy
     (mEditor, _monaco) => {
       editorRef.current = mEditor;
       parentOnMount?.(mEditor, _monaco);
-      editorRef.current.onKeyDown(ev => {
+      editorRef.current!.onKeyDown(ev => {
         if (ev.metaKey && ev.keyCode === 3) {
           if (!latestErrors.current) {
             onSubmit();

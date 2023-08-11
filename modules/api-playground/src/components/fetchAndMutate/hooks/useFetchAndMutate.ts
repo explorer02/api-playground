@@ -76,7 +76,7 @@ export const useFetchAndMutate = ({ config }: Params): ReturnType => {
     async (action: string) => {
       switch (action) {
         case EXECUTE_MUTATION:
-          const mutationVariables = getMutationVariables(JSON.parse(queryOutputEditorRef.current!.getValue()));
+          const mutationVariables = getMutationVariables(JSON.parse(queryOutputEditorRef.current!.getValue() ?? ''));
           setMutating(true);
           try {
             const { data, errors } = await client.mutate({ mutation, variables: mutationVariables });

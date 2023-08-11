@@ -82,7 +82,7 @@ export const useMonacoActions = ({
             switch (language) {
               case Language.GRAPHQL: {
                 try {
-                  editorRef.current?.setValue(prettifyGQL(editorRef.current.getValue()));
+                  editorRef.current?.setValue(prettifyGQL(editorRef.current.getValue() ?? ''));
                 } catch {}
                 break;
               }

@@ -58,7 +58,7 @@ export const APIPlayground = ({ config, className }: APIPlaygroundProps): JSX.El
   }
 
   return (
-    <Box className={['w-full flex gap-8 h-full', className]}>
+    <Box className={['w-full flex gap-8 h-full explorer-container', className]}>
       <Box className="flex-none">
         <SideNav
           config={config}

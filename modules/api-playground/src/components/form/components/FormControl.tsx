@@ -12,7 +12,7 @@ type Props = {
 
 export const FormControl = ({ onBlur, error, label, children, required }: Props): JSX.Element => {
   return (
-    <Box onBlur={onBlur}>
+    <div onBlur={onBlur}>
       {label ? (
         <Box className="flex items-center gap-1 mb-1">
           <Typography>{label} </Typography>
@@ -21,6 +21,6 @@ export const FormControl = ({ onBlur, error, label, children, required }: Props)
       ) : null}
       {children}
       {error ? <Typography className="spr-support-error-text">{error}</Typography> : null}
-    </Box>
+    </div>
   );
 };

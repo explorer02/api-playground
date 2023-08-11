@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc && resolve-tspaths",
+    "resolve-path": "resolve-tspaths",
     "minify": "uglifyjs-folder ./dist -eo ./dist2"
   },
   "repository": {

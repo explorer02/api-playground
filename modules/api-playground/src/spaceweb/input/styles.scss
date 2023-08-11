@@ -1,0 +1,21 @@
+.explorer-space-input {
+  width: 100%;
+
+  padding: 10px 11px;
+  font-size: 14px;
+
+  border: 1px solid #dbdbdb;
+  border-radius: 8px;
+  outline: none;
+
+  &:hover {
+    border-color: black;
+  }
+  &:focus {
+    border-color: #0e61f6;
+  }
+
+  &.error {
+    border-color: #c70f5c;
+  }
+}

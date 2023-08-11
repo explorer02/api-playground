@@ -15,7 +15,6 @@ export {
   NestedTemplateConfig,
   CustomQueryConfig,
   CustomMutationConfig,
-  ApolloClient,
   FetchAndMutateConfig,
 } from './types';
 
