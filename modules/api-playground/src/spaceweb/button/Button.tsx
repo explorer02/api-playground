@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps, LegacyRef } from 'react';
+import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
 import { Tooltip } from '../tooltip';
 
@@ -41,14 +41,8 @@ export const Button = ({
   if (tooltipContent) {
     return (
       <Tooltip content={tooltipContent}>
-        {({ ref, onMouseEnter, onMouseLeave }) => (
-          <button
-            {...rest}
-            ref={ref as LegacyRef<HTMLButtonElement>}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            className={mergedClassName}
-          />
+        {({ onMouseEnter, onMouseLeave }) => (
+          <button {...rest} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={mergedClassName} />
         )}
       </Tooltip>
     );

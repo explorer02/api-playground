@@ -2,7 +2,6 @@
 import { ComponentType, memo, useCallback } from 'react';
 
 // components
-import { Box } from '@sprinklrjs/spaceweb/box';
 import { FormFieldType } from '@/constants/formFieldTypes';
 import { TextInput } from './components/TextInput';
 import { NumberInput } from './components/NumberInput';
@@ -29,13 +28,11 @@ type FormProps = {
   loading?: boolean;
 };
 
-const GAP = 4;
-
 const Arranger = ({ layout, fieldConfigMap, errors, values, onAction }: FormProps) => {
   const { fields, horizontal } = layout;
 
   return (
-    <Box className={['flex', horizontal ? '' : 'flex-col', { gap: `${GAP * 4}px` }]}>
+    <div className={`flex ${horizontal ? '' : 'flex-col'} gap-4`}>
       {fields?.map(field => {
         if (typeof field === 'string') {
           const config = fieldConfigMap[field];
@@ -62,7 +59,7 @@ const Arranger = ({ layout, fieldConfigMap, errors, values, onAction }: FormProp
           />
         );
       })}
-    </Box>
+    </div>
   );
 };
 
@@ -74,7 +71,7 @@ const Form = ({ layout, fieldConfigMap, values, errors, onAction, loading }: For
   }, [onAction]);
 
   return (
-    <Box className="h-full">
+    <div className="h-full">
       <MemoizedArranger
         layout={layout}
         fieldConfigMap={fieldConfigMap}
@@ -82,12 +79,12 @@ const Form = ({ layout, fieldConfigMap, values, errors, onAction, loading }: For
         errors={errors}
         onAction={onAction}
       />
-      <Box className="flex justify-center mt-8">
+      <div className="flex justify-center mt-8">
         <Button onClick={onSubmit} loading={loading}>
           Submit
         </Button>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

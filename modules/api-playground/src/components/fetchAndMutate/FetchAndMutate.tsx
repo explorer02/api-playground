@@ -2,7 +2,6 @@
 import { useMemo } from 'react';
 
 //components
-import { Box } from '@sprinklrjs/spaceweb/box';
 import { Form, useForm } from '../form';
 import { Snippet } from '../snippet';
 
@@ -12,7 +11,7 @@ import { useFetchAndMutate } from './hooks/useFetchAndMutate';
 //types
 import { FetchAndMutateConfig } from '@/types';
 
-const SNIPPET_CLASSNAME = ['flex-1', { flexGrow: 2 }];
+const SNIPPET_CLASSNAME = 'flex-1 flex-grow-2';
 
 export const FetchAndMutate = ({ config }: { config: FetchAndMutateConfig }) => {
   const {
@@ -49,8 +48,8 @@ export const FetchAndMutate = ({ config }: { config: FetchAndMutateConfig }) => 
   );
 
   return (
-    <Box className="h-full flex gap-4">
-      <Box className="h-full flex flex-col gap-4 flex-1">
+    <div className="h-full flex gap-4">
+      <div className="h-full flex flex-col gap-4 flex-1">
         <Form
           fieldConfigMap={fieldConfigMap}
           layout={formLayout}
@@ -59,7 +58,7 @@ export const FetchAndMutate = ({ config }: { config: FetchAndMutateConfig }) => 
           onAction={onAction}
           loading={fetching}
         />
-      </Box>
+      </div>
       <Snippet
         title={queryOutput?.title ?? 'Output'}
         className={SNIPPET_CLASSNAME}
@@ -75,6 +74,6 @@ export const FetchAndMutate = ({ config }: { config: FetchAndMutateConfig }) => 
         className={SNIPPET_CLASSNAME}
         loading={mutating}
       />
-    </Box>
+    </div>
   );
 };

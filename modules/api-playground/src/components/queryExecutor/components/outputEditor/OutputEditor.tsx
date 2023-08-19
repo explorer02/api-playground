@@ -5,14 +5,11 @@ import { OnMount } from '@monaco-editor/react';
 //components
 import { Snippet } from '@/components/snippet';
 
-//types
-import { ClassName } from '@sprinklrjs/spaceweb';
-
 type Props = {
   title?: string;
   readOnly?: boolean;
   onMount: OnMount;
-  className?: ClassName;
+  className?: string;
   loading?: boolean;
 };
 

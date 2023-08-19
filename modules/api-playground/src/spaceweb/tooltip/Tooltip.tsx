@@ -3,19 +3,13 @@ import { MouseEvent, ReactNode, Ref, useCallback, useRef, useState } from 'react
 import './styles.css';
 
 type Props = {
-  children: (p: {
-    ref: Ref<HTMLElement>;
-    onMouseEnter: (ev: MouseEvent) => void;
-    onMouseLeave: (ev: MouseEvent) => void;
-  }) => ReactNode;
+  children: (p: { onMouseEnter: (ev: MouseEvent) => void; onMouseLeave: (ev: MouseEvent) => void }) => ReactNode;
   content?: ReactNode;
 };
 
 const TIMEOUT = 300;
 
 export const Tooltip = ({ content, children }: Props): JSX.Element => {
-  const ref = useRef<HTMLElement>(null);
-
   const [coords, setCoords] = useState<DOMRect>();
 
   const timerRef = useRef<NodeJS.Timeout>();
@@ -36,7 +30,7 @@ export const Tooltip = ({ content, children }: Props): JSX.Element => {
 
   return (
     <>
-      {children({ ref, onMouseEnter, onMouseLeave })}
+      {children({ onMouseEnter, onMouseLeave })}
       {coords ? (
         <div
           className="explorer-tooltip-container"

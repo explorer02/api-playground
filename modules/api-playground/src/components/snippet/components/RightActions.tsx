@@ -2,17 +2,15 @@
 import { MouseEvent, memo, useCallback, useMemo } from 'react';
 
 //components
-import { Box } from '@sprinklrjs/spaceweb/box';
 import { Button } from '@/spaceweb/button';
 
 //types
 import { Action } from '../types';
-import { ClassName } from '@sprinklrjs/spaceweb';
 
 type Props = {
   actions: Action[];
   onActionClick: (action: string) => void;
-  className?: ClassName;
+  className?: string;
   loading?: boolean;
 };
 
@@ -27,13 +25,13 @@ const RightActions = ({ actions, onActionClick, className, loading }: Props): JS
   );
 
   return (
-    <Box className={['flex gap-2 justify-end', className]}>
+    <div className={`flex gap-2 justify-end ${className}`}>
       {actions.map(({ Icon, label, id, type, disabled }) => {
         if (type === 'cta') {
           return (
             <Button key={id} size="xs" onClick={handleActionClick} data-id={id} loading={loading} disabled={disabled}>
-              {Icon ? <Icon /> : null}
               {label}
+              {Icon ? <Icon className="ml-2" /> : null}
             </Button>
           );
         }
@@ -53,7 +51,7 @@ const RightActions = ({ actions, onActionClick, className, loading }: Props): JS
           </Button>
         );
       })}
-    </Box>
+    </div>
   );
 };
 

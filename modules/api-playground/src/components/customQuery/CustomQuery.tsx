@@ -1,5 +1,4 @@
 //components
-import { Box } from '@sprinklrjs/spaceweb/box';
 import { OutputEditor } from './components/OutputEditor';
 import { Form, useForm } from '../form';
 
@@ -17,8 +16,8 @@ export const CustomQuery = ({ config }: { config: CustomQueryConfig }) => {
   const { onAction, values, errors } = useForm({ fieldConfigMap, validator, initialValues, onSubmit });
 
   return (
-    <Box className="h-full flex gap-4">
-      <Box className="h-full flex flex-col gap-4 flex-1">
+    <div className="h-full flex gap-4">
+      <div className="h-full flex flex-col gap-4 flex-1">
         <Form
           fieldConfigMap={fieldConfigMap}
           layout={formLayout}
@@ -27,7 +26,7 @@ export const CustomQuery = ({ config }: { config: CustomQueryConfig }) => {
           onAction={onAction}
           loading={loading}
         />
-      </Box>
+      </div>
       <OutputEditor
         title="Output"
         readOnly={outputConfig?.readOnly ?? true}
@@ -35,6 +34,6 @@ export const CustomQuery = ({ config }: { config: CustomQueryConfig }) => {
         onMount={onOutputEditorMount}
         loading={loading}
       />
-    </Box>
+    </div>
   );
 };

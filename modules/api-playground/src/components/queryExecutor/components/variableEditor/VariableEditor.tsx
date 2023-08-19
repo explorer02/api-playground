@@ -8,14 +8,11 @@ import { Snippet } from '@/components/snippet';
 //hooks
 import { useVariableEditor } from './hooks/useVariableEditor';
 
-//types
-import { ClassName } from '@sprinklrjs/spaceweb';
-
 type Props = {
   title?: string;
   onSubmit: () => void;
   onMount?: OnMount;
-  className?: ClassName;
+  className?: string;
 };
 
 const VariableEditor = ({ title, onSubmit, className, onMount: parentOnMount }: Props) => {

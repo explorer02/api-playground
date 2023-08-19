@@ -3,7 +3,6 @@ import { memo, useMemo, useRef } from 'react';
 import MonacoEditor from '@monaco-editor/react';
 
 //components
-import { Box } from '@sprinklrjs/spaceweb/box';
 import { FormControl } from './FormControl';
 import { FullSizeLoader } from '@/components/snippet/components/FullSizeLoader';
 
@@ -31,11 +30,9 @@ const JSONInput = ({ id, label, onAction, error, readOnly, required, value }: Fo
 
   return (
     <FormControl error={error} onBlur={onBlur} required={required} label={label}>
-      <Box
-        className={[
-          'py-2 rounded-8 spr-ui-01 border-1 border-solid',
-          validationErrors ? ({ theme }) => ({ borderColor: theme.spr.supportError }) : 'spr-border-03',
-        ]}
+      <div
+        className="py-2 rounded-8 spr-ui-01 border-1 border-solid"
+        style={{ borderColor: validationErrors ? 'var(--spr-support-error)' : 'var(--spr-border-03)' }}
       >
         <MonacoEditor
           language={Language.JSON}
@@ -45,7 +42,7 @@ const JSONInput = ({ id, label, onAction, error, readOnly, required, value }: Fo
           onChange={handleChange}
           value={valueRef.current}
         />
-      </Box>
+      </div>
     </FormControl>
   );
 };

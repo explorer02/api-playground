@@ -22,6 +22,9 @@ const VARIANT_VS_STYLES = {
   l2: { fontSize: '12px', lineHeight: '16px', fontWeight: 400 },
   l3: { fontSize: '11px', lineHeight: '16px', fontWeight: 400 },
   l4: { fontSize: '10px', lineHeight: '14px', fontWeight: 400 },
+
+  'body-16': { fontSize: '16px', lineHeight: '20px', fontWeight: 400 },
+  'body-14': { fontSize: '14px', lineHeight: '18px', fontWeight: 400 },
 } as const;
 
 type Props = DetailedHTMLProps<ButtonHTMLAttributes<HTMLParagraphElement>, HTMLParagraphElement> & {

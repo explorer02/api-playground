@@ -18,7 +18,6 @@ import { getMonacoConfig } from './utils';
 import { Language } from '@/constants/language';
 
 //types
-import { ClassName } from '@sprinklrjs/spaceweb';
 import { Action, Tab } from './types';
 
 type EditorProps = Pick<MonacoEditorProps, 'onMount' | 'onChange'> & {
@@ -28,7 +27,7 @@ type EditorProps = Pick<MonacoEditorProps, 'onMount' | 'onChange'> & {
 
 type Props = {
   title: string;
-  className?: ClassName;
+  className?: string;
 
   tabs?: Tab[];
   selectedTabIdx?: number;
