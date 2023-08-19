@@ -14,6 +14,9 @@ import { SnackbarProvider } from '@/context/SnackbarContext';
 
 import { APIPlaygroundProps } from '@/types';
 
+import './styles.css';
+import './tailwind.css';
+
 export const ContainerWithStyles = (props: APIPlaygroundProps): JSX.Element => {
   return (
     <SpacewebProvider direction="ltr" theme={light}>

@@ -3,7 +3,6 @@ import { ApolloClient, DocumentNode, NormalizedCacheObject } from '@apollo/clien
 import { Template } from './constants/template';
 import { Language } from './constants/language';
 
-import { ClassName } from '@sprinklrjs/spaceweb';
 import { FormFieldType } from './constants/formFieldTypes';
 import { FormErrors, FormValues } from './components/form/types';
 
@@ -127,7 +126,6 @@ export type TemplateConfig = PlainTemplates | NestedTemplateConfig;
 
 export type APIPlaygroundProps = {
   config: TemplateConfig[];
-  className?: ClassName;
 };
 
 /***************************** FORM CONFIG ***************************************/

@@ -3,7 +3,7 @@ import { MouseEvent, memo, useCallback, useMemo } from 'react';
 
 //components
 import { Box } from '@sprinklrjs/spaceweb/box';
-import { Button, IconButton } from '@sprinklrjs/spaceweb/button';
+import { Button } from '@/spaceweb/button';
 
 //types
 import { Action } from '../types';
@@ -31,33 +31,26 @@ const RightActions = ({ actions, onActionClick, className, loading }: Props): JS
       {actions.map(({ Icon, label, id, type, disabled }) => {
         if (type === 'cta') {
           return (
-            <Button
-              key={id}
-              endEnhancer={Icon ? <Icon /> : undefined}
-              size="xs"
-              onClick={handleActionClick}
-              data-id={id}
-              isLoading={loading}
-              disabled={disabled}
-            >
+            <Button key={id} size="xs" onClick={handleActionClick} data-id={id} loading={loading} disabled={disabled}>
+              {Icon ? <Icon /> : null}
               {label}
             </Button>
           );
         }
         return (
-          <IconButton
+          <Button
             key={id}
             tooltipContent={label}
-            bordered
-            shape="square"
             size="xs"
             onClick={handleActionClick}
             data-id={id}
-            isLoading={loading}
+            loading={loading}
             disabled={disabled}
+            variant="secondary"
+            icon
           >
-            {Icon ? <Icon size={16} stroke="black" strokeWidth={0.3} /> : null}
-          </IconButton>
+            {Icon ? <Icon size={16} strokeWidth={0.3} /> : null}
+          </Button>
         );
       })}
     </Box>

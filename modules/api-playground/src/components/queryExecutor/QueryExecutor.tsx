@@ -5,7 +5,7 @@ import { VariableEditor } from './components/variableEditor';
 import { OutputEditor } from './components/outputEditor';
 import { QuerySelector } from './components/querySelector';
 import { VscSend, VscSync } from 'react-icons/vsc';
-import { Button, IconButton } from '@sprinklrjs/spaceweb/button';
+import { Button } from '@/spaceweb/button';
 
 //hooks
 import { useQueryExecutor } from './hooks/useQueryExecutor';
@@ -23,17 +23,17 @@ export const QueryExecutor = ({ config }: { config: QueryExecutorConfig }) => {
   });
 
   return (
-    <Box className="h-full flex gap-4">
-      <Box className="h-full flex flex-col gap-4 flex-1">
-        <Box className="flex-none flex gap-3">
+    <div className="h-full flex gap-4">
+      <div className="h-full flex flex-col gap-4 flex-1">
+        <div className="flex-none flex gap-3">
           <QuerySelector config={config} onChange={onQuerySelect} className="flex-1" />
-          <IconButton tooltipContent="Refresh Queries" className="flex-none" bordered shape="square" size="xs">
-            <VscSync size={16} stroke="black" strokeWidth={0.3} />
-          </IconButton>
+          <Button tooltipContent="Refresh Queries" className="flex-none" size="xs" variant="secondary">
+            <VscSync size={16} strokeWidth={0.4} />
+          </Button>
           <Button className="min-w-0" size="xs" tooltipContent="Execute" onClick={onSubmit}>
             <VscSend />
           </Button>
-        </Box>
+        </div>
         <InputEditor
           title={config.config?.input?.title}
           onSubmit={onSubmit}
@@ -46,7 +46,7 @@ export const QueryExecutor = ({ config }: { config: QueryExecutorConfig }) => {
           className={VARIABLE_CONTAINER_CLASSNAME}
           onMount={onVariableMount}
         />
-      </Box>
+      </div>
       <OutputEditor
         title={config.config?.output?.title}
         readOnly={config.config?.output?.readOnly}
@@ -54,6 +54,6 @@ export const QueryExecutor = ({ config }: { config: QueryExecutorConfig }) => {
         onMount={onOutputMount}
         loading={loading}
       />
-    </Box>
+    </div>
   );
 };

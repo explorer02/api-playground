@@ -4,18 +4,19 @@
   padding: 10px 11px;
   font-size: 14px;
 
-  border: 1px solid #dbdbdb;
+  border: 1px solid var(--spr-border-03);
+  border-width: 1px;
   border-radius: 8px;
   outline: none;
 
   &:hover {
-    border-color: black;
+    border-color: var(--spr-border-06);
   }
   &:focus {
-    border-color: #0e61f6;
+    border-color: var(--spr-interactive-01);
   }
 
   &.error {
-    border-color: #c70f5c;
+    border-color: var(--spr-support-error);
   }
 }

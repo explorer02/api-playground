@@ -3,8 +3,7 @@ import { memo, useMemo } from 'react';
 
 //components
 import MonacoEditor, { EditorProps as MonacoEditorProps } from '@monaco-editor/react';
-import { Box } from '@sprinklrjs/spaceweb/box';
-import { Typography } from '@sprinklrjs/spaceweb/typography';
+import { Typography } from '@/spaceweb/typography';
 import { RightActions } from './components/RightActions';
 import { Tabs } from './components/Tabs';
 import { FullSizeLoader } from './components/FullSizeLoader';
@@ -81,27 +80,25 @@ const Snippet = ({
   );
 
   return (
-    <Box
-      className={[
-        'h-full w-full flex flex-col p-3 border-1 border-solid rounded-8 spr-ui-01',
-        errors ? ({ theme }) => ({ borderColor: theme.spr.supportError }) : 'spr-border-03',
-        className,
-      ]}
+    <div
+      className={`h-full w-full flex flex-col border-solid border-1 rounded-8 spr-ui-01 ${
+        errors ? 'border-error' : 'spr-border-03'
+      } ${className ?? ''}`}
     >
-      <Box className="flex-none flex px-3 pb-2 gap-2 items-center border-0 border-b-1 border-solid spr-border-03 -mx-4 px-4">
+      <div className="flex-none flex p-3 gap-2 items-center border-0 border-b-1 border-solid spr-border-03 ">
         <Typography variant="h5" className="flex-1 ml-1">
           {title}
         </Typography>
 
         {tabs && onTabClick ? (
-          <Box className="flex-1">
+          <div className="flex-1 flex justify-center">
             <Tabs tabs={tabs} selectedTabIdx={selectedTabIdx} onTabClick={onTabClick} />
-          </Box>
+          </div>
         ) : null}
 
         <RightActions className="flex-1" onActionClick={handleActionClick} actions={rightActions} loading={loading} />
-      </Box>
-      <Box className="flex-1 relative">
+      </div>
+      <div className="flex-1 relative px-3 pb-3">
         <MonacoEditor
           {...editorProps}
           language={editorProps?.language ?? Language.JSON}
@@ -111,8 +108,8 @@ const Snippet = ({
           loading={<FullSizeLoader />}
         />
         {loading ? <FullSizeLoader /> : null}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

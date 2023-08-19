@@ -4,7 +4,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
 // components
-import { Box } from '@sprinklrjs/spaceweb/box';
 import { SideNav } from './components/SideNav';
 import { StaticDataViewer } from './components/StaticDataViewer';
 import { CacheViewer } from './components/cacheViewer';
@@ -20,7 +19,7 @@ import { Template } from './constants/template';
 //types
 import { APIPlaygroundProps, NestedTemplateConfig } from './types';
 
-export const APIPlayground = ({ config, className }: APIPlaygroundProps): JSX.Element => {
+export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
   const [activeNavItem, setActiveNavItem] = useState<string>(config[0].id);
   const [activeSubNavItem, setActiveSubNavItem] = useState<string>();
 
@@ -58,16 +57,18 @@ export const APIPlayground = ({ config, className }: APIPlaygroundProps): JSX.El
   }
 
   return (
-    <Box className={['w-full flex gap-8 h-full explorer-container', className]}>
-      <Box className="flex-none">
-        <SideNav
-          config={config}
-          activeNavItem={activeNavItem}
-          activeSubNavItem={activeSubNavItem}
-          onNavItemClick={onNavItemClick}
-        />
-      </Box>
-      <Box className="flex-1">{el}</Box>
-    </Box>
+    <div className="explorer-container hyperspace-light" style={{ height: '100%' }}>
+      <div className="w-full flex gap-8 h-full">
+        <div className="flex-none">
+          <SideNav
+            config={config}
+            activeNavItem={activeNavItem}
+            activeSubNavItem={activeSubNavItem}
+            onNavItemClick={onNavItemClick}
+          />
+        </div>
+        <div className="flex-1">{el}</div>
+      </div>
+    </div>
   );
 };

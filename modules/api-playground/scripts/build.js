@@ -3,10 +3,12 @@ const path = require('path');
 const glob = require('glob');
 const { execSync } = require('child_process');
 
+const { resolveTsPaths } = require('resolve-tspaths');
+
 const srcDir = './src';
 const distDir = './dist';
 
-function copyCssFiles() {
+function copyAllCssFiles() {
   const cssFiles = glob.sync(`${srcDir}/**/*.css`);
 
   cssFiles.forEach(cssFile => {
@@ -20,30 +22,19 @@ function copyCssFiles() {
     }
 
     copyFileSync(cssFile, destFile);
-    console.log(`Copied: ${cssFile} -> ${destFile}`);
   });
+  console.log(`Copied ${cssFiles.length} css files`);
 }
 
-const buildFn = () => {
+const build = async () => {
   try {
-    execSync('yarn build', { encoding: 'utf-8' });
-    copyCssFiles();
+    execSync('yarn tsc', { encoding: 'utf-8' });
+    await resolveTsPaths();
+    copyAllCssFiles();
     console.log('Build Success!');
   } catch (e) {
     console.log(e.message);
   }
 };
 
-watch('./dist', { recursive: true }, () => {
-  execSync('yarn resolve-path', { encoding: 'utf-8' });
-});
-
-watch('./src', { recursive: true }, () => {
-  try {
-    copyCssFiles();
-  } catch (e) {
-    console.log(e.message);
-  }
-});
-
-buildFn();
+build();

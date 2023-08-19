@@ -2,33 +2,27 @@
 import { useCallback } from 'react';
 
 //components
-import { ButtonGroup } from '@sprinklrjs/spaceweb/button-group';
-import { Button } from '@sprinklrjs/spaceweb/button';
+import { ButtonGroup } from '@/spaceweb/button-group';
 
 //types
-import { ClassName } from '@sprinklrjs/spaceweb';
 import { Tab } from '../types';
 
 type Props = {
   tabs: Tab[];
   selectedTabIdx?: number;
   onTabClick: (idx: number) => void;
-  className?: ClassName;
+  className?: string;
 };
 
 export const Tabs = ({ tabs, selectedTabIdx = 0, onTabClick, className }: Props): JSX.Element => {
   const onTabSwitch = useCallback(
-    (ev: any, idx: number) => {
+    (idx: number) => {
       onTabClick(idx);
     },
     [onTabClick]
   );
 
   return (
-    <ButtonGroup className={className} selected={selectedTabIdx} onClick={onTabSwitch} size="sm">
-      {tabs.map(tab => (
-        <Button key={tab.id}>{tab.label}</Button>
-      ))}
-    </ButtonGroup>
+    <ButtonGroup className={className} config={tabs} selectedIdx={selectedTabIdx} size="xs" onClick={onTabSwitch} />
   );
 };

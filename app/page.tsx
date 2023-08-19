@@ -8,17 +8,13 @@ import { TEMPLATE_CONFIG } from './config';
 import { CLIENT } from './constants';
 import { MyComponent } from './MyComponent';
 
-const InnerComponent = () => {
-  return <APIPlayground config={TEMPLATE_CONFIG} className="h-screen p-16" />;
-};
-
 const Page = (): JSX.Element | null => {
   return (
-    <div style={{ background: '#dddddd55' }}>
+    <div style={{ background: '#dddddd55', height: '100vh', padding: '40px' }}>
       {/* <ApolloProvider client={CLIENT}>
         <MyComponent />
       </ApolloProvider> */}
-      <InnerComponent />
+      <APIPlayground config={TEMPLATE_CONFIG} />
     </div>
   );
 };
