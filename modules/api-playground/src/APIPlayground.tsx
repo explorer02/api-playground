@@ -12,12 +12,17 @@ import { MutationExecutor } from './components/mutationExecutor';
 import { CustomQuery } from './components/customQuery';
 import { CustomMutation } from './components/customMutation';
 import { FetchAndMutate } from './components/fetchAndMutate';
+import { SnackbarProvider } from './context/SnackbarContext';
 
 //constants
 import { Template } from './constants/template';
 
 //types
 import { APIPlaygroundProps, NestedTemplateConfig } from './types';
+
+//styles
+import './styles/root.css';
+import './styles/tailwind.css';
 
 export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
   const [activeNavItem, setActiveNavItem] = useState<string>(config[0].id);
@@ -58,17 +63,19 @@ export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
 
   return (
     <div className="explorer-container hyperspace-light" style={{ height: '100%' }}>
-      <div className="w-full flex gap-8 h-full">
-        <div className="flex-none">
-          <SideNav
-            config={config}
-            activeNavItem={activeNavItem}
-            activeSubNavItem={activeSubNavItem}
-            onNavItemClick={onNavItemClick}
-          />
+      <SnackbarProvider>
+        <div className="w-full flex gap-8 h-full">
+          <div className="flex-none">
+            <SideNav
+              config={config}
+              activeNavItem={activeNavItem}
+              activeSubNavItem={activeSubNavItem}
+              onNavItemClick={onNavItemClick}
+            />
+          </div>
+          <div className="flex-1">{el}</div>
         </div>
-        <div className="flex-1">{el}</div>
-      </div>
+      </SnackbarProvider>
     </div>
   );
 };
