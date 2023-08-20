@@ -11,7 +11,7 @@
     "build": "node ./scripts/build.js && yarn purge-tailwind",
     "dev": "node ./scripts/dev.js && yarn purge-tailwind",
     "minify": "uglifyjs-folder ./dist -eo ./dist2",
-    "purge-tailwind": "purgecss --css dist/containers/withStyles/tailwind.css --content dist/*.js dist/**/*.js --output dist/containers/withStyles"
+    "purge-tailwind": "purgecss --css dist/styles/tailwind.css --content dist/*.js dist/**/*.js --output dist/styles"
   },
   "repository": {
     "type": "git",
