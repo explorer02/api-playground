@@ -12,11 +12,16 @@
   &:hover {
     border-color: var(--spr-border-06);
   }
-  &:focus {
+  &:focus,
+  &.active {
     border-color: var(--spr-interactive-01);
   }
 
   &.error {
     border-color: var(--spr-support-error);
+  }
+
+  &.size-xs {
+    padding: 7px 11px;
   }
 }

@@ -28,7 +28,7 @@ export const QueryExecutor = ({ config }: { config: QueryExecutorConfig }) => {
           <Button tooltipContent="Refresh Queries" className="flex-none" size="xs" variant="secondary" icon>
             <VscSync size={16} strokeWidth={0.4} />
           </Button>
-          <Button className="min-w-0" size="xs" tooltipContent="Execute" onClick={onSubmit}>
+          <Button className="flex-none" size="xs" tooltipContent="Execute" onClick={onSubmit} icon>
             <VscSend />
           </Button>
         </div>

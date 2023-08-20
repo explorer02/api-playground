@@ -1,0 +1,15 @@
+.explorer-space-select {
+  .select-menu {
+    &::-webkit-scrollbar {
+      background-color: transparent;
+      width: 12px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #a9a9a9;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      background-clip: padding-box;
+    }
+  }
+}

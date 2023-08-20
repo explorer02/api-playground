@@ -8,7 +8,7 @@ import { prettifyJSON } from '@/utils/prettifyJSON';
 
 //types
 import { QueryExecutorConfig } from '@/types';
-import { OnChangeParams, Option } from '@sprinklrjs/spaceweb/select';
+import { Option } from '@/spaceweb/select';
 import { OnQuerySelect } from '@/components/queryExecutor/types';
 
 type Params = {
@@ -18,14 +18,14 @@ type Params = {
 
 type ReturnType = {
   options: Option[];
-  selectedOption: Option[] | undefined;
-  onOptionSelect: (param: OnChangeParams) => void;
+  selectedOption: Option | undefined;
+  onOptionSelect: (option: Option) => void;
 };
 
 export const useQuerySelector = ({ config, onChange }: Params): ReturnType => {
   const { client } = config;
 
-  const [selectedOption, setSelectedOption] = useState<Option[]>();
+  const [selectedOption, setSelectedOption] = useState<Option>();
 
   const options = useMemo<Option[]>(() => {
     // @ts-ignore not anymore
@@ -48,26 +48,24 @@ export const useQuerySelector = ({ config, onChange }: Params): ReturnType => {
   }, [client]);
 
   const onOptionSelect = useCallback(
-    async ({ value }: OnChangeParams) => {
-      setSelectedOption(value as Option[]);
-      if (value.length) {
-        const { node, variables = {} } = value[0] as { node: DocumentNode; variables?: Record<string, any> };
+    async (option: Option) => {
+      setSelectedOption(option);
+      const { node, variables = {} } = option as Option & { node: DocumentNode; variables?: Record<string, any> };
 
-        if (node) {
-          try {
-            const output = await client.query({ query: node, variables, fetchPolicy: 'cache-only' });
-            onChange({
-              query: print(node),
-              variables: prettifyJSON(variables),
-              output: prettifyJSON(output.data) || output.error?.message,
-            });
-          } catch (e: any) {
-            onChange({
-              query: print(node),
-              variables: prettifyJSON(variables),
-              output: e.message,
-            });
-          }
+      if (node) {
+        try {
+          const output = await client.query({ query: node, variables, fetchPolicy: 'cache-only' });
+          onChange({
+            query: print(node),
+            variables: prettifyJSON(variables),
+            output: prettifyJSON(output.data) || output.error?.message,
+          });
+        } catch (e: any) {
+          onChange({
+            query: print(node),
+            variables: prettifyJSON(variables),
+            output: e.message,
+          });
         }
       }
     },

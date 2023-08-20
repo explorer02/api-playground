@@ -1,22 +1,20 @@
 //lib
 import { memo } from 'react';
-import { DocumentNode } from 'graphql';
 
 //components
-import { Select } from '@sprinklrjs/spaceweb/select';
+import { Select } from '@/spaceweb/select';
 
 //hooks
 import { useQuerySelector } from './hooks/useQuerySelector';
 
 //types
 import { QueryExecutorConfig } from '@/types';
-import { ClassName } from '@sprinklrjs/spaceweb';
 import { OnQuerySelect } from '../../types';
 
 type Props = {
   config: QueryExecutorConfig;
   onChange: OnQuerySelect;
-  className?: ClassName;
+  className?: string;
 };
 
 const QuerySelector = ({ config, onChange, className }: Props) => {

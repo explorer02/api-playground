@@ -84,7 +84,7 @@ const Snippet = ({
         errors ? 'border-error' : 'spr-border-03'
       } ${className ?? ''}`}
     >
-      <div className="flex-none flex p-3 gap-2 items-center border-0 border-b-1 border-solid spr-border-03 ">
+      <div className="flex-none flex px-3 py-2 gap-2 items-center border-0 border-b-1 border-solid spr-border-03 ">
         <Typography variant="h5" className="flex-1 ml-1">
           {title}
         </Typography>

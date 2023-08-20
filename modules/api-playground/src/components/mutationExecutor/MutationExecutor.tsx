@@ -25,7 +25,7 @@ export const MutationExecutor = ({ config }: { config: MutationExecutorConfig })
       <div className="h-full flex flex-col gap-4 flex-1">
         <div className="flex-none flex gap-3">
           <MutationSelector config={config} onChange={onMutationSelect} className="flex-1" />
-          <Button className="min-w-0" size="xs" tooltipContent="Execute" onClick={onSubmit}>
+          <Button className="flex-none" size="xs" tooltipContent="Execute" onClick={onSubmit} icon>
             <VscSend />
           </Button>
         </div>
