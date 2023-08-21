@@ -39,13 +39,9 @@ const Arranger = ({ layout, fieldConfigMap, errors, values, onAction }: FormProp
           const Component = FIELD_TYPE_VS_COMPONENT[config.type];
 
           return (
-            <Component
-              key={config.id}
-              {...config}
-              onAction={onAction}
-              error={errors[config.id]}
-              value={values[config.id]}
-            />
+            <div key={config.id} className={horizontal ? 'flex-1' : ''}>
+              <Component {...config} onAction={onAction} error={errors[config.id]} value={values[config.id]} />
+            </div>
           );
         }
         return (

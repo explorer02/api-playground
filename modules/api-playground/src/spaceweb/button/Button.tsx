@@ -32,11 +32,12 @@ export const Button = ({
   tooltipContent,
   icon,
   selected,
+  disabled,
   ...rest
 }: Props) => {
   const mergedClassName = `explorer-space-button ${className ? className : ''} ${VARIANT_VS_CLASSNAME[variant]} ${
     SIZE_VS_CLASSNAME[size]
-  } ${icon ? 'icon' : ''} ${selected ? 'selected' : ''}`;
+  } ${icon ? 'icon' : ''} ${selected ? 'selected' : ''} ${disabled ? 'disabled' : ''}`;
 
   if (tooltipContent) {
     return (
@@ -47,5 +48,5 @@ export const Button = ({
       </Tooltip>
     );
   }
-  return <button {...rest} className={mergedClassName} />;
+  return <button {...rest} className={mergedClassName} disabled={disabled} />;
 };

@@ -55,10 +55,15 @@ export const Select = ({ options, onChange, placeholder = 'Select...', size = 'm
               onChange={e => setSearch(e.target.value)}
             />
             <div
-              className="absolute top-0 bottom-0 flex items-center cursor-pointer"
-              style={{ right: '8px', rotate: isOpen ? '-180deg' : '0deg', transitionDuration: '300ms' }}
+              className="absolute flex items-center cursor-pointer spr-ui-01"
+              style={{ right: '8px', top: '4px', bottom: '4px' }}
             >
-              <VscChevronDown />
+              <VscChevronDown
+                style={{
+                  rotate: isOpen ? '-180deg' : '0deg',
+                  transitionDuration: '300ms',
+                }}
+              />
             </div>
           </div>
         )}

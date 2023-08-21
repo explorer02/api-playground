@@ -1,13 +1,13 @@
 //lib
-import { useCallback, useMemo, useState } from 'react';
-import { OnChange, OnMount } from '@monaco-editor/react';
+import { MutableRefObject, useCallback, useMemo, useRef, useState } from 'react';
+import { OnChange } from '@monaco-editor/react';
 
 //components
 import { VscSend } from 'react-icons/vsc';
 
 //hooks
-import { useMonacoMount } from '@/hooks/useMonacoMount';
 import { useValidateJSON } from '@/hooks/useValidateJSON';
+import { useForm } from '@/components/form';
 
 //utils
 import { prettifyJSON } from '@/utils/prettifyJSON';
@@ -16,41 +16,44 @@ import { prettifyJSON } from '@/utils/prettifyJSON';
 import { FetchAndMutateConfig } from '@/types';
 import { FormValues } from '@/components/form/types';
 import { Action } from '@/components/snippet/types';
+import { MonacoEditorType } from '@/monaco';
+import { OnFormAction } from '@/components/form/actionType';
 
 type Params = {
   config: FetchAndMutateConfig;
+
+  queryOutputEditorRef: MutableRefObject<MonacoEditorType | undefined>;
+  mutationOutputEditorRef: MutableRefObject<MonacoEditorType | undefined>;
 };
 
 type ReturnType = {
   fetching: boolean;
   mutating: boolean;
-  onFetchSubmit: (vals: FormValues) => void;
-
-  onQueryOutputEditorMount: OnMount;
-  onMutationOutputEditorMount: OnMount;
 
   queryActions: Action[];
   onQueryActionClick: (action: string) => void;
 
   queryResponseErrors: boolean;
   handleQueryResponseChange: OnChange;
+
+  onAction: OnFormAction;
+  formValues: Record<string, string | number>;
+  formErrors: Record<string, string>;
 };
 
 const EXECUTE_MUTATION = 'EXECUTE_MUTATION';
 
-export const useFetchAndMutate = ({ config }: Params): ReturnType => {
+export const useFetchAndMutate = ({ config, mutationOutputEditorRef, queryOutputEditorRef }: Params): ReturnType => {
   const [fetching, setFetching] = useState(false);
   const [isQueryExecuted, setIsQueryExecuted] = useState(false);
   const [mutating, setMutating] = useState(false);
 
   const { errors: queryResponseErrors, handleChange: handleQueryResponseChange } = useValidateJSON();
 
-  const { editorRef: queryOutputEditorRef, onMount: onQueryOutputEditorMount } = useMonacoMount();
-  const { editorRef: mutationOutputEditorRef, onMount: onMutationOutputEditorMount } = useMonacoMount();
-
   const {
-    fetchConfig: { getVariables: getQueryVariables, query, cta },
+    fetchConfig: { fieldConfigMap, initialValues, validator, getVariables: getQueryVariables, query, cta },
     mutateConfig: { getVariables: getMutationVariables, mutation },
+
     client,
   } = config;
 
@@ -72,13 +75,25 @@ export const useFetchAndMutate = ({ config }: Params): ReturnType => {
     [client, getQueryVariables, queryOutputEditorRef, query]
   );
 
+  const {
+    onAction,
+    values: formValues,
+    errors: formErrors,
+  } = useForm({ fieldConfigMap, validator, initialValues, onSubmit: onFetchSubmit });
+
+  const latestFormValuesRef = useRef(formValues);
+  latestFormValuesRef.current = formValues;
+
   const onQueryActionClick = useCallback(
     async (action: string) => {
       switch (action) {
         case EXECUTE_MUTATION:
-          const mutationVariables = getMutationVariables(JSON.parse(queryOutputEditorRef.current!.getValue() ?? ''));
-          setMutating(true);
           try {
+            const mutationVariables = getMutationVariables(
+              JSON.parse(queryOutputEditorRef.current!.getValue() ?? ''),
+              latestFormValuesRef.current
+            );
+            setMutating(true);
             const { data, errors } = await client.mutate({ mutation, variables: mutationVariables });
             mutationOutputEditorRef.current?.setValue(prettifyJSON(data) ?? errors?.[0]?.message);
           } catch (e: any) {
@@ -109,15 +124,15 @@ export const useFetchAndMutate = ({ config }: Params): ReturnType => {
   return {
     fetching,
     mutating,
-    onFetchSubmit,
-
-    onQueryOutputEditorMount,
-    onMutationOutputEditorMount,
 
     queryActions,
     onQueryActionClick,
 
     queryResponseErrors,
     handleQueryResponseChange,
+
+    onAction,
+    formValues,
+    formErrors,
   };
 };

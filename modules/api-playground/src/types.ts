@@ -64,8 +64,8 @@ export type CustomQueryConfig = CommonConfig & {
   formLayout: FormLayout;
   fieldConfigMap: FieldConfigMap;
   query: DocumentNode;
-  getVariables: (o: FormValues) => object;
-  validator?: (o: FormValues) => FormErrors;
+  getVariables: (formValues: FormValues) => object;
+  validator?: (formValues: FormValues) => FormErrors;
   initialValues?: FormValues;
   client: ApolloClient<NormalizedCacheObject>;
   outputConfig?: {
@@ -78,8 +78,8 @@ export type CustomMutationConfig = CommonConfig & {
   formLayout: FormLayout;
   fieldConfigMap: FieldConfigMap;
   mutation: DocumentNode;
-  getVariables: (o: FormValues) => object;
-  validator?: (o: FormValues) => FormErrors;
+  getVariables: (formValues: FormValues) => object;
+  validator?: (formValues: FormValues) => FormErrors;
   initialValues?: FormValues;
   client: ApolloClient<NormalizedCacheObject>;
   outputConfig?: {
@@ -93,16 +93,16 @@ export type FetchAndMutateConfig = CommonConfig & {
     formLayout: FormLayout;
     fieldConfigMap: FieldConfigMap;
     query: DocumentNode;
-    getVariables: (o: FormValues) => object;
-    validator?: (o: FormValues) => FormErrors;
+    getVariables: (formValues: FormValues) => object;
+    validator?: (formValues: FormValues) => FormErrors;
     initialValues?: FormValues;
     output?: { title?: string };
     cta?: { label: string };
   };
   mutateConfig: {
     mutation: DocumentNode;
-    getVariables: (o: object) => object;
-    validator?: (o: object) => FormErrors;
+    getVariables: (formValues: FormValues, queryResponse: object) => object;
+    validator?: (formValues: FormValues) => FormErrors;
     output?: { title?: string };
   };
   client: ApolloClient<NormalizedCacheObject>;

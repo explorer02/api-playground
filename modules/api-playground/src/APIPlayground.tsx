@@ -26,7 +26,9 @@ import './styles/tailwind.css';
 
 export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
   const [activeNavItem, setActiveNavItem] = useState<string>(config[0].id);
-  const [activeSubNavItem, setActiveSubNavItem] = useState<string>();
+  const [activeSubNavItem, setActiveSubNavItem] = useState<string | undefined>(
+    (config[0] as NestedTemplateConfig).templates?.[0]?.id
+  );
 
   const onNavItemClick = useCallback((navItem: string, subNavItem?: string) => {
     setActiveNavItem(navItem);
@@ -65,7 +67,7 @@ export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
     <div className="explorer-container hyperspace-light" style={{ height: '100%' }}>
       <SnackbarProvider>
         <div className="w-full flex gap-8 h-full">
-          <div className="flex-none">
+          <div className="flex-none" style={{ maxWidth: '350px', minWidth: '200px' }}>
             <SideNav
               config={config}
               activeNavItem={activeNavItem}

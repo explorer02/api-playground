@@ -37,6 +37,10 @@
     &.selected {
       background-color: var(--spr-interactive-focus);
     }
+    &.disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
   }
 
   &.variant-secondary {

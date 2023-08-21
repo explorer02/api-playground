@@ -2,11 +2,12 @@
 import { useMemo } from 'react';
 
 //components
-import { Form, useForm } from '../form';
+import { Form } from '../form';
 import { Snippet } from '../snippet';
 
 //hooks
 import { useFetchAndMutate } from './hooks/useFetchAndMutate';
+import { useMonacoMount } from '@/hooks/useMonacoMount';
 
 //types
 import { FetchAndMutateConfig } from '@/types';
@@ -19,23 +20,23 @@ export const FetchAndMutate = ({ config }: { config: FetchAndMutateConfig }) => 
     mutateConfig: { output: mutationOutput },
   } = config;
 
+  const { editorRef: queryOutputEditorRef, onMount: onQueryOutputEditorMount } = useMonacoMount();
+  const { editorRef: mutationOutputEditorRef, onMount: onMutationOutputEditorMount } = useMonacoMount();
+
   const {
     fetching,
     mutating,
-
-    onFetchSubmit,
-
-    onQueryOutputEditorMount,
-    onMutationOutputEditorMount,
 
     queryActions,
     onQueryActionClick,
 
     queryResponseErrors,
     handleQueryResponseChange,
-  } = useFetchAndMutate({ config });
 
-  const { onAction, values, errors } = useForm({ fieldConfigMap, validator, initialValues, onSubmit: onFetchSubmit });
+    onAction,
+    formErrors,
+    formValues,
+  } = useFetchAndMutate({ config, queryOutputEditorRef, mutationOutputEditorRef });
 
   const queryOutputEditorProps = useMemo(
     () => ({ onMount: onQueryOutputEditorMount, onChange: handleQueryResponseChange }),
@@ -53,8 +54,8 @@ export const FetchAndMutate = ({ config }: { config: FetchAndMutateConfig }) => 
         <Form
           fieldConfigMap={fieldConfigMap}
           layout={formLayout}
-          values={values}
-          errors={errors}
+          values={formValues}
+          errors={formErrors}
           onAction={onAction}
           loading={fetching}
         />
