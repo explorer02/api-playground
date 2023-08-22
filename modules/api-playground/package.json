@@ -1,6 +1,6 @@
 {
   "name": "@explorer02/api-playground",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "API Playground component",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -11,7 +11,7 @@
     "build": "node ./scripts/build.js && yarn purge-tailwind",
     "dev": "node ./scripts/dev.js && yarn purge-tailwind",
     "minify": "uglifyjs-folder ./dist -eo ./dist2",
-    "purge-tailwind": "purgecss --css dist/styles/tailwind.css --content dist/*.js dist/**/*.js --output dist/styles"
+    "purge-tailwind": "purgecss --css src/styles/tailwind.css --content dist/*.js dist/**/*.js dist/**/**/*.js dist/**/**/**/*.js dist/**/**/**/**/*.js dist/**/**/**/**/**/*.js --output dist/styles"
   },
   "repository": {
     "type": "git",
