@@ -20,7 +20,7 @@ watch('./dist', { recursive: true }, (_, filename) => {
 });
 
 watch('./src', { recursive: true }, (_, filename) => {
-  if (filename.endsWith('.css')) {
+  if (filename.endsWith('root.css') || filename.endsWith('tailwind.css')) {
     try {
       copyCssFile(filename);
     } catch (e) {

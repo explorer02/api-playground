@@ -9,7 +9,7 @@ const srcDir = './src';
 const distDir = './dist';
 
 function copyAllCssFiles() {
-  const cssFiles = glob.sync(`${srcDir}/**/*.css`);
+  const cssFiles = glob.sync(`${srcDir}/styles/*.css`);
 
   cssFiles.forEach(cssFile => {
     const relativePath = path.relative(srcDir, cssFile);

@@ -32,7 +32,7 @@ const ChildMenuItem = ({
     <div
       key={id}
       className={`pl-4 pr-4 py-3 cursor-pointer flex items-center gap-2 spr-border-03 ${
-        selected ? 'spr-ui-03' : 'hover:spr-ui-02'
+        selected ? 'spr-ui-03' : 'hover-spr-ui-02'
       }`}
       onClick={() => onClick(id)}
       data-child={id}
@@ -76,7 +76,7 @@ const MenuItem = ({
   return (
     <div className="border-0 border-solid spr-border-03 border-b-1">
       <div
-        className={`px-4 py-3 cursor-pointer flex gap-2 items-center ${isSelected ? 'spr-ui-04' : 'hover:spr-ui-02'} `}
+        className={`px-4 py-3 cursor-pointer flex gap-2 items-center ${isSelected ? 'spr-ui-04' : 'hover-spr-ui-02'} `}
         onClick={onMenuItemClick}
       >
         <Typography variant="body-14" className={`flex-1 ${isSelected ? 'spr-text-05' : ''}`}>

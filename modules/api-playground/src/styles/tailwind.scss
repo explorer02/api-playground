@@ -1139,7 +1139,7 @@
     height: auto;
   }
 
-  .h-1\.5 {
+  .h-1-5 {
     height: 06px;
   }
 
@@ -1243,7 +1243,7 @@
     margin: auto;
   }
 
-  .m-1\.5 {
+  .m-1-5 {
     margin: 06px;
   }
 
@@ -1295,7 +1295,7 @@
     margin: -48px;
   }
 
-  .-m-1\.5 {
+  .-m-1-5 {
     margin: -06px;
   }
 
@@ -1439,12 +1439,12 @@
     margin-right: auto;
   }
 
-  .my-1\.5 {
+  .my-1-5 {
     margin-top: 06px;
     margin-bottom: 06px;
   }
 
-  .mx-1\.5 {
+  .mx-1-5 {
     margin-left: 06px;
     margin-right: 06px;
   }
@@ -1569,12 +1569,12 @@
     margin-right: -48px;
   }
 
-  .-my-1\.5 {
+  .-my-1-5 {
     margin-top: -06px;
     margin-bottom: -06px;
   }
 
-  .-mx-1\.5 {
+  .-mx-1-5 {
     margin-left: -06px;
     margin-right: -06px;
   }
@@ -1803,19 +1803,19 @@
     margin-left: auto;
   }
 
-  .mt-1\.5 {
+  .mt-1-5 {
     margin-top: 06px;
   }
 
-  .mr-1\.5 {
+  .mr-1-5 {
     margin-right: 06px;
   }
 
-  .mb-1\.5 {
+  .mb-1-5 {
     margin-bottom: 06px;
   }
 
-  .ml-1\.5 {
+  .ml-1-5 {
     margin-left: 06px;
   }
 
@@ -2011,19 +2011,19 @@
     margin-left: -48px;
   }
 
-  .-mt-1\.5 {
+  .-mt-1-5 {
     margin-top: -06px;
   }
 
-  .-mr-1\.5 {
+  .-mr-1-5 {
     margin-right: -06px;
   }
 
-  .-mb-1\.5 {
+  .-mb-1-5 {
     margin-bottom: -06px;
   }
 
-  .-ml-1\.5 {
+  .-ml-1-5 {
     margin-left: -06px;
   }
 
@@ -2197,7 +2197,7 @@
     outline: 0;
   }
 
-  .focus\:outline-none:focus {
+  .focus-outline-none:focus {
     outline: 0;
   }
 
@@ -2309,7 +2309,7 @@
     padding: 48px;
   }
 
-  .p-1\.5 {
+  .p-1-5 {
     padding: 06px;
   }
 
@@ -2326,6 +2326,11 @@
   .py-1 {
     padding-top: 04px;
     padding-bottom: 04px;
+  }
+
+  .py-1-5 {
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 
   .px-1 {
@@ -2443,12 +2448,12 @@
     padding-right: 48px;
   }
 
-  .py-1\.5 {
+  .py-1-5 {
     padding-top: 06px;
     padding-bottom: 06px;
   }
 
-  .px-1\.5 {
+  .px-1-5 {
     padding-left: 06px;
     padding-right: 06px;
   }
@@ -2661,19 +2666,19 @@
     padding-left: 48px;
   }
 
-  .pt-1\.5 {
+  .pt-1-5 {
     padding-top: 06px;
   }
 
-  .pr-1\.5 {
+  .pr-1-5 {
     padding-right: 06px;
   }
 
-  .pb-1\.5 {
+  .pb-1-5 {
     padding-bottom: 06px;
   }
 
-  .pl-1\.5 {
+  .pl-1-5 {
     padding-left: 06px;
   }
 
@@ -3069,7 +3074,7 @@
     width: auto;
   }
 
-  .w-1\.5 {
+  .w-1-5 {
     width: 06px;
   }
 
@@ -3408,217 +3413,217 @@
     background-color: var(--nav-ui-hover-01, rgba(255, 255, 255, 0.3));
   }
 
-  .hover\:spr-ui-01:hover {
+  .hover-spr-ui-01:hover {
     background-color: #ffffff;
     background-color: var(--spr-ui-01, #ffffff);
   }
 
-  .hover\:spr-ui-02:hover {
+  .hover-spr-ui-02:hover {
     background-color: #f8f8fa;
     background-color: var(--spr-ui-02, #f8f8fa);
   }
 
-  .hover\:spr-ui-03:hover {
+  .hover-spr-ui-03:hover {
     background-color: #f2f2f4;
     background-color: var(--spr-ui-03, #f2f2f4);
   }
 
-  .hover\:spr-ui-04:hover {
+  .hover-spr-ui-04:hover {
     background-color: #0828cc;
     background-color: var(--spr-ui-04, #0828cc);
   }
 
-  .hover\:spr-ui-05:hover {
+  .hover-spr-ui-05:hover {
     background-color: #f2f2f4;
     background-color: var(--spr-ui-05, #f2f2f4);
   }
 
-  .hover\:spr-ui-06:hover {
+  .hover-spr-ui-06:hover {
     background-color: #e6e6e9;
     background-color: var(--spr-ui-06, #e6e6e9);
   }
 
-  .hover\:spr-ui-focus:hover {
+  .hover-spr-ui-focus:hover {
     background-color: rgba(8, 40, 204, 0.07);
     background-color: var(--spr-ui-focus, rgba(8, 40, 204, 0.07));
   }
 
-  .hover\:spr-ui-focus-reverse:hover {
+  .hover-spr-ui-focus-reverse:hover {
     background-color: rgba(255, 255, 255, 0.2);
     background-color: var(--spr-ui-focus-reverse, rgba(255, 255, 255, 0.2));
   }
 
-  .hover\:spr-ui-hover:hover {
+  .hover-spr-ui-hover:hover {
     background-color: rgba(8, 40, 204, 0.05);
     background-color: var(--spr-ui-hover, rgba(8, 40, 204, 0.05));
   }
 
-  .hover\:spr-ui-hover-reverse:hover {
+  .hover-spr-ui-hover-reverse:hover {
     background-color: rgba(255, 255, 255, 0.1);
     background-color: var(--spr-ui-hover-reverse, rgba(255, 255, 255, 0.1));
   }
 
-  .hover\:spr-support-error:hover {
+  .hover-spr-support-error:hover {
     background-color: #e44045;
     background-color: var(--spr-support-error, #e44045);
   }
 
-  .hover\:spr-support-error-highlight:hover {
+  .hover-spr-support-error-highlight:hover {
     background-color: rgba(255, 96, 96, 0.1);
     background-color: var(--spr-support-error-highlight, rgba(255, 96, 96, 0.1));
   }
 
-  .hover\:spr-support-success:hover {
+  .hover-spr-support-success:hover {
     background-color: #3fbf41;
     background-color: var(--spr-support-success, #3fbf41);
   }
 
-  .hover\:spr-support-success-highlight:hover {
+  .hover-spr-support-success-highlight:hover {
     background-color: rgba(63, 191, 65, 0.07);
     background-color: var(--spr-support-success-highlight, rgba(63, 191, 65, 0.07));
   }
 
-  .hover\:spr-support-warning:hover {
+  .hover-spr-support-warning:hover {
     background-color: #eec202;
     background-color: var(--spr-support-warning, #eec202);
   }
 
-  .hover\:spr-support-warning-highlight:hover {
+  .hover-spr-support-warning-highlight:hover {
     background-color: rgba(238, 194, 2, 0.1);
     background-color: var(--spr-support-warning-highlight, rgba(238, 194, 2, 0.1));
   }
 
-  .hover\:spr-clr-blue-highlight:hover {
+  .hover-spr-clr-blue-highlight:hover {
     background-color: #e8f0fe;
     background-color: var(--spr-clr-blue-highlight, #e8f0fe);
   }
 
-  .hover\:spr-tag:hover {
+  .hover-spr-tag:hover {
     background-color: #f2f2f4;
     background-color: var(--spr-tag, #f2f2f4);
   }
 
-  .hover\:spr-tag-01:hover {
+  .hover-spr-tag-01:hover {
     background-color: #f2f2f4;
     background-color: var(--spr-tag-01, #f2f2f4);
   }
 
-  .hover\:spr-tag-02:hover {
+  .hover-spr-tag-02:hover {
     background-color: rgba(8, 40, 204, 0.07);
     background-color: var(--spr-tag-02, rgba(8, 40, 204, 0.07));
   }
 
-  .hover\:spr-field:hover {
+  .hover-spr-field:hover {
     background-color: #dbdbdb;
     background-color: var(--spr-field, #dbdbdb);
   }
 
-  .hover\:spr-popup:hover {
+  .hover-spr-popup:hover {
     background-color: #ffffff;
     background-color: var(--spr-popup, #ffffff);
   }
 
-  .hover\:spr-overlay:hover {
+  .hover-spr-overlay:hover {
     background-color: rgba(10, 10, 20, 0.9);
     background-color: var(--spr-overlay, rgba(10, 10, 20, 0.9));
   }
 
-  .hover\:spr-tooltip-01:hover {
+  .hover-spr-tooltip-01:hover {
     background-color: #0a0a14;
     background-color: var(--spr-tooltip-01, #0a0a14);
   }
 
-  .hover\:spr-highlight:hover {
+  .hover-spr-highlight:hover {
     background-color: rgba(255, 231, 173, 0.7);
     background-color: var(--spr-highlight, rgba(255, 231, 173, 0.7));
   }
 
-  .hover\:spr-favourite:hover {
+  .hover-spr-favourite:hover {
     background-color: #ff9f21;
     background-color: var(--spr-favourite, #ff9f21);
   }
 
-  .hover\:spr-notification:hover {
+  .hover-spr-notification:hover {
     background-color: #c6202b;
     background-color: var(--spr-notification, #c6202b);
   }
 
-  .hover\:spr-interactive-01:hover {
+  .hover-spr-interactive-01:hover {
     background-color: #0828cc;
     background-color: var(--spr-interactive-01, #0828cc);
   }
 
-  .hover\:spr-interactive-hover:hover {
+  .hover-spr-interactive-hover:hover {
     background-color: #0729a0;
     background-color: var(--spr-interactive-hover, #0729a0);
   }
 
-  .hover\:spr-interactive-disable:hover {
+  .hover-spr-interactive-disable:hover {
     background-color: rgba(255, 255, 255, 0.8);
     background-color: var(--spr-interactive-disable, rgba(255, 255, 255, 0.8));
   }
 
-  .hover\:spr-interactive-02:hover {
+  .hover-spr-interactive-02:hover {
     background-color: #646470;
     background-color: var(--spr-interactive-02, #646470);
   }
 
-  .hover\:spr-clr-blue:hover {
+  .hover-spr-clr-blue:hover {
     background-color: #0aa2ff;
     background-color: var(--spr-clr-blue, #0aa2ff);
   }
 
-  .hover\:spr-clr-green:hover {
+  .hover-spr-clr-green:hover {
     background-color: #20963a;
     background-color: var(--spr-clr-green, #20963a);
   }
 
-  .hover\:spr-clr-lavender:hover {
+  .hover-spr-clr-lavender:hover {
     background-color: #7f36f6;
     background-color: var(--spr-clr-lavender, #7f36f6);
   }
 
-  .hover\:spr-clr-orange:hover {
+  .hover-spr-clr-orange:hover {
     background-color: #f08c1a;
     background-color: var(--spr-clr-orange, #f08c1a);
   }
 
-  .hover\:spr-clr-pink:hover {
+  .hover-spr-clr-pink:hover {
     background-color: #de456b;
     background-color: var(--spr-clr-pink, #de456b);
   }
 
-  .hover\:spr-clr-red:hover {
+  .hover-spr-clr-red:hover {
     background-color: #e44045;
     background-color: var(--spr-clr-red, #e44045);
   }
 
-  .hover\:spr-clr-sea:hover {
+  .hover-spr-clr-sea:hover {
     background-color: #16aad2;
     background-color: var(--spr-clr-sea, #16aad2);
   }
 
-  .hover\:spr-clr-teal:hover {
+  .hover-spr-clr-teal:hover {
     background-color: #13c18d;
     background-color: var(--spr-clr-teal, #13c18d);
   }
 
-  .hover\:spr-clr-yellow:hover {
+  .hover-spr-clr-yellow:hover {
     background-color: #deac09;
     background-color: var(--spr-clr-yellow, #deac09);
   }
 
-  .hover\:spr-clr-grey:hover {
+  .hover-spr-clr-grey:hover {
     background-color: #d7d7dc;
     background-color: var(--spr-clr-grey, #d7d7dc);
   }
 
-  .hover\:nav-ui-01:hover {
+  .hover-nav-ui-01:hover {
     background-color: rgba(255, 255, 255, 0.2);
     background-color: var(--nav-ui-01, rgba(255, 255, 255, 0.2));
   }
 
-  .hover\:nav-ui-hover-01:hover {
+  .hover-nav-ui-hover-01:hover {
     background-color: rgba(255, 255, 255, 0.3);
     background-color: var(--nav-ui-hover-01, rgba(255, 255, 255, 0.3));
   }
@@ -3683,62 +3688,62 @@
     color: var(--nav-text-01, rgba(255, 255, 255, 0.9));
   }
 
-  .hover\:spr-link:hover {
+  .hover-spr-link:hover {
     color: #0828cc;
     color: var(--spr-link, #0828cc);
   }
 
-  .hover\:spr-text-01:hover {
+  .hover-spr-text-01:hover {
     color: #0a0a14;
     color: var(--spr-text-01, #0a0a14);
   }
 
-  .hover\:spr-text-02:hover {
+  .hover-spr-text-02:hover {
     color: #646470;
     color: var(--spr-text-02, #646470);
   }
 
-  .hover\:spr-text-03:hover {
+  .hover-spr-text-03:hover {
     color: #a0a0a8;
     color: var(--spr-text-03, #a0a0a8);
   }
 
-  .hover\:spr-text-04:hover {
+  .hover-spr-text-04:hover {
     color: #0828cc;
     color: var(--spr-text-04, #0828cc);
   }
 
-  .hover\:spr-text-05:hover {
+  .hover-spr-text-05:hover {
     color: #ffffff;
     color: var(--spr-text-05, #ffffff);
   }
 
-  .hover\:spr-text-06:hover {
+  .hover-spr-text-06:hover {
     color: #ffffff;
     color: var(--spr-text-06, #ffffff);
   }
 
-  .hover\:spr-text-placeholder:hover {
+  .hover-spr-text-placeholder:hover {
     color: #a0a0a8;
     color: var(--spr-text-placeholder, #a0a0a8);
   }
 
-  .hover\:spr-support-error-text:hover {
+  .hover-spr-support-error-text:hover {
     color: #c6202b;
     color: var(--spr-support-error-text, #c6202b);
   }
 
-  .hover\:spr-support-success-text:hover {
+  .hover-spr-support-success-text:hover {
     color: #20963a;
     color: var(--spr-support-success-text, #20963a);
   }
 
-  .hover\:spr-support-warning-text:hover {
+  .hover-spr-support-warning-text:hover {
     color: #deac09;
     color: var(--spr-support-warning-text, #deac09);
   }
 
-  .hover\:nav-text-01:hover {
+  .hover-nav-text-01:hover {
     color: rgba(255, 255, 255, 0.9);
     color: var(--nav-text-01, rgba(255, 255, 255, 0.9));
   }
@@ -3798,57 +3803,57 @@
     fill: var(--nav-icon-focus-01, #327afd);
   }
 
-  .hover\:spr-icon-01:hover {
+  .hover-spr-icon-01:hover {
     fill: #0a0a14;
     fill: var(--spr-icon-01, #0a0a14);
   }
 
-  .hover\:spr-icon-02:hover {
+  .hover-spr-icon-02:hover {
     fill: #646470;
     fill: var(--spr-icon-02, #646470);
   }
 
-  .hover\:spr-icon-03:hover {
+  .hover-spr-icon-03:hover {
     fill: #a0a0a8;
     fill: var(--spr-icon-03, #a0a0a8);
   }
 
-  .hover\:spr-icon-04:hover {
+  .hover-spr-icon-04:hover {
     fill: #0828cc;
     fill: var(--spr-icon-04, #0828cc);
   }
 
-  .hover\:spr-icon-05:hover {
+  .hover-spr-icon-05:hover {
     fill: #ffffff;
     fill: var(--spr-icon-05, #ffffff);
   }
 
-  .hover\:spr-icon-06:hover {
+  .hover-spr-icon-06:hover {
     fill: rgba(255, 255, 255, 0.6);
     fill: var(--spr-icon-06, rgba(255, 255, 255, 0.6));
   }
 
-  .hover\:spr-icon-hover:hover {
+  .hover-spr-icon-hover:hover {
     fill: #0a0a14;
     fill: var(--spr-icon-hover, #0a0a14);
   }
 
-  .hover\:spr-icon-disable:hover {
+  .hover-spr-icon-disable:hover {
     fill: #d7d7dc;
     fill: var(--spr-icon-disable, #d7d7dc);
   }
 
-  .hover\:spr-icon-hover-reverse:hover {
+  .hover-spr-icon-hover-reverse:hover {
     fill: #ffffff;
     fill: var(--spr-icon-hover-reverse, #ffffff);
   }
 
-  .hover\:nav-icon-01:hover {
+  .hover-nav-icon-01:hover {
     fill: rgba(255, 255, 255, 0.9);
     fill: var(--nav-icon-01, rgba(255, 255, 255, 0.9));
   }
 
-  .hover\:nav-icon-focus-01:hover {
+  .hover-nav-icon-focus-01:hover {
     fill: #327afd;
     fill: var(--nav-icon-focus-01, #327afd);
   }
@@ -3860,7 +3865,7 @@
     outline: var(--spr-focus-02, 1px solid #1c62fd);
   }
 
-  .focus\:spr-focus-02:focus {
+  .focus-spr-focus-02:focus {
     outline: 1px solid #1c62fd;
     outline: var(--spr-focus-02, 1px solid #1c62fd);
     outline: 1px solid #1c62fd;
@@ -3922,57 +3927,57 @@
     border-color: var(--spr-interactive-focus, #132a86);
   }
 
-  .hover\:spr-hover:hover {
+  .hover-spr-hover:hover {
     border-color: #0828cc;
     border-color: var(--spr-hover, #0828cc);
   }
 
-  .hover\:spr-focus-01:hover {
+  .hover-spr-focus-01:hover {
     border-color: #0828cc;
     border-color: var(--spr-focus-01, #0828cc);
   }
 
-  .hover\:spr-border-01:hover {
+  .hover-spr-border-01:hover {
     border-color: #f2f2f4;
     border-color: var(--spr-border-01, #f2f2f4);
   }
 
-  .hover\:spr-border-02:hover {
+  .hover-spr-border-02:hover {
     border-color: #ececef;
     border-color: var(--spr-border-02, #ececef);
   }
 
-  .hover\:spr-border-03:hover {
+  .hover-spr-border-03:hover {
     border-color: #d7d7dc;
     border-color: var(--spr-border-03, #d7d7dc);
   }
 
-  .hover\:spr-border-04:hover {
+  .hover-spr-border-04:hover {
     border-color: #a0a0a8;
     border-color: var(--spr-border-04, #a0a0a8);
   }
 
-  .hover\:spr-border-05:hover {
+  .hover-spr-border-05:hover {
     border-color: #ffffff;
     border-color: var(--spr-border-05, #ffffff);
   }
 
-  .hover\:spr-card-border:hover {
+  .hover-spr-card-border:hover {
     border-color: #ececef;
     border-color: var(--spr-card-border, #ececef);
   }
 
-  .hover\:spr-popup-border:hover {
+  .hover-spr-popup-border:hover {
     border-color: #d7d7dc;
     border-color: var(--spr-popup-border, #d7d7dc);
   }
 
-  .hover\:spr-tooltip-border:hover {
+  .hover-spr-tooltip-border:hover {
     border-color: #0a0a14;
     border-color: var(--spr-tooltip-border, #0a0a14);
   }
 
-  .hover\:spr-interactive-focus:hover {
+  .hover-spr-interactive-focus:hover {
     border-color: #132a86;
     border-color: var(--spr-interactive-focus, #132a86);
   }

@@ -12,7 +12,7 @@ type Props = {
 export const Menu = ({ options, onClose, onChange, selected }: Props) => {
   if (!options.length) {
     return (
-      <div className="py-1.5 px-2 rounded-8 hover:spr-ui-05">
+      <div className="py-1-5 px-2 rounded-8 hover-spr-ui-05">
         <Typography>No Results</Typography>
       </div>
     );
@@ -23,8 +23,8 @@ export const Menu = ({ options, onClose, onChange, selected }: Props) => {
       {options.map(option => (
         <div
           key={option.id}
-          className={`py-1.5 px-2 rounded-8 cursor-pointer break-all ${
-            selected?.id === option.id ? 'spr-ui-05' : 'hover:spr-ui-05'
+          className={`py-1-5 px-2 rounded-8 cursor-pointer break-all ${
+            selected?.id === option.id ? 'spr-ui-05' : 'hover-spr-ui-05'
           }`}
           onClick={() => {
             onChange(option);

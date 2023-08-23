@@ -1,7 +1,5 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
-import './styles.css';
-
 const VARIANT_VS_STYLES = {
   h1: { fontSize: '32px', lineHeight: '40px', fontWeight: 600 },
   h2: { fontSize: '24px', lineHeight: '32px', fontWeight: 600 },

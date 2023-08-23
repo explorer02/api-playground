@@ -2,8 +2,6 @@ import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
 import { Tooltip } from '../tooltip';
 
-import './styles.css';
-
 type Props = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
   loading?: boolean;
   variant?: 'primary' | 'secondary';

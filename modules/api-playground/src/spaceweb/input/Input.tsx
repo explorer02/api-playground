@@ -1,7 +1,5 @@
 import { DetailedHTMLProps, InputHTMLAttributes, WheelEventHandler, forwardRef, useCallback } from 'react';
 
-import './styles.css';
-
 type Props = Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'size'> & {
   error?: boolean;
   size?: 'xs' | 'md';

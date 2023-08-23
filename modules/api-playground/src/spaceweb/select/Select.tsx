@@ -10,9 +10,6 @@ import { VscChevronDown } from 'react-icons/vsc';
 //types
 import { Option } from './types';
 
-//styles
-import './styles.css';
-
 type Props = {
   size?: 'xs' | 'md';
   placeholder?: string;

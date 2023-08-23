@@ -1,7 +1,5 @@
 import { MouseEvent, ReactNode, Ref, useCallback, useRef, useState } from 'react';
 
-import './styles.css';
-
 type Props = {
   children: (p: { onMouseEnter: (ev: MouseEvent) => void; onMouseLeave: (ev: MouseEvent) => void }) => ReactNode;
   content?: ReactNode;
