@@ -31,7 +31,7 @@ export const Select = ({ options, onChange, placeholder = 'Select...', size = 'm
   }, [options, search, touched]);
 
   return (
-    <div className={`explorer-select ${className}`}>
+    <div className={`explorer-select relative ${className}`}>
       <Popover
         content={({ close }) => (
           <Menu

@@ -3,6 +3,7 @@
 
   padding: 10px 11px;
   font-size: 14px;
+  line-height: normal;
 
   border: 1px solid var(--spr-border-03);
   border-width: 1px;
@@ -23,5 +24,6 @@
 
   &.size-xs {
     padding: 7px 11px;
+    height: 32px;
   }
 }

@@ -1,5 +1,7 @@
 import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 
+import { Tooltip } from '@/shared/tooltip';
+
 type Props = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> & {
   loading?: boolean;
   variant?: 'primary' | 'secondary';
@@ -33,14 +35,16 @@ export const Button = ({
 }: Props) => {
   const mergedClassName = `explorer-button ${VARIANT_VS_CLASSNAME[variant]} ${SIZE_VS_CLASSNAME[size]} ${
     icon ? 'icon' : ''
-  } ${selected ? 'selected' : ''} ${disabled ? 'disabled' : ''} `;
+  } ${selected ? 'selected' : ''} ${disabled ? 'disabled' : ''} ${className ?? ''} `;
 
-  return (
-    <div
-      className={`explorer-button-container ${tooltipContent ? 'explorer-tooltip' : ''} ${className}`}
-      data-tooltip={tooltipContent}
-    >
-      <button {...rest} className={mergedClassName} disabled={disabled} />
-    </div>
-  );
+  if (tooltipContent) {
+    return (
+      <Tooltip content={tooltipContent}>
+        {({ onMouseEnter, onMouseLeave }) => (
+          <button {...rest} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className={mergedClassName} />
+        )}
+      </Tooltip>
+    );
+  }
+  return <button {...rest} className={mergedClassName} disabled={disabled} />;
 };
