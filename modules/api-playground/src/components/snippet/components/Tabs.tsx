@@ -2,7 +2,7 @@
 import { useCallback } from 'react';
 
 //components
-import { ButtonGroup } from '@/spaceweb/button-group';
+import { ButtonGroup } from '@/shared/button-group';
 
 //types
 import { Tab } from '../types';

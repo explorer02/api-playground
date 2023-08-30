@@ -2,7 +2,7 @@
 import { ReactNode, createContext, useCallback, useContext, useMemo, useRef, useState } from 'react';
 
 //components
-import { Snackbar, Intent } from '@/spaceweb/snackbar';
+import { Snackbar, Intent } from '@/shared/snackbar';
 
 type SnackbarContextType = {
   onSuccess: (message: string) => void;

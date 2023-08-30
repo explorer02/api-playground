@@ -2,7 +2,7 @@
 import { MouseEvent, memo, useCallback, useMemo } from 'react';
 
 //components
-import { Button } from '@/spaceweb/button';
+import { Button } from '@/shared/button';
 
 //types
 import { Action } from '../types';

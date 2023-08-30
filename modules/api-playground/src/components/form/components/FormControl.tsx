@@ -1,4 +1,4 @@
-import { Typography } from '@/spaceweb/typography';
+import { Typography } from '@/shared/typography';
 import { ReactNode } from 'react';
 
 type Props = {

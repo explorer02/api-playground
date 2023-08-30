@@ -8,7 +8,7 @@ import { prettifyJSON } from '@/utils/prettifyJSON';
 
 //types
 import { QueryExecutorConfig } from '@/types';
-import { Option } from '@/spaceweb/select';
+import { Option } from '@/shared/select';
 import { OnQuerySelect } from '@/components/queryExecutor/types';
 
 type Params = {

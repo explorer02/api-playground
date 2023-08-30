@@ -4,7 +4,7 @@ import { VariableEditor } from './components/variableEditor';
 import { OutputEditor } from './components/outputEditor';
 import { QuerySelector } from './components/querySelector';
 import { VscSend, VscSync } from 'react-icons/vsc';
-import { Button } from '@/spaceweb/button';
+import { Button } from '@/shared/button';
 
 //hooks
 import { useQueryExecutor } from './hooks/useQueryExecutor';

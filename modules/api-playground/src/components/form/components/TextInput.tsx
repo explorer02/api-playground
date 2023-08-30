@@ -2,7 +2,7 @@
 import { ChangeEvent, memo, useCallback } from 'react';
 
 //components
-import { Input } from '@/spaceweb/input';
+import { Input } from '@/shared/input';
 import { FormControl } from './FormControl';
 
 //hooks

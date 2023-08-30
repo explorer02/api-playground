@@ -6,7 +6,7 @@ import { FormFieldType } from '@/constants/formFieldTypes';
 import { TextInput } from './components/TextInput';
 import { NumberInput } from './components/NumberInput';
 import { JSONInput } from './components/JSONInput';
-import { Button } from '@/spaceweb/button/Button';
+import { Button } from '@/shared/button/Button';
 
 //types
 import { FieldConfigMap, FormLayout } from '@/types';

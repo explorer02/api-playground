@@ -6,7 +6,7 @@ import { DocumentNode, print } from 'graphql';
 import { prettifyJSON } from '@/utils/prettifyJSON';
 
 //types
-import { Option } from '@/spaceweb/select';
+import { Option } from '@/shared/select';
 import { OnMutationSelect } from '@/components/mutationExecutor/types';
 
 type Params = {

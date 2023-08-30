@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { Typography } from '@/spaceweb/typography';
+import { Typography } from '@/shared/typography';
 
 import { Option } from '../types';
 

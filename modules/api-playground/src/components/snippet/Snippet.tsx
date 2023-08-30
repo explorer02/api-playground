@@ -3,7 +3,7 @@ import { memo, useMemo } from 'react';
 
 //components
 import MonacoEditor, { EditorProps as MonacoEditorProps } from '@monaco-editor/react';
-import { Typography } from '@/spaceweb/typography';
+import { Typography } from '@/shared/typography';
 import { RightActions } from './components/RightActions';
 import { Tabs } from './components/Tabs';
 import { FullSizeLoader } from './components/FullSizeLoader';

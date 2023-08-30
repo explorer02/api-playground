@@ -2,7 +2,7 @@
 import { memo, useState } from 'react';
 
 // components
-import { Typography } from '@/spaceweb/typography';
+import { Typography } from '@/shared/typography';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import { VscChevronDown } from 'react-icons/vsc';
 

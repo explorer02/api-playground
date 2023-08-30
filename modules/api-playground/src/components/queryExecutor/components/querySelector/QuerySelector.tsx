@@ -2,7 +2,7 @@
 import { memo } from 'react';
 
 //components
-import { Select } from '@/spaceweb/select';
+import { Select } from '@/shared/select';
 
 //hooks
 import { useQuerySelector } from './hooks/useQuerySelector';
