@@ -15,6 +15,7 @@ export {
   CustomQueryConfig,
   CustomMutationConfig,
   FetchAndMutateConfig,
+  CustomTemplateConfig,
 } from './types';
 
 export { FieldConfigMapBuilder } from './utils/FieldConfigMapBuilder';

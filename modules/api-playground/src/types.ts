@@ -1,3 +1,4 @@
+import { ComponentType } from 'react';
 import { ApolloClient, DocumentNode, NormalizedCacheObject } from '@apollo/client';
 
 import { Template } from './constants/template';
@@ -108,6 +109,11 @@ export type FetchAndMutateConfig = CommonConfig & {
   client: ApolloClient<NormalizedCacheObject>;
 };
 
+export type CustomTemplateConfig = CommonConfig & {
+  type: Template.CUSTOM;
+  Component: ComponentType;
+};
+
 type PlainTemplates =
   | StaticDataConfig
   | CacheViewerConfig
@@ -115,7 +121,8 @@ type PlainTemplates =
   | MutationExecutorConfig
   | CustomQueryConfig
   | CustomMutationConfig
-  | FetchAndMutateConfig;
+  | FetchAndMutateConfig
+  | CustomTemplateConfig;
 
 export type NestedTemplateConfig = CommonConfig & {
   type: Template.NESTED_TEMPLATE;

@@ -61,6 +61,9 @@ export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
     el = <CustomMutation config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
   } else if (activeTemplate === Template.FETCH_AND_MUTATE) {
     el = <FetchAndMutate config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
+  } else if (activeTemplate === Template.CUSTOM) {
+    const { Component } = activeTemplateConfig;
+    el = <Component key={activeNavItem + activeSubNavItem} />;
   }
 
   return (
