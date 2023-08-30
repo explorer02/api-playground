@@ -29,10 +29,10 @@ export const ButtonGroup = ({ style, className = '', config, selectedIdx, size, 
           <Button
             key={button.id}
             variant="secondary"
-            className={`border-none ${idx === selectedIdx ? 'font-600' : 'font-400'}`}
+            className={`${idx === selectedIdx ? 'font-600' : 'font-400'}`}
             size={size}
             selected={idx === selectedIdx}
-            style={{ minWidth: '100px' }}
+            style={{ minWidth: '100px', border: 'none' }}
             onClick={() => {
               onClick(idx);
             }}

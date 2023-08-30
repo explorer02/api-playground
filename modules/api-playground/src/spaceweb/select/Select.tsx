@@ -20,23 +20,29 @@ type Props = {
 };
 
 export const Select = ({ options, onChange, placeholder = 'Select...', size = 'md', value, className = '' }: Props) => {
+  const [touched, setTouched] = useState(false);
   const [search, setSearch] = useState('');
 
-  const filteredOptions = useMemo(
-    () => options.filter(option => option.label.toLowerCase().includes(search.toLowerCase())),
-    [options, search]
-  );
+  const filteredOptions = useMemo(() => {
+    if (touched) {
+      return options.filter(option => option.label.toLowerCase().includes(search.toLowerCase()));
+    }
+    return options;
+  }, [options, search, touched]);
 
   return (
-    <div className={`explorer-space-select ${className}`}>
+    <div className={`explorer-select ${className}`}>
       <Popover
         content={({ close }) => (
           <Menu
             options={filteredOptions}
-            onClose={close}
+            onClose={() => {
+              setTouched(false);
+              close();
+            }}
             onChange={option => {
               onChange(option);
-              setSearch(option.label as string);
+              setSearch(option.label);
             }}
             selected={value}
           />
@@ -49,7 +55,10 @@ export const Select = ({ options, onChange, placeholder = 'Select...', size = 'm
               placeholder={placeholder}
               isActive={isOpen}
               value={search}
-              onChange={e => setSearch(e.target.value)}
+              onChange={e => {
+                setSearch(e.target.value);
+                setTouched(true);
+              }}
             />
             <div
               className="absolute flex items-center cursor-pointer spr-ui-01"

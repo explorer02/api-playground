@@ -45,7 +45,7 @@ export const Popover = ({ content, children }: Props): JSX.Element => {
       {children({ onClick, isOpen: !!coords, ref: childRef })}
       {coords && childDomRect ? (
         <div
-          className="fixed border-1 border-solid spr-border-03 rounded-8 overflow-hidden p-1 spr-ui-01 spr-shadow-02"
+          className="absolute border-1 border-solid spr-border-03 rounded-8 overflow-hidden p-1 spr-ui-01 spr-shadow-02"
           style={{
             zIndex: 1000,
             top: `${childDomRect.top + childDomRect.height + 10}px`,

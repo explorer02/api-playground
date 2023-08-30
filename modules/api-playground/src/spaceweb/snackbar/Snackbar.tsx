@@ -50,11 +50,6 @@ const INTENT_VS_ERROR = {
   error: ErrorIcon,
 };
 
-const INTENT_VS_ICON_BG = {
-  success: '#6AC96E',
-  error: '#C70F5C',
-};
-
 export const Snackbar = ({ message, intent }: Props) => {
   const Icon = INTENT_VS_ERROR[intent ?? 'success'];
 
@@ -63,6 +58,7 @@ export const Snackbar = ({ message, intent }: Props) => {
       <div
         style={{
           position: 'fixed',
+          zIndex: 1000000,
           bottom: '20px',
           left: '50%',
 
@@ -79,7 +75,6 @@ export const Snackbar = ({ message, intent }: Props) => {
           alignItems: 'center',
           gap: '4px',
         }}
-        id="snackbar"
       >
         <Icon />
         <div style={{ color: 'white', fontSize: '13px' }}>{message}</div>

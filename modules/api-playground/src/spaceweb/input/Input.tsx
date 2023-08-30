@@ -26,10 +26,9 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     return (
       <input
         {...rest}
-        className={`explorer-space-input ${error ? 'error' : ''} ${SIZE_VS_CLASSNAME[size]} ${
-          isActive ? 'active' : ''
-        } ${className ? className : ''}`}
-        // className="explorer-space-input"
+        className={`explorer-input ${error ? 'error' : ''} ${SIZE_VS_CLASSNAME[size]} ${isActive ? 'active' : ''} ${
+          className ? className : ''
+        }`}
         onWheel={onWheel}
         type={type}
         ref={ref}

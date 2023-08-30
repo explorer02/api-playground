@@ -31,10 +31,6 @@ type Props = DetailedHTMLProps<ButtonHTMLAttributes<HTMLParagraphElement>, HTMLP
 
 export const Typography = ({ variant = 'l1', className, style, ...rest }: Props) => {
   return (
-    <div
-      {...rest}
-      style={{ ...VARIANT_VS_STYLES[variant], ...style }}
-      className={`explorer-typography ${className ?? ''}`}
-    />
+    <div {...rest} style={{ ...VARIANT_VS_STYLES[variant], ...style }} className={`spr-text-01 ${className ?? ''}`} />
   );
 };
