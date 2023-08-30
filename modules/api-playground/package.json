@@ -8,9 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
     "tsc-watch": "tsc --watch",
-    "build": "node ./scripts/build.js && yarn purge-tailwind",
+    "build": "node ./scripts/build.js && yarn purge-tailwind && yarn minify-js",
     "dev": "node ./scripts/dev.js && yarn purge-tailwind",
-    "minify": "uglifyjs-folder ./dist -eo ./dist2",
+    "minify-js": "uglifyjs-folder ./dist -eo ./dist -x .js",
     "purge-tailwind": "purgecss --css src/styles/tailwind.css --content dist/*.js dist/**/*.js dist/**/**/*.js dist/**/**/**/*.js dist/**/**/**/**/*.js dist/**/**/**/**/**/*.js --output dist/styles"
   },
   "repository": {
