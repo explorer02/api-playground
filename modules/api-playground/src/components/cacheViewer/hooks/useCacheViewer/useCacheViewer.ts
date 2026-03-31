@@ -80,9 +80,9 @@ export const useCacheViewer = ({ config }: Params): ReturnType => {
           const parsedCache = JSON.parse(editorRef.current?.getValue() ?? '');
           client.cache.restore(parsedCache);
           onSuccess('Cache updated successfully...');
-        } catch (e: any) {
+        } catch (e: unknown) {
           console.error(e);
-          onError(e.message ?? 'Something went wrong...');
+          onError(e instanceof Error ? e.message : 'Something went wrong...');
         }
       }
     },

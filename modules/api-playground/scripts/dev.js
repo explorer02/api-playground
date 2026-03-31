@@ -1,30 +1,17 @@
-const { watch, copyFileSync } = require('fs');
-const { resolveTsPaths } = require('resolve-tspaths');
-require('./build');
+const { watch } = require('fs');
+const { spawn } = require('child_process');
+const { compileStyles, combineStyles } = require('./utils');
 
-const srcDir = './src';
-const distDir = './dist';
+// Start tsup in watch mode (onSuccess in tsup.config.ts rebuilds styles after each TS build)
+const tsup = spawn('tsup', ['--watch'], { stdio: 'inherit', shell: true });
+tsup.on('error', err => console.error('tsup error:', err.message));
 
-function copyCssFile(path) {
-  copyFileSync(`${srcDir}/${path}`, `${distDir}/${path}`);
-}
-
-watch('./dist', { recursive: true }, (_, filename) => {
-  if (filename.endsWith('.js')) {
-    try {
-      resolveTsPaths();
-    } catch (e) {
-      console.log(e.message);
-    }
-  }
-});
-
+// Watch for SCSS-only changes (TS changes are handled by tsup's onSuccess)
 watch('./src', { recursive: true }, (_, filename) => {
-  if (filename.endsWith('root.css') || filename.endsWith('tailwind.css')) {
-    try {
-      copyCssFile(filename);
-    } catch (e) {
-      console.log(e.message);
-    }
+  if (filename && (filename.endsWith('.scss') || filename.endsWith('.css'))) {
+    compileStyles();
+    combineStyles();
   }
 });
+
+console.log('Watching for style changes...');

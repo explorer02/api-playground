@@ -4,7 +4,7 @@ export { Template } from './constants/template';
 export { Language } from './constants/language';
 export { FormFieldType } from './constants/formFieldTypes';
 
-export {
+export type {
   APIPlaygroundProps,
   TemplateConfig,
   StaticDataConfig,

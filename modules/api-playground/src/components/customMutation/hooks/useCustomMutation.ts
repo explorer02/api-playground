@@ -36,8 +36,8 @@ export const useCustomMutation = ({ config }: Params): ReturnType => {
       try {
         const { data, errors } = await client.mutate({ mutation, variables });
         outputEditorRef.current?.setValue(prettifyJSON(data) ?? errors?.[0]?.message);
-      } catch (e: any) {
-        outputEditorRef.current?.setValue(e?.message);
+      } catch (e: unknown) {
+        outputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
       }
       setLoading(false);
     },

@@ -1,7 +1,7 @@
 'use client';
 
 // lib
-import { useCallback, useMemo, useState } from 'react';
+import { ComponentType, useCallback, useMemo, useState } from 'react';
 
 // components
 import { SideNav } from './components/SideNav';
@@ -13,18 +13,41 @@ import { CustomQuery } from './components/customQuery';
 import { CustomMutation } from './components/customMutation';
 import { FetchAndMutate } from './components/fetchAndMutate';
 import { SnackbarProvider } from './context/SnackbarContext';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { Typography } from './shared/typography';
 
 //constants
 import { Template } from './constants/template';
 
 //types
-import { APIPlaygroundProps, NestedTemplateConfig } from './types';
+import { APIPlaygroundProps, NestedTemplateConfig, TemplateConfig } from './types';
 
-//styles
-import './styles/root.css';
-import './styles/tailwind.css';
+
+const TEMPLATE_COMPONENT_MAP: Partial<Record<Template, ComponentType<{ config: any }>>> = {
+  [Template.STATIC_DATA]: StaticDataViewer,
+  [Template.CACHE_VIEWER]: CacheViewer,
+  [Template.QUERY_EXECUTOR]: QueryExecutor,
+  [Template.MUTATION_EXECUTOR]: MutationExecutor,
+  [Template.CUSTOM_QUERY]: CustomQuery,
+  [Template.CUSTOM_MUTATION]: CustomMutation,
+  [Template.FETCH_AND_MUTATE]: FetchAndMutate,
+};
 
 export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
+  if (!config || config.length === 0) {
+    return (
+      <div className="explorer-container hyperspace-light flex items-center justify-center" style={{ height: '100%' }}>
+        <Typography variant="body-16" className="spr-text-03">
+          No templates configured
+        </Typography>
+      </div>
+    );
+  }
+
+  return <APIPlaygroundInner config={config} />;
+};
+
+const APIPlaygroundInner = ({ config }: { config: TemplateConfig[] }): JSX.Element => {
   const [activeNavItem, setActiveNavItem] = useState<string>(config[0].id);
   const [activeSubNavItem, setActiveSubNavItem] = useState<string | undefined>(
     (config[0] as NestedTemplateConfig).templates?.[0]?.id
@@ -36,34 +59,24 @@ export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
   }, []);
 
   const activeTemplateConfig = useMemo(() => {
-    const primaryConfig = config.find(c => c.id === activeNavItem)!;
+    const primaryConfig = config.find(c => c.id === activeNavItem);
+    if (!primaryConfig) return config[0];
     if (activeSubNavItem) {
-      const secondaryConfig = (primaryConfig as NestedTemplateConfig).templates.find(t => t.id === activeSubNavItem)!;
-      return secondaryConfig;
+      const secondaryConfig = (primaryConfig as NestedTemplateConfig).templates?.find(t => t.id === activeSubNavItem);
+      return secondaryConfig ?? primaryConfig;
     }
     return primaryConfig;
   }, [activeNavItem, activeSubNavItem, config]);
 
-  const activeTemplate = activeTemplateConfig.type;
+  const templateKey = `${activeNavItem}/${activeSubNavItem ?? ''}`;
 
   let el;
-  if (activeTemplate === Template.STATIC_DATA) {
-    el = <StaticDataViewer config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
-  } else if (activeTemplate === Template.CACHE_VIEWER) {
-    el = <CacheViewer config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
-  } else if (activeTemplate === Template.QUERY_EXECUTOR) {
-    el = <QueryExecutor config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
-  } else if (activeTemplate === Template.MUTATION_EXECUTOR) {
-    el = <MutationExecutor config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
-  } else if (activeTemplate === Template.CUSTOM_QUERY) {
-    el = <CustomQuery config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
-  } else if (activeTemplate === Template.CUSTOM_MUTATION) {
-    el = <CustomMutation config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
-  } else if (activeTemplate === Template.FETCH_AND_MUTATE) {
-    el = <FetchAndMutate config={activeTemplateConfig} key={activeNavItem + activeSubNavItem} />;
-  } else if (activeTemplate === Template.CUSTOM) {
+  if (activeTemplateConfig.type === Template.CUSTOM) {
     const { Component } = activeTemplateConfig;
-    el = <Component key={activeNavItem + activeSubNavItem} />;
+    el = <Component key={templateKey} />;
+  } else {
+    const TemplateComponent = TEMPLATE_COMPONENT_MAP[activeTemplateConfig.type];
+    el = TemplateComponent ? <TemplateComponent config={activeTemplateConfig} key={templateKey} /> : null;
   }
 
   return (
@@ -78,7 +91,9 @@ export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
               onNavItemClick={onNavItemClick}
             />
           </div>
-          <div className="flex-1">{el}</div>
+          <div className="flex-1">
+            <ErrorBoundary>{el}</ErrorBoundary>
+          </div>
         </div>
       </SnackbarProvider>
     </div>

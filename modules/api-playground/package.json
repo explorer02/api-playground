@@ -2,16 +2,30 @@
   "name": "@explorer02/api-playground",
   "version": "1.0.22",
   "description": "API Playground component",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./types/index.d.ts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles/tailwind.css",
+    "./root.css": "./dist/styles/root.css"
+  },
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc",
-    "tsc-watch": "tsc --watch",
-    "build": "node ./scripts/build.js && yarn purge-tailwind && yarn minify-js",
-    "dev": "node ./scripts/dev.js && yarn purge-tailwind",
-    "minify-js": "uglifyjs-folder ./dist -eo ./dist -x .js",
-    "purge-tailwind": "purgecss --css src/styles/tailwind.css --content dist/*.js dist/**/*.js dist/**/**/*.js dist/**/**/**/*.js dist/**/**/**/**/*.js dist/**/**/**/**/**/*.js --output dist/styles"
+    "build": "node ./scripts/build.js",
+    "dev": "node ./scripts/dev.js"
   },
   "repository": {
     "type": "git",
@@ -29,29 +43,28 @@
   },
   "homepage": "https://github.com/explorer02/api-playground#readme",
   "dependencies": {
-    "rtl-css-js": "^1.16.1",
-    "typescript": ">=5.9.2",
-    "react-use": "^12.2.0",
     "@monaco-editor/react": "^4.5.1",
     "react-icons": "4.10.1",
-    "@apollo/client": "3.8.7",
-    "graphql": "^15.3.0",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-use": "^12.2.0",
+    "rtl-css-js": "^1.16.1"
   },
   "peerDependencies": {
-    "@types/node": "20.4.6"
+    "@apollo/client": ">=3.8.0",
+    "@types/react": ">=18.0.0",
+    "@types/react-dom": ">=18.0.0",
+    "graphql": ">=16.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "devDependencies": {
-    "resolve-tspaths": "^0.8.14",
-    "uglifyjs-folder": "3.3.0",
-    "@fullhuman/postcss-purgecss": "5.0.0"
-  },
-  "resolutions": {
-    "@types/node": "^14.11.2",
     "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11"
+    "@types/react-dom": "18.0.11",
+    "purgecss": "^5.0.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "resolve-tspaths": "^0.8.23",
+    "sass": "^1.70.0",
+    "tsup": "^8.0.0",
+    "typescript": ">=5.9.2"
   }
 }

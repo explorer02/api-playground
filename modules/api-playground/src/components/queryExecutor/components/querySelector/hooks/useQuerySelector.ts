@@ -28,8 +28,7 @@ export const useQuerySelector = ({ config, onChange }: Params): ReturnType => {
   const [selectedOption, setSelectedOption] = useState<Option>();
 
   const options = useMemo<Option[]>(() => {
-    // @ts-ignore not anymore
-    const queriesMap = client.queryManager.queries as Map<string, QueryInfo>;
+    const queriesMap = (client as any).queryManager.queries as Map<string, QueryInfo>;
 
     const queriesArray = Array.from(queriesMap.values());
 
@@ -60,11 +59,11 @@ export const useQuerySelector = ({ config, onChange }: Params): ReturnType => {
             variables: prettifyJSON(variables),
             output: prettifyJSON(output.data) || output.error?.message,
           });
-        } catch (e: any) {
+        } catch (e: unknown) {
           onChange({
             query: print(node),
             variables: prettifyJSON(variables),
-            output: e.message,
+            output: e instanceof Error ? e.message : 'Unknown error',
           });
         }
       }

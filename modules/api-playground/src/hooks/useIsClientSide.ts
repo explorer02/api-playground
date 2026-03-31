@@ -7,5 +7,5 @@ export const useIsClientSide = () => {
     setMounted(true);
   }, []);
 
-  return isMounted;
+  return isMounted || typeof window !== 'undefined';
 };

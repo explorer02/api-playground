@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2018",
     "lib": [
       "dom",
       "dom.iterable",
@@ -13,14 +13,14 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "jsx": "react-jsx",
-    "declaration": true, // Generate declaration files (*.d.ts)
-    "declarationDir": "./types", // Output directory for declaration files
-    "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+    "declaration": true,
+    "declarationDir": "./types",
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": [
         "./*"

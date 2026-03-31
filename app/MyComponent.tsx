@@ -1,3 +1,5 @@
+'use client';
+
 import { gql, useLazyQuery, useQuery } from '@apollo/client';
 import { useState } from 'react';
 
@@ -5,12 +7,19 @@ const FRAGMENT_CHARACTER = gql`
   fragment Character on Character {
     id
     name
+    status
+    species
   }
 `;
 
 const FETCH_CHARACTERS = gql`
-  query BroFetchChars($page: Int) {
+  query FetchCharacters($page: Int) {
     characters(page: $page) {
+      info {
+        count
+        pages
+        next
+      }
       results {
         ...Character
       }
@@ -23,12 +32,18 @@ const FRAGMENT_LOCATION = gql`
   fragment Location on Location {
     id
     name
+    type
+    dimension
   }
 `;
 
 const FETCH_LOCATIONS = gql`
   query FetchLocations($page: Int) {
     locations(page: $page) {
+      info {
+        count
+        pages
+      }
       results {
         ...Location
       }
@@ -37,64 +52,87 @@ const FETCH_LOCATIONS = gql`
   ${FRAGMENT_LOCATION}
 `;
 
-// console.log(print(FETCH_CHARACTERS), print(parse(TEMP)));
+const FETCH_EPISODES = gql`
+  query FetchEpisodes($page: Int) {
+    episodes(page: $page) {
+      info {
+        count
+        pages
+      }
+      results {
+        id
+        name
+        air_date
+        episode
+      }
+    }
+  }
+`;
 
-const MyComponent = () => {
-  const [charFetcher, charResult] = useLazyQuery(FETCH_CHARACTERS, { ssr: false });
-  const [locFetcher, locResult] = useLazyQuery(FETCH_LOCATIONS, { ssr: false });
+const buttonStyle: React.CSSProperties = {
+  border: '1px solid #ccc',
+  padding: '8px 16px',
+  background: '#0e61f6',
+  color: 'white',
+  borderRadius: '8px',
+  cursor: 'pointer',
+  fontSize: '14px',
+};
 
-  const { data } = useQuery(FETCH_LOCATIONS, { variables: { page: 4 } });
-  useQuery(FETCH_LOCATIONS, { variables: { page: 4 } });
+const DataFetcher = () => {
+  const [charPage, setCharPage] = useState(1);
+  const [locPage, setLocPage] = useState(1);
 
-  const onFetchChars = () => {
-    const randomPage = Math.floor(Math.random() * 20);
-    charFetcher({
-      variables: {
-        page: 4 || randomPage,
-      },
-    });
+  const [fetchChars, { data: charData, loading: charsLoading }] = useLazyQuery(FETCH_CHARACTERS);
+  const [fetchLocs, { data: locData, loading: locsLoading }] = useLazyQuery(FETCH_LOCATIONS);
+  const [fetchEps, { data: epData, loading: epsLoading }] = useLazyQuery(FETCH_EPISODES);
+
+  // Pre-populate cache with a locations query so Cache Viewer has data on load
+  useQuery(FETCH_LOCATIONS, { variables: { page: 1 } });
+
+  const handleFetchChars = () => {
+    fetchChars({ variables: { page: charPage } });
+    setCharPage(p => (p % 20) + 1);
   };
-  const onFetchLocations = () => {
-    const randomPage = Math.floor(Math.random() * 20);
-    locFetcher({
-      variables: {
-        page: 4 || randomPage,
-      },
-    });
+
+  const handleFetchLocs = () => {
+    fetchLocs({ variables: { page: locPage } });
+    setLocPage(p => (p % 7) + 1);
   };
+
+  const handleFetchEpisodes = () => {
+    fetchEps({ variables: { page: 1 } });
+  };
+
+  const charCount = charData?.characters?.results?.length ?? 0;
+  const locCount = locData?.locations?.results?.length ?? 0;
+  const epCount = epData?.episodes?.results?.length ?? 0;
 
   return (
-    <>
-      <button
-        onClick={onFetchChars}
-        style={{ border: '1px solid', padding: '12px', background: 'blue', color: 'white', borderRadius: '8px' }}
-      >
-        Fetch Chars
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
+      <button onClick={handleFetchChars} style={buttonStyle} disabled={charsLoading}>
+        {charsLoading ? 'Loading...' : `Fetch Characters${charCount ? ` (${charCount})` : ''}`}
       </button>
-      <button
-        onClick={onFetchLocations}
-        style={{ border: '1px solid', padding: '12px', background: 'blue', color: 'white', borderRadius: '8px' }}
-      >
-        Fetch locs
+      <button onClick={handleFetchLocs} style={buttonStyle} disabled={locsLoading}>
+        {locsLoading ? 'Loading...' : `Fetch Locations${locCount ? ` (${locCount})` : ''}`}
       </button>
-      {/* <div>{JSON.stringify(data ?? {})}</div> */}
-    </>
+      <button onClick={handleFetchEpisodes} style={buttonStyle} disabled={epsLoading}>
+        {epsLoading ? 'Loading...' : `Fetch Episodes${epCount ? ` (${epCount})` : ''}`}
+      </button>
+    </div>
   );
 };
 
 const Wrapper = () => {
-  const [count, setCount] = useState(0);
+  const [key, setKey] = useState(0);
 
   return (
-    <>
-      <MyComponent key={count} />
-      <button
-        onClick={() => setCount(c => c + 1)}
-        style={{ border: '1px solid', padding: '12px', background: 'blue', color: 'white', borderRadius: '8px' }}
-      >
-        Click To ReRender
+    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '16px' }}>
+      <DataFetcher key={key} />
+      <button onClick={() => setKey(k => k + 1)} style={{ ...buttonStyle, background: '#666' }}>
+        Reset
       </button>
-    </>
+    </div>
   );
 };
 

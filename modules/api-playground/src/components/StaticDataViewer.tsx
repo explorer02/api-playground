@@ -17,7 +17,7 @@ type Props = {
 const StaticDataViewer = ({ config }: Props) => {
   const { data, title, language, readOnly } = config;
 
-  const stringifiedData = useMemo(() => prettifyJSON(data), [data]);
+  const stringifiedData = useMemo(() => (typeof data === 'string' ? data : prettifyJSON(data)), [data]);
 
   const editorProps = useMemo(
     () => ({ value: stringifiedData, readOnly, language }),

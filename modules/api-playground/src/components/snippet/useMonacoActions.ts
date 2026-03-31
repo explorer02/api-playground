@@ -83,7 +83,9 @@ export const useMonacoActions = ({
               case Language.GRAPHQL: {
                 try {
                   editorRef.current?.setValue(prettifyGQL(editorRef.current.getValue() ?? ''));
-                } catch {}
+                } catch (e: unknown) {
+                  console.warn('[APIPlayground] Failed to format GraphQL:', e instanceof Error ? e.message : e);
+                }
                 break;
               }
 

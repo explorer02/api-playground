@@ -46,8 +46,8 @@ export const useQueryExecutor = ({ config }: Params): ReturnType => {
     try {
       const response = await client.query({ query, variables, fetchPolicy: 'network-only' });
       outputEditorRef.current?.setValue(prettifyJSON(response.data) ?? response.error?.message);
-    } catch (e: any) {
-      outputEditorRef.current?.setValue(e.message);
+    } catch (e: unknown) {
+      outputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
     }
     setLoading(false);
   }, [client, inputEditorRef, outputEditorRef, variableEditorRef]);

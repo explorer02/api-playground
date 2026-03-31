@@ -67,8 +67,8 @@ export const useFetchAndMutate = ({ config, mutationOutputEditorRef, queryOutput
         if (data) {
           setIsQueryExecuted(true);
         }
-      } catch (e: any) {
-        queryOutputEditorRef.current?.setValue(e?.message);
+      } catch (e: unknown) {
+        queryOutputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
       }
       setFetching(false);
     },
@@ -96,8 +96,8 @@ export const useFetchAndMutate = ({ config, mutationOutputEditorRef, queryOutput
             setMutating(true);
             const { data, errors } = await client.mutate({ mutation, variables: mutationVariables });
             mutationOutputEditorRef.current?.setValue(prettifyJSON(data) ?? errors?.[0]?.message);
-          } catch (e: any) {
-            mutationOutputEditorRef.current?.setValue(e?.message);
+          } catch (e: unknown) {
+            mutationOutputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
           }
           setMutating(false);
           break;
