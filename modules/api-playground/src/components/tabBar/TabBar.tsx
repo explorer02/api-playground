@@ -21,7 +21,7 @@ const TabBar = ({ tabs, activeTabId, onTabClick, onTabClose }: Props) => {
   if (tabs.length <= 1) return null;
 
   return (
-    <div className="flex-none flex items-center border-0 border-b-1 border-solid spr-border-03 gap-0 overflow-x-auto mb-2">
+    <div className="flex-none flex items-center border-0 border-b-1 border-solid spr-border-03 gap-0 overflow-x-auto mb-2 flex-wrap">
       {tabs.map(tab => {
         const isActive = tab.id === activeTabId;
         return (
