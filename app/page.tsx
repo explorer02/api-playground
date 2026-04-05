@@ -2,8 +2,8 @@
 
 import { ApolloProvider } from '@apollo/client';
 
-import { APIPlayground } from '@/modules/api-playground/dist';
-import '@/modules/api-playground/dist/index.css';
+import { APIPlayground } from '@explorer02/api-playground';
+import '@explorer02/api-playground/styles/index.scss';
 
 import { TEMPLATE_CONFIG } from './config';
 import { CLIENT } from './constants';

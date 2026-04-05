@@ -7,7 +7,7 @@ import {
   TemplateConfig,
   CustomTemplateConfig,
   SchemaViewerConfig,
-} from '@/modules/api-playground';
+} from '@explorer02/api-playground';
 import { CLIENT } from './constants';
 
 type FormValues = Record<string, string | number>;
