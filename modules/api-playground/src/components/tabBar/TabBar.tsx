@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { VscClose, VscAdd } from 'react-icons/vsc';
+import { VscClose } from 'react-icons/vsc';
 import { Typography } from '@/shared/typography';
 
 export type TabInstance = {
@@ -15,10 +15,9 @@ type Props = {
   activeTabId: string;
   onTabClick: (tabId: string) => void;
   onTabClose: (tabId: string) => void;
-  onNewTab: () => void;
 };
 
-const TabBar = ({ tabs, activeTabId, onTabClick, onTabClose, onNewTab }: Props) => {
+const TabBar = ({ tabs, activeTabId, onTabClick, onTabClose }: Props) => {
   if (tabs.length <= 1) return null;
 
   return (
@@ -49,12 +48,6 @@ const TabBar = ({ tabs, activeTabId, onTabClick, onTabClose, onNewTab }: Props) 
           </div>
         );
       })}
-      <div
-        className="flex items-center px-2 py-2 cursor-pointer spr-text-03 hover-spr-ui-02"
-        onClick={onNewTab}
-      >
-        <VscAdd size={14} />
-      </div>
     </div>
   );
 };

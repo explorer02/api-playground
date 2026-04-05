@@ -105,7 +105,7 @@ const MenuItem = ({
         {onAddTab && !isNestedTemplate ? (
           <VscAdd
             size={14}
-            className="spr-text-03 cursor-pointer"
+            className={`${isSelected ? 'spr-text-05' : 'spr-text-03'} cursor-pointer`}
             onClick={(e: React.MouseEvent) => {
               e.stopPropagation();
               onAddTab(config.id);

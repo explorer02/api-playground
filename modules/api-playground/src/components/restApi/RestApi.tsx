@@ -6,6 +6,7 @@ import { VscSend, VscAdd, VscClose } from 'react-icons/vsc';
 import { Snippet } from '@/components/snippet';
 import { Button } from '@/shared/button/Button';
 import { Input } from '@/shared/input';
+import { Select } from '@/shared/select/Select';
 import { Typography } from '@/shared/typography';
 
 //hooks
@@ -19,6 +20,7 @@ import { Language } from '@/constants/language';
 import { RestApiConfig } from '@/types';
 
 const HTTP_METHODS = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'] as const;
+const HTTP_METHOD_OPTIONS = HTTP_METHODS.map(m => ({ id: m, label: m }));
 
 export const RestApi = ({ config }: { config: RestApiConfig }) => {
   const {
@@ -63,18 +65,14 @@ export const RestApi = ({ config }: { config: RestApiConfig }) => {
       <div className="h-full flex flex-col gap-4 flex-1">
         {/* Method selector + URL + Execute */}
         <div className="flex-none flex gap-3 items-center">
-          <select
-            className="explorer-input"
-            value={method}
-            onChange={e => setMethod(e.target.value as typeof method)}
-            style={{ width: '120px', cursor: 'pointer' }}
-          >
-            {HTTP_METHODS.map(m => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-          </select>
+          <div style={{ width: '120px' }}>
+            <Select
+              size="xs"
+              options={HTTP_METHOD_OPTIONS}
+              value={HTTP_METHOD_OPTIONS.find(o => o.id === method)}
+              onChange={o => setMethod(o.id as typeof method)}
+            />
+          </div>
           <Input className="flex-1" placeholder="Enter URL" value={url} onChange={e => setUrl(e.target.value)} />
           <Button className="flex-none" size="xs" tooltipContent="Execute" onClick={execute} icon>
             <VscSend />

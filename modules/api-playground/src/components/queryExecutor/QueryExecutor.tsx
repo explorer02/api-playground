@@ -15,6 +15,9 @@ import { Button } from '@/shared/button';
 import { useQueryExecutor } from './hooks/useQueryExecutor';
 import { useHistory } from '@/context/HistoryContext';
 
+//constants
+import { Template } from '@/constants/template';
+
 //types
 import { QueryExecutorConfig } from '@/types';
 import { HistoryEntry } from '../queryHistory/types';
@@ -22,18 +25,19 @@ import { HistoryEntry } from '../queryHistory/types';
 const QUERY_CONTAINER_CLASSNAME = 'flex-1 flex-grow-2';
 const VARIABLE_CONTAINER_CLASSNAME = 'flex-1';
 
-export const QueryExecutor = ({ config }: { config: QueryExecutorConfig }) => {
-  const { entries, addEntry, clearHistory } = useHistory();
+export const QueryExecutor = ({ config, tabId }: { config: QueryExecutorConfig; tabId: string }) => {
+  const { entries, addEntry, clearHistory } = useHistory(Template.QUERY_EXECUTOR);
 
   const onExecutionComplete = useCallback(
     (data: { queryText: string; variables: string; result: string; responseTimeMs: number }) => {
-      addEntry({ ...data, templateId: config.id });
+      addEntry({ ...data, templateId: config.id, templateType: Template.QUERY_EXECUTOR });
     },
     [addEntry, config.id]
   );
 
   const { onInputMount, onOutputMount, onVariableMount, onSubmit, loading, onQuerySelect, stats } = useQueryExecutor({
     config,
+    tabId,
     onExecutionComplete,
   });
 

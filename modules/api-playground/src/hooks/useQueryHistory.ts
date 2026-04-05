@@ -26,6 +26,7 @@ type ReturnType = {
   entries: HistoryEntry[];
   addEntry: (entry: Omit<HistoryEntry, 'id' | 'timestamp'>) => void;
   clearHistory: () => void;
+  clearHistoryForType: (templateType: string) => void;
 };
 
 export const useQueryHistory = (instanceId: string): ReturnType => {
@@ -52,5 +53,16 @@ export const useQueryHistory = (instanceId: string): ReturnType => {
     writeEntries(instanceId, []);
   }, [instanceId]);
 
-  return { entries, addEntry, clearHistory };
+  const clearHistoryForType = useCallback(
+    (templateType: string) => {
+      setEntries(prev => {
+        const updated = prev.filter(e => e.templateType !== templateType);
+        writeEntries(instanceId, updated);
+        return updated;
+      });
+    },
+    [instanceId]
+  );
+
+  return { entries, addEntry, clearHistory, clearHistoryForType };
 };

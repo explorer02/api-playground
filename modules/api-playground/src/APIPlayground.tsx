@@ -17,6 +17,7 @@ import { RestApi } from './components/restApi';
 import { TabBar, TabInstance } from './components/tabBar/TabBar';
 import { SnackbarProvider } from './context/SnackbarContext';
 import { HistoryProvider } from './context/HistoryContext';
+import { TabStateProvider, useTabState } from './context/TabStateContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Typography } from './shared/typography';
 
@@ -25,32 +26,6 @@ import { Template } from './constants/template';
 
 //types
 import { APIPlaygroundProps, NestedTemplateConfig, TemplateConfig } from './types';
-
-const TEMPLATE_COMPONENT_MAP: Partial<Record<Template, ComponentType<{ config: any }>>> = {
-  [Template.STATIC_DATA]: StaticDataViewer,
-  [Template.CACHE_VIEWER]: CacheViewer,
-  [Template.QUERY_EXECUTOR]: QueryExecutor,
-  [Template.MUTATION_EXECUTOR]: MutationExecutor,
-  [Template.CUSTOM_QUERY]: CustomQuery,
-  [Template.CUSTOM_MUTATION]: CustomMutation,
-  [Template.FETCH_AND_MUTATE]: FetchAndMutate,
-  [Template.SCHEMA_VIEWER]: SchemaViewer,
-  [Template.REST_API]: RestApi,
-};
-
-export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
-  if (!config || config.length === 0) {
-    return (
-      <div className="explorer-container hyperspace-light flex items-center justify-center" style={{ height: '100%' }}>
-        <Typography variant="body-16" className="spr-text-03">
-          No templates configured
-        </Typography>
-      </div>
-    );
-  }
-
-  return <APIPlaygroundInner config={config} />;
-};
 
 // Resolve a template config by navItem + optional subNavItem
 const resolveTemplateConfig = (config: TemplateConfig[], navItem: string, subNavItem?: string): TemplateConfig => {
@@ -84,7 +59,20 @@ const createTab = (
   };
 };
 
-const APIPlaygroundInner = ({ config }: { config: TemplateConfig[] }): JSX.Element => {
+const TEMPLATE_COMPONENT_MAP: Partial<Record<Template, ComponentType<{ config: any; tabId: string }>>> = {
+  [Template.STATIC_DATA]: StaticDataViewer,
+  [Template.CACHE_VIEWER]: CacheViewer,
+  [Template.QUERY_EXECUTOR]: QueryExecutor,
+  [Template.MUTATION_EXECUTOR]: MutationExecutor,
+  [Template.CUSTOM_QUERY]: CustomQuery,
+  [Template.CUSTOM_MUTATION]: CustomMutation,
+  [Template.FETCH_AND_MUTATE]: FetchAndMutate,
+  [Template.SCHEMA_VIEWER]: SchemaViewer,
+  [Template.REST_API]: RestApi,
+};
+
+const APIPlaygroundView = ({ config }: { config: TemplateConfig[] }): JSX.Element => {
+  const { removeState } = useTabState();
   const firstNavItem = config[0].id;
   const firstSubNavItem = (config[0] as NestedTemplateConfig).templates?.[0]?.id;
 
@@ -136,6 +124,7 @@ const APIPlaygroundInner = ({ config }: { config: TemplateConfig[] }): JSX.Eleme
 
   const onTabClose = useCallback(
     (tabId: string) => {
+      removeState(tabId);
       setTabs(prev => {
         const updated = prev.filter(t => t.id !== tabId);
         if (updated.length === 0) {
@@ -156,12 +145,8 @@ const APIPlaygroundInner = ({ config }: { config: TemplateConfig[] }): JSX.Eleme
         return updated;
       });
     },
-    [activeTabId, config, firstNavItem, firstSubNavItem]
+    [activeTabId, config, firstNavItem, firstSubNavItem, removeState]
   );
-
-  const onNewTab = useCallback(() => {
-    onAddTab(activeNavItem, activeSubNavItem);
-  }, [activeNavItem, activeSubNavItem, onAddTab]);
 
   // Render the active tab's template
   const activeTab = tabs.find(t => t.id === activeTabId);
@@ -176,38 +161,50 @@ const APIPlaygroundInner = ({ config }: { config: TemplateConfig[] }): JSX.Eleme
     el = <Component key={activeTabId} />;
   } else {
     const TemplateComponent = TEMPLATE_COMPONENT_MAP[activeTemplateConfig.type];
-    el = TemplateComponent ? <TemplateComponent config={activeTemplateConfig} key={activeTabId} /> : null;
+    el = TemplateComponent ? (
+      <TemplateComponent config={activeTemplateConfig} tabId={activeTabId} key={activeTabId} />
+    ) : null;
   }
 
   return (
     <div className="explorer-container hyperspace-light" style={{ height: '100%' }}>
-      <HistoryProvider instanceId={config[0]?.id ?? 'default'}>
-        <SnackbarProvider>
-          <div className="w-full flex gap-8 h-full">
-            <div className="flex-none" style={{ maxWidth: '350px', minWidth: '200px' }}>
-              <SideNav
-                config={config}
-                activeNavItem={activeNavItem}
-                activeSubNavItem={activeSubNavItem}
-                onNavItemClick={onNavItemClick}
-                onAddTab={onAddTab}
-              />
-            </div>
-            <div className="flex-1 flex flex-col h-full">
-              <TabBar
-                tabs={tabs}
-                activeTabId={activeTabId}
-                onTabClick={onTabClick}
-                onTabClose={onTabClose}
-                onNewTab={onNewTab}
-              />
-              <div className="flex-1 min-h-0">
-                <ErrorBoundary>{el}</ErrorBoundary>
+      <TabStateProvider>
+        <HistoryProvider instanceId={config[0]?.id ?? 'default'}>
+          <SnackbarProvider>
+            <div className="w-full flex gap-8 h-full">
+              <div className="flex-none" style={{ maxWidth: '350px', minWidth: '200px' }}>
+                <SideNav
+                  config={config}
+                  activeNavItem={activeNavItem}
+                  activeSubNavItem={activeSubNavItem}
+                  onNavItemClick={onNavItemClick}
+                  onAddTab={onAddTab}
+                />
+              </div>
+              <div className="flex-1 flex flex-col h-full">
+                <TabBar tabs={tabs} activeTabId={activeTabId} onTabClick={onTabClick} onTabClose={onTabClose} />
+                <div className="flex-1 min-h-0">
+                  <ErrorBoundary>{el}</ErrorBoundary>
+                </div>
               </div>
             </div>
-          </div>
-        </SnackbarProvider>
-      </HistoryProvider>
+          </SnackbarProvider>
+        </HistoryProvider>
+      </TabStateProvider>
     </div>
   );
+};
+
+export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
+  if (!config || config.length === 0) {
+    return (
+      <div className="explorer-container hyperspace-light flex items-center justify-center" style={{ height: '100%' }}>
+        <Typography variant="body-16" className="spr-text-03">
+          No templates configured
+        </Typography>
+      </div>
+    );
+  }
+
+  return <APIPlaygroundView config={config} />;
 };

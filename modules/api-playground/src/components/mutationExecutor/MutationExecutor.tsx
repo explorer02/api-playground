@@ -15,6 +15,9 @@ import { Button } from '@/shared/button';
 import { useMutationExecutor } from './hooks/useMutationExecutor';
 import { useHistory } from '@/context/HistoryContext';
 
+//constants
+import { Template } from '@/constants/template';
+
 //types
 import { MutationExecutorConfig } from '@/types';
 import { HistoryEntry } from '../queryHistory/types';
@@ -22,18 +25,18 @@ import { HistoryEntry } from '../queryHistory/types';
 const QUERY_CONTAINER_CLASSNAME = 'flex-1 flex-grow-2';
 const VARIABLE_CONTAINER_CLASSNAME = 'flex-1';
 
-export const MutationExecutor = ({ config }: { config: MutationExecutorConfig }) => {
-  const { entries, addEntry, clearHistory } = useHistory();
+export const MutationExecutor = ({ config, tabId }: { config: MutationExecutorConfig; tabId: string }) => {
+  const { entries, addEntry, clearHistory } = useHistory(Template.MUTATION_EXECUTOR);
 
   const onExecutionComplete = useCallback(
     (data: { queryText: string; variables: string; result: string; responseTimeMs: number }) => {
-      addEntry({ ...data, templateId: config.id });
+      addEntry({ ...data, templateId: config.id, templateType: Template.MUTATION_EXECUTOR });
     },
     [addEntry, config.id]
   );
 
   const { onInputMount, onOutputMount, onVariableMount, onSubmit, loading, onMutationSelect, stats } =
-    useMutationExecutor({ config, onExecutionComplete });
+    useMutationExecutor({ config, tabId, onExecutionComplete });
 
   const onHistorySelect = useCallback(
     (entry: HistoryEntry) => {

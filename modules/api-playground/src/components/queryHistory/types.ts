@@ -6,4 +6,5 @@ export type HistoryEntry = {
   timestamp: number;
   responseTimeMs: number;
   templateId: string;
+  templateType: string;
 };

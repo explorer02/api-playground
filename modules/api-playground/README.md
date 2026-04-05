@@ -38,11 +38,10 @@ The following peer dependencies must be installed in your project:
 
 ### CSS Imports
 
-You must import the stylesheets explicitly, as they are not bundled into the JS output:
+> **Important:** You must import the stylesheet for the playground to render correctly. Without this import, components will appear unstyled.
 
 ```ts
-import '@explorer02/api-playground/styles.css';
-import '@explorer02/api-playground/root.css';
+import '@explorer02/api-playground/dist/index.css';
 ```
 
 ---
@@ -52,8 +51,7 @@ import '@explorer02/api-playground/root.css';
 ```tsx
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { APIPlayground, Template } from '@explorer02/api-playground';
-import '@explorer02/api-playground/styles.css';
-import '@explorer02/api-playground/root.css';
+import '@explorer02/api-playground/dist/index.css';
 
 const client = new ApolloClient({
   uri: 'https://your-graphql-endpoint.com/graphql',
@@ -127,6 +125,8 @@ You can also display a raw string with a specific language for syntax highlighti
 }
 ```
 
+![STATIC_DATA template](./docs/screenshots/static-data.png)
+
 ---
 
 ### CACHE_VIEWER
@@ -155,6 +155,8 @@ type CacheViewerConfig = {
   client: apolloClient,
 }
 ```
+
+![CACHE_VIEWER template](./docs/screenshots/cache-viewer.png)
 
 ---
 
@@ -193,6 +195,8 @@ type QueryExecutorConfig = {
   },
 }
 ```
+
+![QUERY_EXECUTOR template](./docs/screenshots/query-executor.png)
 
 ---
 
@@ -235,6 +239,8 @@ type MutationExecutorConfig = {
   ],
 }
 ```
+
+![MUTATION_EXECUTOR template](./docs/screenshots/mutation-executor.png)
 
 ---
 
@@ -295,6 +301,8 @@ const fieldConfigMap = new FieldConfigMapBuilder()
 }
 ```
 
+![CUSTOM_QUERY template](./docs/screenshots/custom-query.png)
+
 ---
 
 ### CUSTOM_MUTATION
@@ -334,6 +342,8 @@ type CustomMutationConfig = {
   getVariables: (obj) => ({ page: Number(obj.page) }),
 }
 ```
+
+![CUSTOM_MUTATION template](./docs/screenshots/custom-mutation.png)
 
 ---
 
@@ -395,6 +405,8 @@ type FetchAndMutateConfig = {
 }
 ```
 
+![FETCH_AND_MUTATE template](./docs/screenshots/fetch-and-mutate.png)
+
 ---
 
 ### NESTED_TEMPLATE
@@ -446,6 +458,8 @@ type NestedTemplateConfig = {
 }
 ```
 
+![NESTED_TEMPLATE template](./docs/screenshots/nested-template.png)
+
 ---
 
 ### CUSTOM
@@ -481,6 +495,8 @@ const AboutPanel = () => (
 }
 ```
 
+![CUSTOM template](./docs/screenshots/custom.png)
+
 ---
 
 ### SCHEMA_VIEWER
@@ -508,6 +524,8 @@ type SchemaViewerConfig = {
   client: apolloClient,
 }
 ```
+
+![SCHEMA_VIEWER template](./docs/screenshots/schema-viewer.png)
 
 ---
 
@@ -541,6 +559,8 @@ type RestApiConfig = {
   defaultHeaders: { 'Content-Type': 'application/json' },
 }
 ```
+
+![REST_API template](./docs/screenshots/rest-api.png)
 
 ---
 

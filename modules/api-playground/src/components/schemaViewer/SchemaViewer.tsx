@@ -42,14 +42,163 @@ const INTROSPECTION_QUERY = gql`
               ofType {
                 name
                 kind
+                ofType {
+                  name
+                  kind
+                  ofType {
+                    name
+                    kind
+                    ofType {
+                      name
+                      kind
+                      ofType {
+                        name
+                        kind
+                      }
+                    }
+                  }
+                }
               }
             }
           }
           args {
             name
+            description
+            defaultValue
             type {
               name
               kind
+              ofType {
+                name
+                kind
+                ofType {
+                  name
+                  kind
+                  ofType {
+                    name
+                    kind
+                    ofType {
+                      name
+                      kind
+                      ofType {
+                        name
+                        kind
+                        ofType {
+                          name
+                          kind
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        inputFields {
+          name
+          description
+          defaultValue
+          type {
+            name
+            kind
+            ofType {
+              name
+              kind
+              ofType {
+                name
+                kind
+                ofType {
+                  name
+                  kind
+                  ofType {
+                    name
+                    kind
+                    ofType {
+                      name
+                      kind
+                      ofType {
+                        name
+                        kind
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        interfaces {
+          name
+          kind
+          ofType {
+            name
+            kind
+            ofType {
+              name
+              kind
+              ofType {
+                name
+                kind
+                ofType {
+                  name
+                  kind
+                  ofType {
+                    name
+                    kind
+                    ofType {
+                      name
+                      kind
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        enumValues {
+          name
+          description
+        }
+        possibleTypes {
+          name
+          kind
+        }
+      }
+      directives {
+        name
+        description
+        locations
+        args {
+          name
+          description
+          defaultValue
+          type {
+            name
+            kind
+            ofType {
+              name
+              kind
+              ofType {
+                name
+                kind
+                ofType {
+                  name
+                  kind
+                  ofType {
+                    name
+                    kind
+                    ofType {
+                      name
+                      kind
+                      ofType {
+                        name
+                        kind
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -59,7 +208,6 @@ const INTROSPECTION_QUERY = gql`
 `;
 
 export const SchemaViewer = ({ config }: { config: SchemaViewerConfig }): JSX.Element => {
-  const [data, setData] = useState<string>('');
   const [loading, setLoading] = useState(true);
 
   const { editorRef, onMount } = useMonacoMount();
@@ -69,11 +217,9 @@ export const SchemaViewer = ({ config }: { config: SchemaViewerConfig }): JSX.El
     try {
       const result = await config.client.query({ query: INTROSPECTION_QUERY });
       const formatted = prettifyJSON(result.data);
-      setData(formatted);
       editorRef.current?.setValue(formatted);
     } catch (err: unknown) {
       const errMsg = err instanceof Error ? err.message : 'Failed to fetch schema';
-      setData(errMsg);
       editorRef.current?.setValue(errMsg);
     } finally {
       setLoading(false);
