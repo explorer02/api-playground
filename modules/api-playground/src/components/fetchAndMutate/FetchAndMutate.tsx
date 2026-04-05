@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 //components
 import { Form } from '../form';
 import { Snippet } from '../snippet';
+import { ExecutionStats } from '../executionStats';
 
 //hooks
 import { useFetchAndMutate } from './hooks/useFetchAndMutate';
@@ -26,6 +27,9 @@ export const FetchAndMutate = ({ config }: { config: FetchAndMutateConfig }) => 
   const {
     fetching,
     mutating,
+
+    fetchStats,
+    mutateStats,
 
     queryActions,
     onQueryActionClick,
@@ -60,21 +64,27 @@ export const FetchAndMutate = ({ config }: { config: FetchAndMutateConfig }) => 
           loading={fetching}
         />
       </div>
-      <Snippet
-        title={queryOutput?.title ?? 'Output'}
-        className={SNIPPET_CLASSNAME}
-        editorProps={queryOutputEditorProps}
-        loading={fetching}
-        actions={queryActions}
-        errors={queryResponseErrors}
-        onActionClick={onQueryActionClick}
-      />
-      <Snippet
-        editorProps={mutationOutputEditorProps}
-        title={mutationOutput?.title ?? 'Response'}
-        className={SNIPPET_CLASSNAME}
-        loading={mutating}
-      />
+      <div className={`${SNIPPET_CLASSNAME} relative`}>
+        <Snippet
+          title={queryOutput?.title ?? 'Output'}
+          className="h-full"
+          editorProps={queryOutputEditorProps}
+          loading={fetching}
+          actions={queryActions}
+          errors={queryResponseErrors}
+          onActionClick={onQueryActionClick}
+        />
+        {fetchStats && <ExecutionStats stats={fetchStats} />}
+      </div>
+      <div className={`${SNIPPET_CLASSNAME} relative`}>
+        <Snippet
+          editorProps={mutationOutputEditorProps}
+          title={mutationOutput?.title ?? 'Response'}
+          className="h-full"
+          loading={mutating}
+        />
+        {mutateStats && <ExecutionStats stats={mutateStats} />}
+      </div>
     </div>
   );
 };

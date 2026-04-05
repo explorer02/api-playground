@@ -18,6 +18,7 @@ import { FormValues } from '@/components/form/types';
 import { Action } from '@/components/snippet/types';
 import { MonacoEditorType } from '@/monaco';
 import { OnFormAction } from '@/components/form/actionType';
+import { ExecutionStatsData } from '@/components/executionStats/types';
 
 type Params = {
   config: FetchAndMutateConfig;
@@ -29,6 +30,9 @@ type Params = {
 type ReturnType = {
   fetching: boolean;
   mutating: boolean;
+
+  fetchStats: ExecutionStatsData | null;
+  mutateStats: ExecutionStatsData | null;
 
   queryActions: Action[];
   onQueryActionClick: (action: string) => void;
@@ -47,6 +51,8 @@ export const useFetchAndMutate = ({ config, mutationOutputEditorRef, queryOutput
   const [fetching, setFetching] = useState(false);
   const [isQueryExecuted, setIsQueryExecuted] = useState(false);
   const [mutating, setMutating] = useState(false);
+  const [fetchStats, setFetchStats] = useState<ExecutionStatsData | null>(null);
+  const [mutateStats, setMutateStats] = useState<ExecutionStatsData | null>(null);
 
   const { errors: queryResponseErrors, handleChange: handleQueryResponseChange } = useValidateJSON();
 
@@ -61,9 +67,16 @@ export const useFetchAndMutate = ({ config, mutationOutputEditorRef, queryOutput
     async (vals: FormValues) => {
       const variables = getQueryVariables(vals);
       setFetching(true);
+      setFetchStats(null);
+      const startTime = performance.now();
       try {
         const { data, error } = await client.query({ query, variables, fetchPolicy: 'network-only' });
-        queryOutputEditorRef.current?.setValue(prettifyJSON(data) ?? error?.message);
+        const result = prettifyJSON(data) ?? error?.message ?? '';
+        queryOutputEditorRef.current?.setValue(result);
+        setFetchStats({
+          responseTimeMs: Math.round(performance.now() - startTime),
+          payloadSizeBytes: new Blob([result]).size,
+        });
         if (data) {
           setIsQueryExecuted(true);
         }
@@ -94,8 +107,15 @@ export const useFetchAndMutate = ({ config, mutationOutputEditorRef, queryOutput
               latestFormValuesRef.current
             );
             setMutating(true);
+            setMutateStats(null);
+            const mutStart = performance.now();
             const { data, errors } = await client.mutate({ mutation, variables: mutationVariables });
-            mutationOutputEditorRef.current?.setValue(prettifyJSON(data) ?? errors?.[0]?.message);
+            const mutResult = prettifyJSON(data) ?? errors?.[0]?.message ?? '';
+            mutationOutputEditorRef.current?.setValue(mutResult);
+            setMutateStats({
+              responseTimeMs: Math.round(performance.now() - mutStart),
+              payloadSizeBytes: new Blob([mutResult]).size,
+            });
           } catch (e: unknown) {
             mutationOutputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
           }
@@ -124,6 +144,9 @@ export const useFetchAndMutate = ({ config, mutationOutputEditorRef, queryOutput
   return {
     fetching,
     mutating,
+
+    fetchStats,
+    mutateStats,
 
     queryActions,
     onQueryActionClick,

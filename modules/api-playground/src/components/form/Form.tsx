@@ -1,5 +1,5 @@
 // lib
-import { ComponentType, memo, useCallback } from 'react';
+import { ComponentType, KeyboardEvent, memo, useCallback } from 'react';
 
 // components
 import { FormFieldType } from '@/constants/formFieldTypes';
@@ -66,8 +66,18 @@ const Form = ({ layout, fieldConfigMap, values, errors, onAction, loading }: For
     onAction({ type: ActionType.ON_SUBMIT });
   }, [onAction]);
 
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+        e.preventDefault();
+        onSubmit();
+      }
+    },
+    [onSubmit]
+  );
+
   return (
-    <div className="h-full">
+    <div className="h-full" onKeyDown={onKeyDown}>
       <MemoizedArranger
         layout={layout}
         fieldConfigMap={fieldConfigMap}

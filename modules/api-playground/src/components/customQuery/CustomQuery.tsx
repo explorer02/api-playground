@@ -1,5 +1,6 @@
 //components
 import { OutputEditor } from './components/OutputEditor';
+import { ExecutionStats } from '../executionStats';
 import { Form, useForm } from '../form';
 
 //hooks
@@ -11,7 +12,7 @@ import { CustomQueryConfig } from '@/types';
 export const CustomQuery = ({ config }: { config: CustomQueryConfig }) => {
   const { fieldConfigMap, formLayout, validator, initialValues, outputConfig } = config;
 
-  const { loading, onSubmit, onOutputEditorMount } = useCustomQuery({ config });
+  const { loading, stats, onSubmit, onOutputEditorMount } = useCustomQuery({ config });
 
   const { onAction, values, errors } = useForm({ fieldConfigMap, validator, initialValues, onSubmit });
 
@@ -27,13 +28,16 @@ export const CustomQuery = ({ config }: { config: CustomQueryConfig }) => {
           loading={loading}
         />
       </div>
-      <OutputEditor
-        title="Output"
-        readOnly={outputConfig?.readOnly ?? true}
-        className="flex-1"
-        onMount={onOutputEditorMount}
-        loading={loading}
-      />
+      <div className="flex-1 relative">
+        <OutputEditor
+          title="Output"
+          readOnly={outputConfig?.readOnly ?? true}
+          className="h-full"
+          onMount={onOutputEditorMount}
+          loading={loading}
+        />
+        {stats && <ExecutionStats stats={stats} />}
+      </div>
     </div>
   );
 };

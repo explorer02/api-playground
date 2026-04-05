@@ -6,6 +6,7 @@ import {
   Template,
   TemplateConfig,
   CustomTemplateConfig,
+  SchemaViewerConfig,
 } from '@/modules/api-playground';
 import { CLIENT } from './constants';
 
@@ -312,4 +313,22 @@ type Query {
     title: 'About',
     Component: AboutPanel,
   } as CustomTemplateConfig,
+
+  // 11. SCHEMA_VIEWER - introspection schema display
+  {
+    id: 'schema_viewer',
+    type: Template.SCHEMA_VIEWER,
+    title: 'Schema',
+    client: CLIENT,
+  } as SchemaViewerConfig,
+
+  // 12. REST_API - REST endpoint testing
+  {
+    id: 'rest_api',
+    type: Template.REST_API,
+    title: 'REST API',
+    defaultUrl: 'https://jsonplaceholder.typicode.com/posts/1',
+    defaultMethod: 'GET',
+    defaultHeaders: { 'Content-Type': 'application/json' },
+  },
 ];

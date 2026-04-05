@@ -114,6 +114,19 @@ export type CustomTemplateConfig = CommonConfig & {
   Component: ComponentType;
 };
 
+export type SchemaViewerConfig = CommonConfig & {
+  type: Template.SCHEMA_VIEWER;
+  client: ApolloClient<NormalizedCacheObject>;
+};
+
+export type RestApiConfig = CommonConfig & {
+  type: Template.REST_API;
+  defaultUrl?: string;
+  defaultMethod?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+  defaultHeaders?: Record<string, string>;
+  defaultBody?: string;
+};
+
 type PlainTemplates =
   | StaticDataConfig
   | CacheViewerConfig
@@ -122,7 +135,9 @@ type PlainTemplates =
   | CustomQueryConfig
   | CustomMutationConfig
   | FetchAndMutateConfig
-  | CustomTemplateConfig;
+  | CustomTemplateConfig
+  | SchemaViewerConfig
+  | RestApiConfig;
 
 export type NestedTemplateConfig = CommonConfig & {
   type: Template.NESTED_TEMPLATE;

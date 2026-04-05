@@ -16,6 +16,8 @@ export type {
   CustomMutationConfig,
   FetchAndMutateConfig,
   CustomTemplateConfig,
+  SchemaViewerConfig,
+  RestApiConfig,
 } from './types';
 
 export { FieldConfigMapBuilder } from './utils/FieldConfigMapBuilder';

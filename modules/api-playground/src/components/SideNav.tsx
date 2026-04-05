@@ -4,7 +4,7 @@ import { KeyboardEvent, memo, useCallback, useState } from 'react';
 // components
 import { Typography } from '@/shared/typography';
 import { BsArrowReturnRight } from 'react-icons/bs';
-import { VscChevronDown } from 'react-icons/vsc';
+import { VscChevronDown, VscAdd } from 'react-icons/vsc';
 
 //constants
 import { Template } from '@/constants/template';
@@ -17,6 +17,7 @@ type Props = {
   activeNavItem: string;
   activeSubNavItem: string | undefined;
   onNavItemClick: (id: string, subId?: string) => void;
+  onAddTab?: (id: string, subId?: string) => void;
 };
 
 const handleKeyDown = (e: KeyboardEvent, action: () => void) => {
@@ -60,9 +61,10 @@ const MenuItem = ({
   activeNavItem,
   activeSubNavItem,
   onNavItemClick,
+  onAddTab,
 }: {
   config: TemplateConfig;
-} & Pick<Props, 'activeNavItem' | 'activeSubNavItem' | 'onNavItemClick'>) => {
+} & Pick<Props, 'activeNavItem' | 'activeSubNavItem' | 'onNavItemClick' | 'onAddTab'>) => {
   const [open, setOpen] = useState(true);
 
   const isSelected = config.id === activeNavItem;
@@ -100,6 +102,16 @@ const MenuItem = ({
         <Typography variant="body-14" className={`flex-1 ${isSelected ? 'spr-text-05' : ''}`}>
           {config.title}
         </Typography>
+        {onAddTab && !isNestedTemplate ? (
+          <VscAdd
+            size={14}
+            className="spr-text-03 cursor-pointer"
+            onClick={(e: React.MouseEvent) => {
+              e.stopPropagation();
+              onAddTab(config.id);
+            }}
+          />
+        ) : null}
         {isNestedTemplate ? (
           <VscChevronDown
             size={16}
@@ -133,7 +145,7 @@ const MenuItem = ({
   );
 };
 
-const SideNav = ({ config, activeNavItem, activeSubNavItem, onNavItemClick }: Props): JSX.Element => {
+const SideNav = ({ config, activeNavItem, activeSubNavItem, onNavItemClick, onAddTab }: Props): JSX.Element => {
   return (
     <nav aria-label="API Playground navigation">
       <ul
@@ -148,6 +160,7 @@ const SideNav = ({ config, activeNavItem, activeSubNavItem, onNavItemClick }: Pr
               activeSubNavItem={activeSubNavItem}
               config={item}
               onNavItemClick={onNavItemClick}
+              onAddTab={onAddTab}
             />
           );
         })}

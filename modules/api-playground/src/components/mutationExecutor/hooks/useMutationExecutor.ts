@@ -12,9 +12,18 @@ import { prettifyJSON } from '@/utils/prettifyJSON';
 //types
 import { MutationExecutorConfig } from '@/types';
 import { OnMutationSelect } from '../types';
+import { ExecutionStatsData } from '@/components/executionStats/types';
+
+type ExecutionResult = {
+  queryText: string;
+  variables: string;
+  result: string;
+  responseTimeMs: number;
+};
 
 type Params = {
   config: MutationExecutorConfig;
+  onExecutionComplete?: (data: ExecutionResult) => void;
 };
 
 type ReturnType = {
@@ -25,12 +34,14 @@ type ReturnType = {
   onSubmit: () => void;
 
   loading: boolean;
+  stats: ExecutionStatsData | null;
 
   onMutationSelect: OnMutationSelect;
 };
 
-export const useMutationExecutor = ({ config }: Params): ReturnType => {
+export const useMutationExecutor = ({ config, onExecutionComplete }: Params): ReturnType => {
   const [loading, setLoading] = useState(false);
+  const [stats, setStats] = useState<ExecutionStatsData | null>(null);
 
   const { client } = config;
 
@@ -39,18 +50,26 @@ export const useMutationExecutor = ({ config }: Params): ReturnType => {
   const { editorRef: outputEditorRef, onMount: onOutputMount } = useMonacoMount();
 
   const onSubmit = useCallback(async () => {
-    const query = parse(inputEditorRef.current?.getValue() ?? '');
-    const variables = JSON.parse(variableEditorRef.current?.getValue() ?? '');
+    const queryText = inputEditorRef.current?.getValue() ?? '';
+    const variablesText = variableEditorRef.current?.getValue() ?? '';
+    const query = parse(queryText);
+    const variables = JSON.parse(variablesText);
 
     setLoading(true);
+    setStats(null);
+    const startTime = performance.now();
     try {
       const response = await client.query({ query, variables, fetchPolicy: 'network-only' });
-      outputEditorRef.current?.setValue(prettifyJSON(response.data) ?? response.error?.message);
+      const result = prettifyJSON(response.data) ?? response.error?.message ?? '';
+      const elapsed = Math.round(performance.now() - startTime);
+      outputEditorRef.current?.setValue(result);
+      setStats({ responseTimeMs: elapsed, payloadSizeBytes: new Blob([result]).size });
+      onExecutionComplete?.({ queryText, variables: variablesText, result, responseTimeMs: elapsed });
     } catch (e: unknown) {
       outputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
     }
     setLoading(false);
-  }, [client, inputEditorRef, outputEditorRef, variableEditorRef]);
+  }, [client, inputEditorRef, outputEditorRef, variableEditorRef, onExecutionComplete]);
 
   const onMutationSelect = useCallback<OnMutationSelect>(
     ({ mutation, output, variables }) => {
@@ -71,5 +90,6 @@ export const useMutationExecutor = ({ config }: Params): ReturnType => {
     loading,
 
     onMutationSelect,
+    stats,
   };
 };

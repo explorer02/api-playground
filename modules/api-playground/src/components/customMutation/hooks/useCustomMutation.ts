@@ -11,6 +11,7 @@ import { prettifyJSON } from '@/utils/prettifyJSON';
 //types
 import { CustomMutationConfig } from '@/types';
 import { FormValues } from '@/components/form/types';
+import { ExecutionStatsData } from '@/components/executionStats/types';
 
 type Params = {
   config: CustomMutationConfig;
@@ -18,12 +19,14 @@ type Params = {
 
 type ReturnType = {
   loading: boolean;
+  stats: ExecutionStatsData | null;
   onSubmit: (vals: FormValues) => void;
   onOutputEditorMount: OnMount;
 };
 
 export const useCustomMutation = ({ config }: Params): ReturnType => {
   const [loading, setLoading] = useState(false);
+  const [stats, setStats] = useState<ExecutionStatsData | null>(null);
 
   const { editorRef: outputEditorRef, onMount: onOutputEditorMount } = useMonacoMount();
 
@@ -33,9 +36,16 @@ export const useCustomMutation = ({ config }: Params): ReturnType => {
     async (vals: FormValues) => {
       const variables = getVariables(vals);
       setLoading(true);
+      setStats(null);
+      const startTime = performance.now();
       try {
         const { data, errors } = await client.mutate({ mutation, variables });
-        outputEditorRef.current?.setValue(prettifyJSON(data) ?? errors?.[0]?.message);
+        const result = prettifyJSON(data) ?? errors?.[0]?.message ?? '';
+        outputEditorRef.current?.setValue(result);
+        setStats({
+          responseTimeMs: Math.round(performance.now() - startTime),
+          payloadSizeBytes: new Blob([result]).size,
+        });
       } catch (e: unknown) {
         outputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
       }
@@ -44,5 +54,5 @@ export const useCustomMutation = ({ config }: Params): ReturnType => {
     [client, getVariables, mutation, outputEditorRef]
   );
 
-  return { loading, onSubmit, onOutputEditorMount };
+  return { loading, stats, onSubmit, onOutputEditorMount };
 };
