@@ -1,5 +1,5 @@
 export const Loader = () => (
-  <div className="explorer-loader">
+  <div className="expr-loader">
     <div></div>
     <div></div>
     <div></div>

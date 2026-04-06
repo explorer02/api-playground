@@ -1,25 +1,25 @@
-.explorer-input {
+.expr-input {
   width: 100%;
 
   padding: 10px 11px;
   font-size: 14px;
   line-height: normal;
 
-  border: 1px solid var(--spr-border-03);
+  border: 1px solid var(--expr-border-03);
   border-width: 1px;
   border-radius: 8px;
   outline: none;
 
   &:hover {
-    border-color: var(--spr-border-06);
+    border-color: var(--expr-border-06);
   }
   &:focus,
   &.active {
-    border-color: var(--spr-interactive-01);
+    border-color: var(--expr-interactive-01);
   }
 
   &.error {
-    border-color: var(--spr-support-error);
+    border-color: var(--expr-support-error);
   }
 
   &.size-xs {

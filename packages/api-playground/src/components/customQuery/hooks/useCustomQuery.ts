@@ -1,12 +1,10 @@
 //lib
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import { OnMount } from '@monaco-editor/react';
 
 //hooks
 import { useMonacoMount } from '~/hooks/useMonacoMount';
-
-//utils
-import { prettifyJSON } from '~/utils/prettifyJSON';
+import { useGraphQLExecution } from '~/hooks/useGraphQLExecution';
 
 //types
 import { CustomQueryConfig } from '~/types';
@@ -25,33 +23,25 @@ type ReturnType = {
 };
 
 export const useCustomQuery = ({ config }: Params): ReturnType => {
-  const [loading, setLoading] = useState(false);
-  const [stats, setStats] = useState<ExecutionStatsData | null>(null);
-
   const { editorRef: outputEditorRef, onMount: onOutputEditorMount } = useMonacoMount();
 
   const { getVariables, query, client } = config;
 
-  const onSubmit = useCallback(
-    async (vals: FormValues) => {
-      const variables = getVariables(vals);
-      setLoading(true);
-      setStats(null);
-      const startTime = performance.now();
-      try {
-        const { data, error } = await client.query({ query, variables, fetchPolicy: 'network-only' });
-        const result = prettifyJSON(data) ?? error?.message ?? '';
-        outputEditorRef.current?.setValue(result);
-        setStats({
-          responseTimeMs: Math.round(performance.now() - startTime),
-          payloadSizeBytes: new Blob([result]).size,
-        });
-      } catch (e: unknown) {
-        outputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
-      }
-      setLoading(false);
+  const executeFn = useCallback(
+    async (variables: any) => {
+      const { data, error } = await client.query({ query, variables, fetchPolicy: 'network-only' });
+      return { data, errorMessage: error?.message };
     },
-    [client, getVariables, outputEditorRef, query]
+    [client, query]
+  );
+
+  const { loading, stats, execute } = useGraphQLExecution({ executeFn, outputEditorRef });
+
+  const onSubmit = useCallback(
+    (vals: FormValues) => {
+      execute(getVariables(vals));
+    },
+    [execute, getVariables]
   );
 
   return { loading, stats, onSubmit, onOutputEditorMount };

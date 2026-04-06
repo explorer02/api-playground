@@ -31,8 +31,8 @@ const JSONInput = ({ id, label, onAction, error, readOnly, required, value }: Fo
   return (
     <FormControl error={error} onBlur={onBlur} required={required} label={label}>
       <div
-        className="py-2 rounded-8 spr-ui-01 border-1 border-solid"
-        style={{ borderColor: validationErrors ? 'var(--spr-support-error)' : 'var(--spr-border-03)' }}
+        className="py-2 rounded-8 expr-ui-01 border-1 border-solid"
+        style={{ borderColor: validationErrors ? 'var(--expr-support-error)' : 'var(--expr-border-03)' }}
       >
         <MonacoEditor
           language={Language.JSON}

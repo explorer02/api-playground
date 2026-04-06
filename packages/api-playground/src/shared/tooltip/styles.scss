@@ -1,4 +1,4 @@
-.explorer-tooltip-container {
+.expr-tooltip-container {
   position: fixed;
   z-index: 1000;
 
@@ -8,12 +8,12 @@
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     transform: translateX(-50%);
-    border-bottom: 5px solid var(--spr-tooltip-border);
+    border-bottom: 5px solid var(--expr-tooltip-border);
   }
   .tooltip-content {
     transform: translateX(-50%);
-    background-color: var(--spr-tooltip-01);
-    color: var(--spr-text-06);
+    background-color: var(--expr-tooltip-01);
+    color: var(--expr-text-06);
     padding: 8px 12px;
     border-radius: 4px;
     font-size: 13px;

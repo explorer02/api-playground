@@ -14,34 +14,14 @@ type Props = {
 };
 
 const SuccessIcon = () => (
-  <div
-    style={{
-      width: '14px',
-      height: '14px',
-      borderRadius: '100%',
-      background: '#6AC96E',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 'none',
-    }}
-  >
+  <div className="expr-snackbar__icon expr-snackbar__icon--success">
     <VscCheck size={10} strokeWidth={0.7} />
   </div>
 );
 
 const ErrorIcon = () => (
-  <div
-    style={{
-      width: '14px',
-      height: '14px',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flex: 'none',
-    }}
-  >
-    <AiFillWarning size={12} strokeWidth={0.7} style={{ fill: '#C70F5C' }} />
+  <div className="expr-snackbar__icon expr-snackbar__icon--error">
+    <AiFillWarning size={12} strokeWidth={0.7} />
   </div>
 );
 
@@ -55,29 +35,9 @@ export const Snackbar = ({ message, intent }: Props) => {
 
   return createPortal(
     message && intent ? (
-      <div
-        style={{
-          position: 'fixed',
-          zIndex: 1000000,
-          bottom: '20px',
-          left: '50%',
-
-          width: 'fit-content',
-          transform: 'translateX(-50%)',
-
-          padding: '12px 16px',
-          borderRadius: '8px',
-
-          background: 'rgb(33, 33, 35)',
-
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: '4px',
-        }}
-      >
+      <div className="expr-snackbar">
         <Icon />
-        <div style={{ color: 'white', fontSize: '13px' }}>{message}</div>
+        <div className="expr-snackbar__message">{message}</div>
       </div>
     ) : null,
     document.body

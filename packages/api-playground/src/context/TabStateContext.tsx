@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useCallback, useContext, useRef } from 'react';
 
 import { ExecutionStatsData } from '~/components/executionStats/types';
+import { Header, RestApiStats } from '~/components/restApi/types';
 
 export type QueryExecutorTabState = {
   type: 'QUERY_EXECUTOR';
@@ -22,10 +23,10 @@ export type RestApiTabState = {
   type: 'REST_API';
   url: string;
   method: string;
-  headers: { key: string; value: string }[];
+  headers: Header[];
   body: string;
   response: string;
-  stats: { duration: number; status: number; statusText: string } | null;
+  stats: RestApiStats | null;
 };
 
 export type TabState = QueryExecutorTabState | MutationExecutorTabState | RestApiTabState;

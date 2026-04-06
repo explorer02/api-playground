@@ -26,7 +26,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     return (
       <input
         {...rest}
-        className={`explorer-input ${error ? 'error' : ''} ${SIZE_VS_CLASSNAME[size]} ${isActive ? 'active' : ''} ${
+        className={`expr-input ${error ? 'error' : ''} ${SIZE_VS_CLASSNAME[size]} ${isActive ? 'active' : ''} ${
           className ? className : ''
         }`}
         onWheel={onWheel}

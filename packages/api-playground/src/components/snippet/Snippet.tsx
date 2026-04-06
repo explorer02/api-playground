@@ -80,11 +80,11 @@ const Snippet = ({
 
   return (
     <div
-      className={`h-full w-full flex flex-col border-solid border-1 rounded-8 spr-ui-01 ${
-        errors ? 'border-error' : 'spr-border-03'
+      className={`h-full w-full flex flex-col border-solid border-1 rounded-8 expr-ui-01 ${
+        errors ? 'border-error' : 'expr-border-03'
       } ${className ?? ''}`}
     >
-      <div className="flex-none flex px-3 py-2 gap-2 items-center border-0 border-b-1 border-solid spr-border-03 ">
+      <div className="flex-none flex px-3 py-2 gap-2 items-center border-0 border-b-1 border-solid expr-border-03 ">
         <Typography variant="h5" className="flex-1 ml-1">
           {title}
         </Typography>

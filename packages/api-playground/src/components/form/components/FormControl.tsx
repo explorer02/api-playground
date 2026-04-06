@@ -15,11 +15,11 @@ export const FormControl = ({ onBlur, error, label, children, required }: Props)
       {label ? (
         <div className="flex items-center gap-1 mb-1">
           <Typography>{label} </Typography>
-          {required ? <div className="h-1 w-1 spr-support-error rounded-full" /> : null}
+          {required ? <div className="h-1 w-1 expr-support-error rounded-full" /> : null}
         </div>
       ) : null}
       {children}
-      {error ? <Typography className="spr-support-error-text">{error}</Typography> : null}
+      {error ? <Typography className="expr-support-error-text">{error}</Typography> : null}
     </div>
   );
 };

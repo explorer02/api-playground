@@ -8,100 +8,100 @@
  */
 
 /*@tailwind base;*/
-.explorer-container {
+.expr-container {
   &.hyperspace-light {
     color-scheme: light;
-    --spr-ui-01: #ffffff;
-    --spr-ui-02: #f8f8fa;
-    --spr-ui-03: #dbdbdb;
-    --spr-ui-04: #0e61f6;
-    --spr-ui-05: #eef0f1;
-    --spr-ui-06: #e6e6e9;
-    --spr-ui-focus: rgba(8, 40, 204, 0.07);
-    --spr-ui-focus-reverse: rgba(255, 255, 255, 0.2);
-    --spr-ui-hover: #f8f8fa;
-    --spr-ui-hover-reverse: rgba(255, 255, 255, 0.1);
-    --spr-support-error: #c70f5c;
-    --spr-support-error-highlight: rgba(199, 15, 92, 0.2);
-    --spr-support-success: #6ac96e;
-    --spr-support-success-highlight: rgba(106, 201, 110, 0.2);
-    --spr-support-warning: #f3bf24;
-    --spr-support-warning-highlight: rgba(243, 191, 36, 0.2);
-    --spr-clr-blue-highlight: #e8f0fe;
-    --spr-tag: #f2f2f4;
-    --spr-tag-01: #e6e6e9;
-    --spr-tag-02: rgba(8, 40, 204, 0.07);
-    --spr-field: #dbdbdb;
-    --spr-popup: #ffffff;
-    --spr-overlay: rgba(10, 10, 20, 0.9);
-    --spr-tooltip-01: #0a0a14;
-    --spr-highlight: rgba(255, 231, 173, 0.7);
-    --spr-favourite: #ff9f21;
-    --spr-notification: #de336a;
-    --spr-interactive-01: #0e61f6;
-    --spr-interactive-hover: #1858ce;
-    --spr-interactive-disable: rgba(255, 255, 255, 0.6);
-    --spr-interactive-02: #dbdbdb;
-    --spr-clr-blue: #2ea2fb;
-    --spr-clr-green: #33cc99;
-    --spr-clr-lavender: #7f36f6;
-    --spr-clr-orange: #f08c1a;
-    --spr-clr-pink: #ffa1be;
-    --spr-clr-red: #e1245e;
-    --spr-clr-sea: #16aad2;
-    --spr-clr-teal: #13c18d;
-    --spr-clr-yellow: #ecad00;
-    --spr-clr-grey: #d7d7dc;
-    --spr-interactive-focus: #132a86;
-    --spr-clr-purple: #8c43ff;
-    --spr-clr-lt-yellow: #ffd04f;
-    --spr-clr-darker-blue: #327afd;
-    --spr-secondary-yellow: #ffc312;
-    --spr-secondary-green: #a3cb38;
-    --spr-secondary-teal: #12cbc4;
-    --spr-secondary-lt-pink: #fda7df;
-    --spr-secondary-pink: #ed4c67;
-    --spr-secondary-maroon: #b53471;
-    --spr-secondary-orange: #f48749;
-    --spr-icon-01: #0a0a14;
-    --spr-icon-02: #646470;
-    --spr-icon-03: #818192;
-    --spr-icon-04: #0e61f6;
-    --spr-icon-05: #ffffff;
-    --spr-icon-06: rgba(255, 255, 255, 0.6);
-    --spr-icon-hover: #0a0a14;
-    --spr-icon-disable: #dbdbdb;
-    --spr-icon-hover-reverse: #ffffff;
-    --spr-icon-error: #c70f5c;
-    --spr-link: #0e61f6;
-    --spr-text-01: #0a0a14;
-    --spr-text-02: #434350;
-    --spr-text-03: #646470;
-    --spr-text-04: #0e61f6;
-    --spr-text-05: #ffffff;
-    --spr-text-06: #ffffff;
-    --spr-text-placeholder: #646470;
-    --spr-support-error-text: #c70f5c;
-    --spr-support-success-text: #6ac96e;
-    --spr-support-warning-text: #f3bf24;
-    --spr-hover: #0729a0;
-    --spr-focus-01: #0e61f6;
-    --spr-border-01: #eeeeee;
-    --spr-border-02: #e6e6e9;
-    --spr-border-03: #dbdbdb;
-    --spr-border-04: #818192;
-    --spr-border-05: #ffffff;
-    --spr-border-06: #0a0a14;
-    --spr-card-border: #ececef;
-    --spr-popup-border: #d7d7dc;
-    --spr-tooltip-border: #0a0a14;
-    --spr-focus-02: 1px solid #0e61f6;
-    --spr-shadow-01: 0 1px 4px 0 rgba(10, 10, 20, 0.15);
-    --spr-shadow-02: 0 2px 8px 0 rgba(10, 10, 20, 0.2);
-    --spr-shadow-03: -2px 9px 12px 0 rgba(10, 10, 20, 0.6);
-    --spr-shadow-04: -2px 5px 12px -4px rgba(10, 10, 20, 0.2);
-    --spr-shadow-05: 0px 3px 4px 0 rgba(0, 0, 0, 0.1);
-    --spr-shadow-06: 0px -3px 4px 0 rgba(0, 0, 0, 0.1);
+    --expr-ui-01: #ffffff;
+    --expr-ui-02: #f8f8fa;
+    --expr-ui-03: #dbdbdb;
+    --expr-ui-04: #0e61f6;
+    --expr-ui-05: #eef0f1;
+    --expr-ui-06: #e6e6e9;
+    --expr-ui-focus: rgba(8, 40, 204, 0.07);
+    --expr-ui-focus-reverse: rgba(255, 255, 255, 0.2);
+    --expr-ui-hover: #f8f8fa;
+    --expr-ui-hover-reverse: rgba(255, 255, 255, 0.1);
+    --expr-support-error: #c70f5c;
+    --expr-support-error-highlight: rgba(199, 15, 92, 0.2);
+    --expr-support-success: #6ac96e;
+    --expr-support-success-highlight: rgba(106, 201, 110, 0.2);
+    --expr-support-warning: #f3bf24;
+    --expr-support-warning-highlight: rgba(243, 191, 36, 0.2);
+    --expr-clr-blue-highlight: #e8f0fe;
+    --expr-tag: #f2f2f4;
+    --expr-tag-01: #e6e6e9;
+    --expr-tag-02: rgba(8, 40, 204, 0.07);
+    --expr-field: #dbdbdb;
+    --expr-popup: #ffffff;
+    --expr-overlay: rgba(10, 10, 20, 0.9);
+    --expr-tooltip-01: #0a0a14;
+    --expr-highlight: rgba(255, 231, 173, 0.7);
+    --expr-favourite: #ff9f21;
+    --expr-notification: #de336a;
+    --expr-interactive-01: #0e61f6;
+    --expr-interactive-hover: #1858ce;
+    --expr-interactive-disable: rgba(255, 255, 255, 0.6);
+    --expr-interactive-02: #dbdbdb;
+    --expr-clr-blue: #2ea2fb;
+    --expr-clr-green: #33cc99;
+    --expr-clr-lavender: #7f36f6;
+    --expr-clr-orange: #f08c1a;
+    --expr-clr-pink: #ffa1be;
+    --expr-clr-red: #e1245e;
+    --expr-clr-sea: #16aad2;
+    --expr-clr-teal: #13c18d;
+    --expr-clr-yellow: #ecad00;
+    --expr-clr-grey: #d7d7dc;
+    --expr-interactive-focus: #132a86;
+    --expr-clr-purple: #8c43ff;
+    --expr-clr-lt-yellow: #ffd04f;
+    --expr-clr-darker-blue: #327afd;
+    --expr-secondary-yellow: #ffc312;
+    --expr-secondary-green: #a3cb38;
+    --expr-secondary-teal: #12cbc4;
+    --expr-secondary-lt-pink: #fda7df;
+    --expr-secondary-pink: #ed4c67;
+    --expr-secondary-maroon: #b53471;
+    --expr-secondary-orange: #f48749;
+    --expr-icon-01: #0a0a14;
+    --expr-icon-02: #646470;
+    --expr-icon-03: #818192;
+    --expr-icon-04: #0e61f6;
+    --expr-icon-05: #ffffff;
+    --expr-icon-06: rgba(255, 255, 255, 0.6);
+    --expr-icon-hover: #0a0a14;
+    --expr-icon-disable: #dbdbdb;
+    --expr-icon-hover-reverse: #ffffff;
+    --expr-icon-error: #c70f5c;
+    --expr-link: #0e61f6;
+    --expr-text-01: #0a0a14;
+    --expr-text-02: #434350;
+    --expr-text-03: #646470;
+    --expr-text-04: #0e61f6;
+    --expr-text-05: #ffffff;
+    --expr-text-06: #ffffff;
+    --expr-text-placeholder: #646470;
+    --expr-support-error-text: #c70f5c;
+    --expr-support-success-text: #6ac96e;
+    --expr-support-warning-text: #f3bf24;
+    --expr-hover: #0729a0;
+    --expr-focus-01: #0e61f6;
+    --expr-border-01: #eeeeee;
+    --expr-border-02: #e6e6e9;
+    --expr-border-03: #dbdbdb;
+    --expr-border-04: #818192;
+    --expr-border-05: #ffffff;
+    --expr-border-06: #0a0a14;
+    --expr-card-border: #ececef;
+    --expr-popup-border: #d7d7dc;
+    --expr-tooltip-border: #0a0a14;
+    --expr-focus-02: 1px solid #0e61f6;
+    --expr-shadow-01: 0 1px 4px 0 rgba(10, 10, 20, 0.15);
+    --expr-shadow-02: 0 2px 8px 0 rgba(10, 10, 20, 0.2);
+    --expr-shadow-03: -2px 9px 12px 0 rgba(10, 10, 20, 0.6);
+    --expr-shadow-04: -2px 5px 12px -4px rgba(10, 10, 20, 0.2);
+    --expr-shadow-05: 0px 3px 4px 0 rgba(0, 0, 0, 0.1);
+    --expr-shadow-06: 0px -3px 4px 0 rgba(0, 0, 0, 0.1);
     --app-header: #0a0a14;
     --app-header-tab: rgba(255, 255, 255, 0.1);
     --app-header-tab-hover: rgba(255, 255, 255, 0.2);
@@ -135,97 +135,97 @@
   }
   &.hyperspace-dark {
     color-scheme: dark;
-    --spr-ui-01: #1c1c1f;
-    --spr-ui-02: #212123;
-    --spr-ui-03: #48484c;
-    --spr-ui-04: #4b8afc;
-    --spr-ui-05: #3a3a3e;
-    --spr-ui-06: #2c2c2f;
-    --spr-ui-focus: rgba(255, 255, 255, 0.12);
-    --spr-ui-focus-reverse: rgba(255, 255, 255, 0.2);
-    --spr-ui-hover: #212123;
-    --spr-ui-hover-reverse: rgba(255, 255, 255, 0.1);
-    --spr-support-error: #fa6274;
-    --spr-support-error-highlight: rgba(250, 98, 116, 0.3);
-    --spr-support-success: #6ac96e;
-    --spr-support-success-highlight: rgba(106, 201, 110, 0.3);
-    --spr-support-warning: #f3bf24;
-    --spr-support-warning-highlight: rgba(243, 191, 36, 0.3);
-    --spr-clr-blue-highlight: #2b3343;
-    --spr-tag: #48484c;
-    --spr-tag-01: #48484c;
-    --spr-tag-02: rgba(255, 255, 255, 0.1);
-    --spr-field: #48484c;
-    --spr-popup: #1c1c1f;
-    --spr-overlay: rgba(28, 28, 31, 0.85);
-    --spr-tooltip-01: #ffffff;
-    --spr-highlight: rgba(184, 144, 0, 0.6);
-    --spr-favourite: #ff9f21;
-    --spr-notification: #fa6274;
-    --spr-interactive-01: #4b8afc;
-    --spr-interactive-hover: #1858ce;
-    --spr-interactive-disable: rgba(72, 72, 76, 0.8);
-    --spr-interactive-02: #48484c;
-    --spr-clr-blue: #297ab9;
-    --spr-clr-green: #097a4b;
-    --spr-clr-lavender: #9c60ff;
-    --spr-clr-orange: #ff9f21;
-    --spr-clr-pink: #ffa1be;
-    --spr-clr-red: #db334f;
-    --spr-clr-sea: #00c8ff;
-    --spr-clr-teal: #02d999;
-    --spr-clr-yellow: #95700d;
-    --spr-clr-grey: #646469;
-    --spr-interactive-focus: #0a65a1;
-    --spr-clr-purple: #763bd2;
-    --spr-clr-lt-yellow: #846f35;
-    --spr-clr-darker-blue: #327afd;
-    --spr-secondary-yellow: #8d6f18;
-    --spr-secondary-green: #5f732c;
-    --spr-secondary-teal: #168380;
-    --spr-secondary-lt-pink: #956787;
-    --spr-secondary-pink: #b94055;
-    --spr-secondary-maroon: #962f61;
-    --spr-secondary-orange: #a8623a;
-    --spr-hover: #0aa2ff;
-    --spr-focus-01: #4b8afc;
-    --spr-focus-02: 1px solid #1c62fd;
-    --spr-border-01: #3a3a3e;
-    --spr-border-02: #48484c;
-    --spr-border-03: #646469;
-    --spr-border-04: #a0a0a8;
-    --spr-border-05: #2c2c2f;
-    --spr-border-06: #f1f1f1;
-    --spr-card-border: #3a3a3e;
-    --spr-popup-border: #1c1c1f;
-    --spr-tooltip-border: rgba(174, 174, 178, 0.2);
-    --spr-shadow-01: 0 1px 4px 0 rgba(10, 10, 20, 0.3);
-    --spr-shadow-02: 1px 1px 7px rgba(255, 255, 255, 0.1);
-    --spr-shadow-03: -2px 5px 12px 0 rgba(10, 10, 20, 0.8);
-    --spr-shadow-04: -2px 5px 12px -4px rgba(0, 0, 0, 1);
-    --spr-shadow-05: 0px 3px 4px 0 rgba(0, 0, 0, 0.2);
-    --spr-shadow-06: 0px -3px 4px 0 rgba(0, 0, 0, 0.2);
-    --spr-icon-01: #f1f1f1;
-    --spr-icon-02: #aeaeb2;
-    --spr-icon-03: #aeaeb2;
-    --spr-icon-04: #4b8afc;
-    --spr-icon-05: #1c1c1f;
-    --spr-icon-06: rgba(255, 255, 255, 0.6);
-    --spr-icon-hover: #ffffff;
-    --spr-icon-disable: #dbdbdb;
-    --spr-icon-hover-reverse: #ffffff;
-    --spr-icon-error: #fa6274;
-    --spr-link: #4b8afc;
-    --spr-text-01: #f1f1f1;
-    --spr-text-02: #aeaeb2;
-    --spr-text-03: #646469;
-    --spr-text-04: #4b8afc;
-    --spr-text-05: #f1f1f1;
-    --spr-text-06: #2c2c2f;
-    --spr-text-placeholder: #646469;
-    --spr-support-error-text: #fa6274;
-    --spr-support-success-text: #6ac96e;
-    --spr-support-warning-text: #f3bf24;
+    --expr-ui-01: #1c1c1f;
+    --expr-ui-02: #212123;
+    --expr-ui-03: #48484c;
+    --expr-ui-04: #4b8afc;
+    --expr-ui-05: #3a3a3e;
+    --expr-ui-06: #2c2c2f;
+    --expr-ui-focus: rgba(255, 255, 255, 0.12);
+    --expr-ui-focus-reverse: rgba(255, 255, 255, 0.2);
+    --expr-ui-hover: #212123;
+    --expr-ui-hover-reverse: rgba(255, 255, 255, 0.1);
+    --expr-support-error: #fa6274;
+    --expr-support-error-highlight: rgba(250, 98, 116, 0.3);
+    --expr-support-success: #6ac96e;
+    --expr-support-success-highlight: rgba(106, 201, 110, 0.3);
+    --expr-support-warning: #f3bf24;
+    --expr-support-warning-highlight: rgba(243, 191, 36, 0.3);
+    --expr-clr-blue-highlight: #2b3343;
+    --expr-tag: #48484c;
+    --expr-tag-01: #48484c;
+    --expr-tag-02: rgba(255, 255, 255, 0.1);
+    --expr-field: #48484c;
+    --expr-popup: #1c1c1f;
+    --expr-overlay: rgba(28, 28, 31, 0.85);
+    --expr-tooltip-01: #ffffff;
+    --expr-highlight: rgba(184, 144, 0, 0.6);
+    --expr-favourite: #ff9f21;
+    --expr-notification: #fa6274;
+    --expr-interactive-01: #4b8afc;
+    --expr-interactive-hover: #1858ce;
+    --expr-interactive-disable: rgba(72, 72, 76, 0.8);
+    --expr-interactive-02: #48484c;
+    --expr-clr-blue: #297ab9;
+    --expr-clr-green: #097a4b;
+    --expr-clr-lavender: #9c60ff;
+    --expr-clr-orange: #ff9f21;
+    --expr-clr-pink: #ffa1be;
+    --expr-clr-red: #db334f;
+    --expr-clr-sea: #00c8ff;
+    --expr-clr-teal: #02d999;
+    --expr-clr-yellow: #95700d;
+    --expr-clr-grey: #646469;
+    --expr-interactive-focus: #0a65a1;
+    --expr-clr-purple: #763bd2;
+    --expr-clr-lt-yellow: #846f35;
+    --expr-clr-darker-blue: #327afd;
+    --expr-secondary-yellow: #8d6f18;
+    --expr-secondary-green: #5f732c;
+    --expr-secondary-teal: #168380;
+    --expr-secondary-lt-pink: #956787;
+    --expr-secondary-pink: #b94055;
+    --expr-secondary-maroon: #962f61;
+    --expr-secondary-orange: #a8623a;
+    --expr-hover: #0aa2ff;
+    --expr-focus-01: #4b8afc;
+    --expr-focus-02: 1px solid #1c62fd;
+    --expr-border-01: #3a3a3e;
+    --expr-border-02: #48484c;
+    --expr-border-03: #646469;
+    --expr-border-04: #a0a0a8;
+    --expr-border-05: #2c2c2f;
+    --expr-border-06: #f1f1f1;
+    --expr-card-border: #3a3a3e;
+    --expr-popup-border: #1c1c1f;
+    --expr-tooltip-border: rgba(174, 174, 178, 0.2);
+    --expr-shadow-01: 0 1px 4px 0 rgba(10, 10, 20, 0.3);
+    --expr-shadow-02: 1px 1px 7px rgba(255, 255, 255, 0.1);
+    --expr-shadow-03: -2px 5px 12px 0 rgba(10, 10, 20, 0.8);
+    --expr-shadow-04: -2px 5px 12px -4px rgba(0, 0, 0, 1);
+    --expr-shadow-05: 0px 3px 4px 0 rgba(0, 0, 0, 0.2);
+    --expr-shadow-06: 0px -3px 4px 0 rgba(0, 0, 0, 0.2);
+    --expr-icon-01: #f1f1f1;
+    --expr-icon-02: #aeaeb2;
+    --expr-icon-03: #aeaeb2;
+    --expr-icon-04: #4b8afc;
+    --expr-icon-05: #1c1c1f;
+    --expr-icon-06: rgba(255, 255, 255, 0.6);
+    --expr-icon-hover: #ffffff;
+    --expr-icon-disable: #dbdbdb;
+    --expr-icon-hover-reverse: #ffffff;
+    --expr-icon-error: #fa6274;
+    --expr-link: #4b8afc;
+    --expr-text-01: #f1f1f1;
+    --expr-text-02: #aeaeb2;
+    --expr-text-03: #646469;
+    --expr-text-04: #4b8afc;
+    --expr-text-05: #f1f1f1;
+    --expr-text-06: #2c2c2f;
+    --expr-text-placeholder: #646469;
+    --expr-support-error-text: #fa6274;
+    --expr-support-success-text: #6ac96e;
+    --expr-support-warning-text: #f3bf24;
     --app-header: #000;
     --app-header-tab: rgba(44, 44, 47, 0.6);
     --app-header-tab-hover: rgba(44, 44, 47, 0.8);
@@ -3198,209 +3198,209 @@
     z-index: auto;
   }
 
-  .spr-ui-01 {
+  .expr-ui-01 {
     background-color: #ffffff;
-    background-color: var(--spr-ui-01, #ffffff);
+    background-color: var(--expr-ui-01, #ffffff);
   }
 
-  .spr-ui-02 {
+  .expr-ui-02 {
     background-color: #f8f8fa;
-    background-color: var(--spr-ui-02, #f8f8fa);
+    background-color: var(--expr-ui-02, #f8f8fa);
   }
 
-  .spr-ui-03 {
+  .expr-ui-03 {
     background-color: #f2f2f4;
-    background-color: var(--spr-ui-03, #f2f2f4);
+    background-color: var(--expr-ui-03, #f2f2f4);
   }
 
-  .spr-ui-04 {
+  .expr-ui-04 {
     background-color: #0828cc;
-    background-color: var(--spr-ui-04, #0828cc);
+    background-color: var(--expr-ui-04, #0828cc);
   }
 
-  .spr-ui-05 {
+  .expr-ui-05 {
     background-color: #f2f2f4;
-    background-color: var(--spr-ui-05, #f2f2f4);
+    background-color: var(--expr-ui-05, #f2f2f4);
   }
 
-  .spr-ui-06 {
+  .expr-ui-06 {
     background-color: #e6e6e9;
-    background-color: var(--spr-ui-06, #e6e6e9);
+    background-color: var(--expr-ui-06, #e6e6e9);
   }
 
-  .spr-ui-focus {
+  .expr-ui-focus {
     background-color: rgba(8, 40, 204, 0.07);
-    background-color: var(--spr-ui-focus, rgba(8, 40, 204, 0.07));
+    background-color: var(--expr-ui-focus, rgba(8, 40, 204, 0.07));
   }
 
-  .spr-ui-focus-reverse {
+  .expr-ui-focus-reverse {
     background-color: rgba(255, 255, 255, 0.2);
-    background-color: var(--spr-ui-focus-reverse, rgba(255, 255, 255, 0.2));
+    background-color: var(--expr-ui-focus-reverse, rgba(255, 255, 255, 0.2));
   }
 
-  .spr-ui-hover {
+  .expr-ui-hover {
     background-color: rgba(8, 40, 204, 0.05);
-    background-color: var(--spr-ui-hover, rgba(8, 40, 204, 0.05));
+    background-color: var(--expr-ui-hover, rgba(8, 40, 204, 0.05));
   }
 
-  .spr-ui-hover-reverse {
+  .expr-ui-hover-reverse {
     background-color: rgba(255, 255, 255, 0.1);
-    background-color: var(--spr-ui-hover-reverse, rgba(255, 255, 255, 0.1));
+    background-color: var(--expr-ui-hover-reverse, rgba(255, 255, 255, 0.1));
   }
 
-  .spr-support-error {
+  .expr-support-error {
     background-color: #e44045;
-    background-color: var(--spr-support-error, #e44045);
+    background-color: var(--expr-support-error, #e44045);
   }
 
-  .spr-support-error-highlight {
+  .expr-support-error-highlight {
     background-color: rgba(255, 96, 96, 0.1);
-    background-color: var(--spr-support-error-highlight, rgba(255, 96, 96, 0.1));
+    background-color: var(--expr-support-error-highlight, rgba(255, 96, 96, 0.1));
   }
 
-  .spr-support-success {
+  .expr-support-success {
     background-color: #3fbf41;
-    background-color: var(--spr-support-success, #3fbf41);
+    background-color: var(--expr-support-success, #3fbf41);
   }
 
-  .spr-support-success-highlight {
+  .expr-support-success-highlight {
     background-color: rgba(63, 191, 65, 0.07);
-    background-color: var(--spr-support-success-highlight, rgba(63, 191, 65, 0.07));
+    background-color: var(--expr-support-success-highlight, rgba(63, 191, 65, 0.07));
   }
 
-  .spr-support-warning {
+  .expr-support-warning {
     background-color: #eec202;
-    background-color: var(--spr-support-warning, #eec202);
+    background-color: var(--expr-support-warning, #eec202);
   }
 
-  .spr-support-warning-highlight {
+  .expr-support-warning-highlight {
     background-color: rgba(238, 194, 2, 0.1);
-    background-color: var(--spr-support-warning-highlight, rgba(238, 194, 2, 0.1));
+    background-color: var(--expr-support-warning-highlight, rgba(238, 194, 2, 0.1));
   }
 
-  .spr-clr-blue-highlight {
+  .expr-clr-blue-highlight {
     background-color: #e8f0fe;
-    background-color: var(--spr-clr-blue-highlight, #e8f0fe);
+    background-color: var(--expr-clr-blue-highlight, #e8f0fe);
   }
 
-  .spr-tag {
+  .expr-tag {
     background-color: #f2f2f4;
-    background-color: var(--spr-tag, #f2f2f4);
+    background-color: var(--expr-tag, #f2f2f4);
   }
 
-  .spr-tag-01 {
+  .expr-tag-01 {
     background-color: #f2f2f4;
-    background-color: var(--spr-tag-01, #f2f2f4);
+    background-color: var(--expr-tag-01, #f2f2f4);
   }
 
-  .spr-tag-02 {
+  .expr-tag-02 {
     background-color: rgba(8, 40, 204, 0.07);
-    background-color: var(--spr-tag-02, rgba(8, 40, 204, 0.07));
+    background-color: var(--expr-tag-02, rgba(8, 40, 204, 0.07));
   }
 
-  .spr-field {
+  .expr-field {
     background-color: #dbdbdb;
-    background-color: var(--spr-field, #dbdbdb);
+    background-color: var(--expr-field, #dbdbdb);
   }
 
-  .spr-popup {
+  .expr-popup {
     background-color: #ffffff;
-    background-color: var(--spr-popup, #ffffff);
+    background-color: var(--expr-popup, #ffffff);
   }
 
-  .spr-overlay {
+  .expr-overlay {
     background-color: rgba(10, 10, 20, 0.9);
-    background-color: var(--spr-overlay, rgba(10, 10, 20, 0.9));
+    background-color: var(--expr-overlay, rgba(10, 10, 20, 0.9));
   }
 
-  .spr-tooltip-01 {
+  .expr-tooltip-01 {
     background-color: #0a0a14;
-    background-color: var(--spr-tooltip-01, #0a0a14);
+    background-color: var(--expr-tooltip-01, #0a0a14);
   }
 
-  .spr-highlight {
+  .expr-highlight {
     background-color: rgba(255, 231, 173, 0.7);
-    background-color: var(--spr-highlight, rgba(255, 231, 173, 0.7));
+    background-color: var(--expr-highlight, rgba(255, 231, 173, 0.7));
   }
 
-  .spr-favourite {
+  .expr-favourite {
     background-color: #ff9f21;
-    background-color: var(--spr-favourite, #ff9f21);
+    background-color: var(--expr-favourite, #ff9f21);
   }
 
-  .spr-notification {
+  .expr-notification {
     background-color: #c6202b;
-    background-color: var(--spr-notification, #c6202b);
+    background-color: var(--expr-notification, #c6202b);
   }
 
-  .spr-interactive-01 {
+  .expr-interactive-01 {
     background-color: #0828cc;
-    background-color: var(--spr-interactive-01, #0828cc);
+    background-color: var(--expr-interactive-01, #0828cc);
   }
 
-  .spr-interactive-hover {
+  .expr-interactive-hover {
     background-color: #0729a0;
-    background-color: var(--spr-interactive-hover, #0729a0);
+    background-color: var(--expr-interactive-hover, #0729a0);
   }
 
-  .spr-interactive-disable {
+  .expr-interactive-disable {
     background-color: rgba(255, 255, 255, 0.8);
-    background-color: var(--spr-interactive-disable, rgba(255, 255, 255, 0.8));
+    background-color: var(--expr-interactive-disable, rgba(255, 255, 255, 0.8));
   }
 
-  .spr-interactive-02 {
+  .expr-interactive-02 {
     background-color: #646470;
-    background-color: var(--spr-interactive-02, #646470);
+    background-color: var(--expr-interactive-02, #646470);
   }
 
-  .spr-clr-blue {
+  .expr-clr-blue {
     background-color: #0aa2ff;
-    background-color: var(--spr-clr-blue, #0aa2ff);
+    background-color: var(--expr-clr-blue, #0aa2ff);
   }
 
-  .spr-clr-green {
+  .expr-clr-green {
     background-color: #20963a;
-    background-color: var(--spr-clr-green, #20963a);
+    background-color: var(--expr-clr-green, #20963a);
   }
 
-  .spr-clr-lavender {
+  .expr-clr-lavender {
     background-color: #7f36f6;
-    background-color: var(--spr-clr-lavender, #7f36f6);
+    background-color: var(--expr-clr-lavender, #7f36f6);
   }
 
-  .spr-clr-orange {
+  .expr-clr-orange {
     background-color: #f08c1a;
-    background-color: var(--spr-clr-orange, #f08c1a);
+    background-color: var(--expr-clr-orange, #f08c1a);
   }
 
-  .spr-clr-pink {
+  .expr-clr-pink {
     background-color: #de456b;
-    background-color: var(--spr-clr-pink, #de456b);
+    background-color: var(--expr-clr-pink, #de456b);
   }
 
-  .spr-clr-red {
+  .expr-clr-red {
     background-color: #e44045;
-    background-color: var(--spr-clr-red, #e44045);
+    background-color: var(--expr-clr-red, #e44045);
   }
 
-  .spr-clr-sea {
+  .expr-clr-sea {
     background-color: #16aad2;
-    background-color: var(--spr-clr-sea, #16aad2);
+    background-color: var(--expr-clr-sea, #16aad2);
   }
 
-  .spr-clr-teal {
+  .expr-clr-teal {
     background-color: #13c18d;
-    background-color: var(--spr-clr-teal, #13c18d);
+    background-color: var(--expr-clr-teal, #13c18d);
   }
 
-  .spr-clr-yellow {
+  .expr-clr-yellow {
     background-color: #deac09;
-    background-color: var(--spr-clr-yellow, #deac09);
+    background-color: var(--expr-clr-yellow, #deac09);
   }
 
-  .spr-clr-grey {
+  .expr-clr-grey {
     background-color: #d7d7dc;
-    background-color: var(--spr-clr-grey, #d7d7dc);
+    background-color: var(--expr-clr-grey, #d7d7dc);
   }
 
   .nav-ui-01 {
@@ -3413,209 +3413,209 @@
     background-color: var(--nav-ui-hover-01, rgba(255, 255, 255, 0.3));
   }
 
-  .hover-spr-ui-01:hover {
+  .hover-expr-ui-01:hover {
     background-color: #ffffff;
-    background-color: var(--spr-ui-01, #ffffff);
+    background-color: var(--expr-ui-01, #ffffff);
   }
 
-  .hover-spr-ui-02:hover {
+  .hover-expr-ui-02:hover {
     background-color: #f8f8fa;
-    background-color: var(--spr-ui-02, #f8f8fa);
+    background-color: var(--expr-ui-02, #f8f8fa);
   }
 
-  .hover-spr-ui-03:hover {
+  .hover-expr-ui-03:hover {
     background-color: #f2f2f4;
-    background-color: var(--spr-ui-03, #f2f2f4);
+    background-color: var(--expr-ui-03, #f2f2f4);
   }
 
-  .hover-spr-ui-04:hover {
+  .hover-expr-ui-04:hover {
     background-color: #0828cc;
-    background-color: var(--spr-ui-04, #0828cc);
+    background-color: var(--expr-ui-04, #0828cc);
   }
 
-  .hover-spr-ui-05:hover {
+  .hover-expr-ui-05:hover {
     background-color: #f2f2f4;
-    background-color: var(--spr-ui-05, #f2f2f4);
+    background-color: var(--expr-ui-05, #f2f2f4);
   }
 
-  .hover-spr-ui-06:hover {
+  .hover-expr-ui-06:hover {
     background-color: #e6e6e9;
-    background-color: var(--spr-ui-06, #e6e6e9);
+    background-color: var(--expr-ui-06, #e6e6e9);
   }
 
-  .hover-spr-ui-focus:hover {
+  .hover-expr-ui-focus:hover {
     background-color: rgba(8, 40, 204, 0.07);
-    background-color: var(--spr-ui-focus, rgba(8, 40, 204, 0.07));
+    background-color: var(--expr-ui-focus, rgba(8, 40, 204, 0.07));
   }
 
-  .hover-spr-ui-focus-reverse:hover {
+  .hover-expr-ui-focus-reverse:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    background-color: var(--spr-ui-focus-reverse, rgba(255, 255, 255, 0.2));
+    background-color: var(--expr-ui-focus-reverse, rgba(255, 255, 255, 0.2));
   }
 
-  .hover-spr-ui-hover:hover {
+  .hover-expr-ui-hover:hover {
     background-color: rgba(8, 40, 204, 0.05);
-    background-color: var(--spr-ui-hover, rgba(8, 40, 204, 0.05));
+    background-color: var(--expr-ui-hover, rgba(8, 40, 204, 0.05));
   }
 
-  .hover-spr-ui-hover-reverse:hover {
+  .hover-expr-ui-hover-reverse:hover {
     background-color: rgba(255, 255, 255, 0.1);
-    background-color: var(--spr-ui-hover-reverse, rgba(255, 255, 255, 0.1));
+    background-color: var(--expr-ui-hover-reverse, rgba(255, 255, 255, 0.1));
   }
 
-  .hover-spr-support-error:hover {
+  .hover-expr-support-error:hover {
     background-color: #e44045;
-    background-color: var(--spr-support-error, #e44045);
+    background-color: var(--expr-support-error, #e44045);
   }
 
-  .hover-spr-support-error-highlight:hover {
+  .hover-expr-support-error-highlight:hover {
     background-color: rgba(255, 96, 96, 0.1);
-    background-color: var(--spr-support-error-highlight, rgba(255, 96, 96, 0.1));
+    background-color: var(--expr-support-error-highlight, rgba(255, 96, 96, 0.1));
   }
 
-  .hover-spr-support-success:hover {
+  .hover-expr-support-success:hover {
     background-color: #3fbf41;
-    background-color: var(--spr-support-success, #3fbf41);
+    background-color: var(--expr-support-success, #3fbf41);
   }
 
-  .hover-spr-support-success-highlight:hover {
+  .hover-expr-support-success-highlight:hover {
     background-color: rgba(63, 191, 65, 0.07);
-    background-color: var(--spr-support-success-highlight, rgba(63, 191, 65, 0.07));
+    background-color: var(--expr-support-success-highlight, rgba(63, 191, 65, 0.07));
   }
 
-  .hover-spr-support-warning:hover {
+  .hover-expr-support-warning:hover {
     background-color: #eec202;
-    background-color: var(--spr-support-warning, #eec202);
+    background-color: var(--expr-support-warning, #eec202);
   }
 
-  .hover-spr-support-warning-highlight:hover {
+  .hover-expr-support-warning-highlight:hover {
     background-color: rgba(238, 194, 2, 0.1);
-    background-color: var(--spr-support-warning-highlight, rgba(238, 194, 2, 0.1));
+    background-color: var(--expr-support-warning-highlight, rgba(238, 194, 2, 0.1));
   }
 
-  .hover-spr-clr-blue-highlight:hover {
+  .hover-expr-clr-blue-highlight:hover {
     background-color: #e8f0fe;
-    background-color: var(--spr-clr-blue-highlight, #e8f0fe);
+    background-color: var(--expr-clr-blue-highlight, #e8f0fe);
   }
 
-  .hover-spr-tag:hover {
+  .hover-expr-tag:hover {
     background-color: #f2f2f4;
-    background-color: var(--spr-tag, #f2f2f4);
+    background-color: var(--expr-tag, #f2f2f4);
   }
 
-  .hover-spr-tag-01:hover {
+  .hover-expr-tag-01:hover {
     background-color: #f2f2f4;
-    background-color: var(--spr-tag-01, #f2f2f4);
+    background-color: var(--expr-tag-01, #f2f2f4);
   }
 
-  .hover-spr-tag-02:hover {
+  .hover-expr-tag-02:hover {
     background-color: rgba(8, 40, 204, 0.07);
-    background-color: var(--spr-tag-02, rgba(8, 40, 204, 0.07));
+    background-color: var(--expr-tag-02, rgba(8, 40, 204, 0.07));
   }
 
-  .hover-spr-field:hover {
+  .hover-expr-field:hover {
     background-color: #dbdbdb;
-    background-color: var(--spr-field, #dbdbdb);
+    background-color: var(--expr-field, #dbdbdb);
   }
 
-  .hover-spr-popup:hover {
+  .hover-expr-popup:hover {
     background-color: #ffffff;
-    background-color: var(--spr-popup, #ffffff);
+    background-color: var(--expr-popup, #ffffff);
   }
 
-  .hover-spr-overlay:hover {
+  .hover-expr-overlay:hover {
     background-color: rgba(10, 10, 20, 0.9);
-    background-color: var(--spr-overlay, rgba(10, 10, 20, 0.9));
+    background-color: var(--expr-overlay, rgba(10, 10, 20, 0.9));
   }
 
-  .hover-spr-tooltip-01:hover {
+  .hover-expr-tooltip-01:hover {
     background-color: #0a0a14;
-    background-color: var(--spr-tooltip-01, #0a0a14);
+    background-color: var(--expr-tooltip-01, #0a0a14);
   }
 
-  .hover-spr-highlight:hover {
+  .hover-expr-highlight:hover {
     background-color: rgba(255, 231, 173, 0.7);
-    background-color: var(--spr-highlight, rgba(255, 231, 173, 0.7));
+    background-color: var(--expr-highlight, rgba(255, 231, 173, 0.7));
   }
 
-  .hover-spr-favourite:hover {
+  .hover-expr-favourite:hover {
     background-color: #ff9f21;
-    background-color: var(--spr-favourite, #ff9f21);
+    background-color: var(--expr-favourite, #ff9f21);
   }
 
-  .hover-spr-notification:hover {
+  .hover-expr-notification:hover {
     background-color: #c6202b;
-    background-color: var(--spr-notification, #c6202b);
+    background-color: var(--expr-notification, #c6202b);
   }
 
-  .hover-spr-interactive-01:hover {
+  .hover-expr-interactive-01:hover {
     background-color: #0828cc;
-    background-color: var(--spr-interactive-01, #0828cc);
+    background-color: var(--expr-interactive-01, #0828cc);
   }
 
-  .hover-spr-interactive-hover:hover {
+  .hover-expr-interactive-hover:hover {
     background-color: #0729a0;
-    background-color: var(--spr-interactive-hover, #0729a0);
+    background-color: var(--expr-interactive-hover, #0729a0);
   }
 
-  .hover-spr-interactive-disable:hover {
+  .hover-expr-interactive-disable:hover {
     background-color: rgba(255, 255, 255, 0.8);
-    background-color: var(--spr-interactive-disable, rgba(255, 255, 255, 0.8));
+    background-color: var(--expr-interactive-disable, rgba(255, 255, 255, 0.8));
   }
 
-  .hover-spr-interactive-02:hover {
+  .hover-expr-interactive-02:hover {
     background-color: #646470;
-    background-color: var(--spr-interactive-02, #646470);
+    background-color: var(--expr-interactive-02, #646470);
   }
 
-  .hover-spr-clr-blue:hover {
+  .hover-expr-clr-blue:hover {
     background-color: #0aa2ff;
-    background-color: var(--spr-clr-blue, #0aa2ff);
+    background-color: var(--expr-clr-blue, #0aa2ff);
   }
 
-  .hover-spr-clr-green:hover {
+  .hover-expr-clr-green:hover {
     background-color: #20963a;
-    background-color: var(--spr-clr-green, #20963a);
+    background-color: var(--expr-clr-green, #20963a);
   }
 
-  .hover-spr-clr-lavender:hover {
+  .hover-expr-clr-lavender:hover {
     background-color: #7f36f6;
-    background-color: var(--spr-clr-lavender, #7f36f6);
+    background-color: var(--expr-clr-lavender, #7f36f6);
   }
 
-  .hover-spr-clr-orange:hover {
+  .hover-expr-clr-orange:hover {
     background-color: #f08c1a;
-    background-color: var(--spr-clr-orange, #f08c1a);
+    background-color: var(--expr-clr-orange, #f08c1a);
   }
 
-  .hover-spr-clr-pink:hover {
+  .hover-expr-clr-pink:hover {
     background-color: #de456b;
-    background-color: var(--spr-clr-pink, #de456b);
+    background-color: var(--expr-clr-pink, #de456b);
   }
 
-  .hover-spr-clr-red:hover {
+  .hover-expr-clr-red:hover {
     background-color: #e44045;
-    background-color: var(--spr-clr-red, #e44045);
+    background-color: var(--expr-clr-red, #e44045);
   }
 
-  .hover-spr-clr-sea:hover {
+  .hover-expr-clr-sea:hover {
     background-color: #16aad2;
-    background-color: var(--spr-clr-sea, #16aad2);
+    background-color: var(--expr-clr-sea, #16aad2);
   }
 
-  .hover-spr-clr-teal:hover {
+  .hover-expr-clr-teal:hover {
     background-color: #13c18d;
-    background-color: var(--spr-clr-teal, #13c18d);
+    background-color: var(--expr-clr-teal, #13c18d);
   }
 
-  .hover-spr-clr-yellow:hover {
+  .hover-expr-clr-yellow:hover {
     background-color: #deac09;
-    background-color: var(--spr-clr-yellow, #deac09);
+    background-color: var(--expr-clr-yellow, #deac09);
   }
 
-  .hover-spr-clr-grey:hover {
+  .hover-expr-clr-grey:hover {
     background-color: #d7d7dc;
-    background-color: var(--spr-clr-grey, #d7d7dc);
+    background-color: var(--expr-clr-grey, #d7d7dc);
   }
 
   .hover-nav-ui-01:hover {
@@ -3628,59 +3628,59 @@
     background-color: var(--nav-ui-hover-01, rgba(255, 255, 255, 0.3));
   }
 
-  .spr-link {
+  .expr-link {
     color: #0828cc;
-    color: var(--spr-link, #0828cc);
+    color: var(--expr-link, #0828cc);
   }
 
-  .spr-text-01 {
+  .expr-text-01 {
     color: #0a0a14;
-    color: var(--spr-text-01, #0a0a14);
+    color: var(--expr-text-01, #0a0a14);
   }
 
-  .spr-text-02 {
+  .expr-text-02 {
     color: #646470;
-    color: var(--spr-text-02, #646470);
+    color: var(--expr-text-02, #646470);
   }
 
-  .spr-text-03 {
+  .expr-text-03 {
     color: #a0a0a8;
-    color: var(--spr-text-03, #a0a0a8);
+    color: var(--expr-text-03, #a0a0a8);
   }
 
-  .spr-text-04 {
+  .expr-text-04 {
     color: #0828cc;
-    color: var(--spr-text-04, #0828cc);
+    color: var(--expr-text-04, #0828cc);
   }
 
-  .spr-text-05 {
+  .expr-text-05 {
     color: #ffffff;
-    color: var(--spr-text-05, #ffffff);
+    color: var(--expr-text-05, #ffffff);
   }
 
-  .spr-text-06 {
+  .expr-text-06 {
     color: #ffffff;
-    color: var(--spr-text-06, #ffffff);
+    color: var(--expr-text-06, #ffffff);
   }
 
-  .spr-text-placeholder {
+  .expr-text-placeholder {
     color: #a0a0a8;
-    color: var(--spr-text-placeholder, #a0a0a8);
+    color: var(--expr-text-placeholder, #a0a0a8);
   }
 
-  .spr-support-error-text {
+  .expr-support-error-text {
     color: #c6202b;
-    color: var(--spr-support-error-text, #c6202b);
+    color: var(--expr-support-error-text, #c6202b);
   }
 
-  .spr-support-success-text {
+  .expr-support-success-text {
     color: #20963a;
-    color: var(--spr-support-success-text, #20963a);
+    color: var(--expr-support-success-text, #20963a);
   }
 
-  .spr-support-warning-text {
+  .expr-support-warning-text {
     color: #deac09;
-    color: var(--spr-support-warning-text, #deac09);
+    color: var(--expr-support-warning-text, #deac09);
   }
 
   .nav-text-01 {
@@ -3688,59 +3688,59 @@
     color: var(--nav-text-01, rgba(255, 255, 255, 0.9));
   }
 
-  .hover-spr-link:hover {
+  .hover-expr-link:hover {
     color: #0828cc;
-    color: var(--spr-link, #0828cc);
+    color: var(--expr-link, #0828cc);
   }
 
-  .hover-spr-text-01:hover {
+  .hover-expr-text-01:hover {
     color: #0a0a14;
-    color: var(--spr-text-01, #0a0a14);
+    color: var(--expr-text-01, #0a0a14);
   }
 
-  .hover-spr-text-02:hover {
+  .hover-expr-text-02:hover {
     color: #646470;
-    color: var(--spr-text-02, #646470);
+    color: var(--expr-text-02, #646470);
   }
 
-  .hover-spr-text-03:hover {
+  .hover-expr-text-03:hover {
     color: #a0a0a8;
-    color: var(--spr-text-03, #a0a0a8);
+    color: var(--expr-text-03, #a0a0a8);
   }
 
-  .hover-spr-text-04:hover {
+  .hover-expr-text-04:hover {
     color: #0828cc;
-    color: var(--spr-text-04, #0828cc);
+    color: var(--expr-text-04, #0828cc);
   }
 
-  .hover-spr-text-05:hover {
+  .hover-expr-text-05:hover {
     color: #ffffff;
-    color: var(--spr-text-05, #ffffff);
+    color: var(--expr-text-05, #ffffff);
   }
 
-  .hover-spr-text-06:hover {
+  .hover-expr-text-06:hover {
     color: #ffffff;
-    color: var(--spr-text-06, #ffffff);
+    color: var(--expr-text-06, #ffffff);
   }
 
-  .hover-spr-text-placeholder:hover {
+  .hover-expr-text-placeholder:hover {
     color: #a0a0a8;
-    color: var(--spr-text-placeholder, #a0a0a8);
+    color: var(--expr-text-placeholder, #a0a0a8);
   }
 
-  .hover-spr-support-error-text:hover {
+  .hover-expr-support-error-text:hover {
     color: #c6202b;
-    color: var(--spr-support-error-text, #c6202b);
+    color: var(--expr-support-error-text, #c6202b);
   }
 
-  .hover-spr-support-success-text:hover {
+  .hover-expr-support-success-text:hover {
     color: #20963a;
-    color: var(--spr-support-success-text, #20963a);
+    color: var(--expr-support-success-text, #20963a);
   }
 
-  .hover-spr-support-warning-text:hover {
+  .hover-expr-support-warning-text:hover {
     color: #deac09;
-    color: var(--spr-support-warning-text, #deac09);
+    color: var(--expr-support-warning-text, #deac09);
   }
 
   .hover-nav-text-01:hover {
@@ -3748,49 +3748,49 @@
     color: var(--nav-text-01, rgba(255, 255, 255, 0.9));
   }
 
-  .spr-icon-01 {
+  .expr-icon-01 {
     fill: #0a0a14;
-    fill: var(--spr-icon-01, #0a0a14);
+    fill: var(--expr-icon-01, #0a0a14);
   }
 
-  .spr-icon-02 {
+  .expr-icon-02 {
     fill: #646470;
-    fill: var(--spr-icon-02, #646470);
+    fill: var(--expr-icon-02, #646470);
   }
 
-  .spr-icon-03 {
+  .expr-icon-03 {
     fill: #a0a0a8;
-    fill: var(--spr-icon-03, #a0a0a8);
+    fill: var(--expr-icon-03, #a0a0a8);
   }
 
-  .spr-icon-04 {
+  .expr-icon-04 {
     fill: #0828cc;
-    fill: var(--spr-icon-04, #0828cc);
+    fill: var(--expr-icon-04, #0828cc);
   }
 
-  .spr-icon-05 {
+  .expr-icon-05 {
     fill: #ffffff;
-    fill: var(--spr-icon-05, #ffffff);
+    fill: var(--expr-icon-05, #ffffff);
   }
 
-  .spr-icon-06 {
+  .expr-icon-06 {
     fill: rgba(255, 255, 255, 0.6);
-    fill: var(--spr-icon-06, rgba(255, 255, 255, 0.6));
+    fill: var(--expr-icon-06, rgba(255, 255, 255, 0.6));
   }
 
-  .spr-icon-hover {
+  .expr-icon-hover {
     fill: #0a0a14;
-    fill: var(--spr-icon-hover, #0a0a14);
+    fill: var(--expr-icon-hover, #0a0a14);
   }
 
-  .spr-icon-disable {
+  .expr-icon-disable {
     fill: #d7d7dc;
-    fill: var(--spr-icon-disable, #d7d7dc);
+    fill: var(--expr-icon-disable, #d7d7dc);
   }
 
-  .spr-icon-hover-reverse {
+  .expr-icon-hover-reverse {
     fill: #ffffff;
-    fill: var(--spr-icon-hover-reverse, #ffffff);
+    fill: var(--expr-icon-hover-reverse, #ffffff);
   }
 
   .nav-icon-01 {
@@ -3803,49 +3803,49 @@
     fill: var(--nav-icon-focus-01, #327afd);
   }
 
-  .hover-spr-icon-01:hover {
+  .hover-expr-icon-01:hover {
     fill: #0a0a14;
-    fill: var(--spr-icon-01, #0a0a14);
+    fill: var(--expr-icon-01, #0a0a14);
   }
 
-  .hover-spr-icon-02:hover {
+  .hover-expr-icon-02:hover {
     fill: #646470;
-    fill: var(--spr-icon-02, #646470);
+    fill: var(--expr-icon-02, #646470);
   }
 
-  .hover-spr-icon-03:hover {
+  .hover-expr-icon-03:hover {
     fill: #a0a0a8;
-    fill: var(--spr-icon-03, #a0a0a8);
+    fill: var(--expr-icon-03, #a0a0a8);
   }
 
-  .hover-spr-icon-04:hover {
+  .hover-expr-icon-04:hover {
     fill: #0828cc;
-    fill: var(--spr-icon-04, #0828cc);
+    fill: var(--expr-icon-04, #0828cc);
   }
 
-  .hover-spr-icon-05:hover {
+  .hover-expr-icon-05:hover {
     fill: #ffffff;
-    fill: var(--spr-icon-05, #ffffff);
+    fill: var(--expr-icon-05, #ffffff);
   }
 
-  .hover-spr-icon-06:hover {
+  .hover-expr-icon-06:hover {
     fill: rgba(255, 255, 255, 0.6);
-    fill: var(--spr-icon-06, rgba(255, 255, 255, 0.6));
+    fill: var(--expr-icon-06, rgba(255, 255, 255, 0.6));
   }
 
-  .hover-spr-icon-hover:hover {
+  .hover-expr-icon-hover:hover {
     fill: #0a0a14;
-    fill: var(--spr-icon-hover, #0a0a14);
+    fill: var(--expr-icon-hover, #0a0a14);
   }
 
-  .hover-spr-icon-disable:hover {
+  .hover-expr-icon-disable:hover {
     fill: #d7d7dc;
-    fill: var(--spr-icon-disable, #d7d7dc);
+    fill: var(--expr-icon-disable, #d7d7dc);
   }
 
-  .hover-spr-icon-hover-reverse:hover {
+  .hover-expr-icon-hover-reverse:hover {
     fill: #ffffff;
-    fill: var(--spr-icon-hover-reverse, #ffffff);
+    fill: var(--expr-icon-hover-reverse, #ffffff);
   }
 
   .hover-nav-icon-01:hover {
@@ -3858,158 +3858,158 @@
     fill: var(--nav-icon-focus-01, #327afd);
   }
 
-  .spr-focus-02 {
+  .expr-focus-02 {
     outline: 1px solid #1c62fd;
-    outline: var(--spr-focus-02, 1px solid #1c62fd);
+    outline: var(--expr-focus-02, 1px solid #1c62fd);
     outline: 1px solid #1c62fd;
-    outline: var(--spr-focus-02, 1px solid #1c62fd);
+    outline: var(--expr-focus-02, 1px solid #1c62fd);
   }
 
-  .focus-spr-focus-02:focus {
+  .focus-expr-focus-02:focus {
     outline: 1px solid #1c62fd;
-    outline: var(--spr-focus-02, 1px solid #1c62fd);
+    outline: var(--expr-focus-02, 1px solid #1c62fd);
     outline: 1px solid #1c62fd;
-    outline: var(--spr-focus-02, 1px solid #1c62fd);
+    outline: var(--expr-focus-02, 1px solid #1c62fd);
   }
 
-  .spr-hover {
+  .expr-hover {
     border-color: #0828cc;
-    border-color: var(--spr-hover, #0828cc);
+    border-color: var(--expr-hover, #0828cc);
   }
 
-  .spr-focus-01 {
+  .expr-focus-01 {
     border-color: #0828cc;
-    border-color: var(--spr-focus-01, #0828cc);
+    border-color: var(--expr-focus-01, #0828cc);
   }
 
-  .spr-border-01 {
+  .expr-border-01 {
     border-color: #f2f2f4;
-    border-color: var(--spr-border-01, #f2f2f4);
+    border-color: var(--expr-border-01, #f2f2f4);
   }
 
-  .spr-border-02 {
+  .expr-border-02 {
     border-color: #ececef;
-    border-color: var(--spr-border-02, #ececef);
+    border-color: var(--expr-border-02, #ececef);
   }
 
-  .spr-border-03 {
+  .expr-border-03 {
     border-color: #d7d7dc;
-    border-color: var(--spr-border-03, #d7d7dc);
+    border-color: var(--expr-border-03, #d7d7dc);
   }
 
-  .spr-border-04 {
+  .expr-border-04 {
     border-color: #a0a0a8;
-    border-color: var(--spr-border-04, #a0a0a8);
+    border-color: var(--expr-border-04, #a0a0a8);
   }
 
-  .spr-border-05 {
+  .expr-border-05 {
     border-color: #ffffff;
-    border-color: var(--spr-border-05, #ffffff);
+    border-color: var(--expr-border-05, #ffffff);
   }
 
-  .spr-card-border {
+  .expr-card-border {
     border-color: #ececef;
-    border-color: var(--spr-card-border, #ececef);
+    border-color: var(--expr-card-border, #ececef);
   }
 
-  .spr-popup-border {
+  .expr-popup-border {
     border-color: #d7d7dc;
-    border-color: var(--spr-popup-border, #d7d7dc);
+    border-color: var(--expr-popup-border, #d7d7dc);
   }
 
-  .spr-tooltip-border {
+  .expr-tooltip-border {
     border-color: #0a0a14;
-    border-color: var(--spr-tooltip-border, #0a0a14);
+    border-color: var(--expr-tooltip-border, #0a0a14);
   }
 
-  .spr-interactive-focus {
+  .expr-interactive-focus {
     border-color: #132a86;
-    border-color: var(--spr-interactive-focus, #132a86);
+    border-color: var(--expr-interactive-focus, #132a86);
   }
 
-  .hover-spr-hover:hover {
+  .hover-expr-hover:hover {
     border-color: #0828cc;
-    border-color: var(--spr-hover, #0828cc);
+    border-color: var(--expr-hover, #0828cc);
   }
 
-  .hover-spr-focus-01:hover {
+  .hover-expr-focus-01:hover {
     border-color: #0828cc;
-    border-color: var(--spr-focus-01, #0828cc);
+    border-color: var(--expr-focus-01, #0828cc);
   }
 
-  .hover-spr-border-01:hover {
+  .hover-expr-border-01:hover {
     border-color: #f2f2f4;
-    border-color: var(--spr-border-01, #f2f2f4);
+    border-color: var(--expr-border-01, #f2f2f4);
   }
 
-  .hover-spr-border-02:hover {
+  .hover-expr-border-02:hover {
     border-color: #ececef;
-    border-color: var(--spr-border-02, #ececef);
+    border-color: var(--expr-border-02, #ececef);
   }
 
-  .hover-spr-border-03:hover {
+  .hover-expr-border-03:hover {
     border-color: #d7d7dc;
-    border-color: var(--spr-border-03, #d7d7dc);
+    border-color: var(--expr-border-03, #d7d7dc);
   }
 
-  .hover-spr-border-04:hover {
+  .hover-expr-border-04:hover {
     border-color: #a0a0a8;
-    border-color: var(--spr-border-04, #a0a0a8);
+    border-color: var(--expr-border-04, #a0a0a8);
   }
 
-  .hover-spr-border-05:hover {
+  .hover-expr-border-05:hover {
     border-color: #ffffff;
-    border-color: var(--spr-border-05, #ffffff);
+    border-color: var(--expr-border-05, #ffffff);
   }
 
-  .hover-spr-card-border:hover {
+  .hover-expr-card-border:hover {
     border-color: #ececef;
-    border-color: var(--spr-card-border, #ececef);
+    border-color: var(--expr-card-border, #ececef);
   }
 
-  .hover-spr-popup-border:hover {
+  .hover-expr-popup-border:hover {
     border-color: #d7d7dc;
-    border-color: var(--spr-popup-border, #d7d7dc);
+    border-color: var(--expr-popup-border, #d7d7dc);
   }
 
-  .hover-spr-tooltip-border:hover {
+  .hover-expr-tooltip-border:hover {
     border-color: #0a0a14;
-    border-color: var(--spr-tooltip-border, #0a0a14);
+    border-color: var(--expr-tooltip-border, #0a0a14);
   }
 
-  .hover-spr-interactive-focus:hover {
+  .hover-expr-interactive-focus:hover {
     border-color: #132a86;
-    border-color: var(--spr-interactive-focus, #132a86);
+    border-color: var(--expr-interactive-focus, #132a86);
   }
 
-  .spr-shadow-01 {
+  .expr-shadow-01 {
     box-shadow: 0 1px 4px 0 rgba(10, 10, 20, 0.15);
-    box-shadow: var(--spr-shadow-01, 0 1px 4px 0 rgba(10, 10, 20, 0.15));
+    box-shadow: var(--expr-shadow-01, 0 1px 4px 0 rgba(10, 10, 20, 0.15));
   }
 
-  .spr-shadow-02 {
+  .expr-shadow-02 {
     box-shadow: 0 2px 8px 0 rgba(10, 10, 20, 0.2);
-    box-shadow: var(--spr-shadow-02, 0 2px 8px 0 rgba(10, 10, 20, 0.2));
+    box-shadow: var(--expr-shadow-02, 0 2px 8px 0 rgba(10, 10, 20, 0.2));
   }
 
-  .spr-shadow-03 {
+  .expr-shadow-03 {
     box-shadow: -2px 9px 12px 0 rgba(10, 10, 20, 0.6);
-    box-shadow: var(--spr-shadow-03, -2px 9px 12px 0 rgba(10, 10, 20, 0.6));
+    box-shadow: var(--expr-shadow-03, -2px 9px 12px 0 rgba(10, 10, 20, 0.6));
   }
 
-  .spr-shadow-04 {
+  .expr-shadow-04 {
     box-shadow: 0px -2px 8px 0px rgba(10, 10, 20, 0.2);
-    box-shadow: var(--spr-shadow-04, 0px -2px 8px 0px rgba(10, 10, 20, 0.2));
+    box-shadow: var(--expr-shadow-04, 0px -2px 8px 0px rgba(10, 10, 20, 0.2));
   }
 
-  .spr-shadow-05 {
+  .expr-shadow-05 {
     box-shadow: 0px 3px 4px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: var(--spr-shadow-05, 0px 3px 4px 0 rgba(0, 0, 0, 0.1));
+    box-shadow: var(--expr-shadow-05, 0px 3px 4px 0 rgba(0, 0, 0, 0.1));
   }
 
-  .spr-shadow-06 {
+  .expr-shadow-06 {
     box-shadow: 0px -3px 4px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: var(--spr-shadow-06, 0px -3px 4px 0 rgba(0, 0, 0, 0.1));
+    box-shadow: var(--expr-shadow-06, 0px -3px 4px 0 rgba(0, 0, 0, 0.1));
   }
 
   .gap-1 {

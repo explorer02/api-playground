@@ -2,10 +2,12 @@
 @import '../shared/input/styles.scss';
 @import '../shared/loader/styles.scss';
 @import '../shared/select/styles.scss';
+@import '../shared/snackbar/styles.scss';
 @import '../shared/tooltip/styles.scss';
+@import '../shared/typography/styles.scss';
 
-.explorer-container,
-.explorer-container > * {
+.expr-container,
+.expr-container > * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -13,8 +15,8 @@
     'Helvetica Neue', sans-serif;
 }
 
-.explorer-container {
+.expr-container {
   .border-error {
-    border-color: var(--spr-support-error);
+    border-color: var(--expr-support-error);
   }
 }

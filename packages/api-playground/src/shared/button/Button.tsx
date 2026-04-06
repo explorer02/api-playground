@@ -33,7 +33,7 @@ export const Button = ({
   disabled,
   ...rest
 }: Props) => {
-  const mergedClassName = `explorer-button ${VARIANT_VS_CLASSNAME[variant]} ${SIZE_VS_CLASSNAME[size]} ${
+  const mergedClassName = `expr-button ${VARIANT_VS_CLASSNAME[variant]} ${SIZE_VS_CLASSNAME[size]} ${
     icon ? 'icon' : ''
   } ${selected ? 'selected' : ''} ${disabled ? 'disabled' : ''} ${className ?? ''} `;
 

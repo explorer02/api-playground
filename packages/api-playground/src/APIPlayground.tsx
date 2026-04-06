@@ -4,7 +4,7 @@
 import { ComponentType, useCallback, useMemo, useState } from 'react';
 
 // components
-import { SideNav } from './components/SideNav';
+import { SideNav } from './components/sideNav';
 import { StaticDataViewer } from './components/StaticDataViewer';
 import { CacheViewer } from './components/cacheViewer';
 import { QueryExecutor } from './components/queryExecutor';
@@ -167,7 +167,7 @@ const APIPlaygroundView = ({ config }: { config: TemplateConfig[] }): JSX.Elemen
   }
 
   return (
-    <div className="explorer-container hyperspace-light" style={{ height: '100%' }}>
+    <div className="expr-container hyperspace-light" style={{ height: '100%' }}>
       <TabStateProvider>
         <HistoryProvider instanceId={config[0]?.id ?? 'default'}>
           <SnackbarProvider>
@@ -198,8 +198,8 @@ const APIPlaygroundView = ({ config }: { config: TemplateConfig[] }): JSX.Elemen
 export const APIPlayground = ({ config }: APIPlaygroundProps): JSX.Element => {
   if (!config || config.length === 0) {
     return (
-      <div className="explorer-container hyperspace-light flex items-center justify-center" style={{ height: '100%' }}>
-        <Typography variant="body-16" className="spr-text-03">
+      <div className="expr-container hyperspace-light flex items-center justify-center" style={{ height: '100%' }}>
+        <Typography variant="body-16" className="expr-text-03">
           No templates configured
         </Typography>
       </div>

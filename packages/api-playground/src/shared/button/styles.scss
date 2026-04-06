@@ -1,4 +1,4 @@
-.explorer-button {
+.expr-button {
   font-weight: 500;
 
   border-radius: 8px;
@@ -25,17 +25,17 @@
 
   &.variant-primary {
     border: none;
-    background-color: var(--spr-interactive-01);
-    color: var(--spr-text-05);
+    background-color: var(--expr-interactive-01);
+    color: var(--expr-text-05);
 
     cursor: pointer;
 
     &:hover {
-      background-color: var(--spr-interactive-hover);
+      background-color: var(--expr-interactive-hover);
     }
     &:active,
     &.selected {
-      background-color: var(--spr-interactive-focus);
+      background-color: var(--expr-interactive-focus);
     }
     &.disabled {
       opacity: 0.6;
@@ -44,21 +44,21 @@
   }
 
   &.variant-secondary {
-    border: 1px solid var(--spr-border-03);
-    background-color: var(--spr-ui-01);
-    color: var(--spr-text-01);
+    border: 1px solid var(--expr-border-03);
+    background-color: var(--expr-ui-01);
+    color: var(--expr-text-01);
 
     cursor: pointer;
 
     &:hover {
-      border-color: var(--spr-border-06);
-      background-color: var(--spr-ui-02);
+      border-color: var(--expr-border-06);
+      background-color: var(--expr-ui-02);
     }
     &:active,
     &.selected {
-      background-color: var(--spr-ui-05);
-      border-color: var(--spr-interactive-01);
-      color: var(--spr-interactive-01);
+      background-color: var(--expr-ui-05);
+      border-color: var(--expr-interactive-01);
+      color: var(--expr-interactive-01);
     }
   }
 

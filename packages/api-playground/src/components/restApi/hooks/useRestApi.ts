@@ -1,15 +1,7 @@
 import { useCallback, useState } from 'react';
 import { prettifyJSON } from '~/utils/prettifyJSON';
 
-type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-
-type Header = { key: string; value: string };
-
-type Stats = {
-  duration: number;
-  status: number;
-  statusText: string;
-};
+import { HttpMethod, Header, RestApiStats } from '../types';
 
 type Params = {
   defaultUrl?: string;
@@ -31,7 +23,7 @@ export const useRestApi = ({ defaultUrl, defaultMethod, defaultHeaders, defaultB
   const [body, setBody] = useState(defaultBody ?? '');
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
-  const [stats, setStats] = useState<Stats | null>(null);
+  const [stats, setStats] = useState<RestApiStats | null>(null);
 
   const addHeader = useCallback(() => {
     setHeaders(prev => [...prev, { key: '', value: '' }]);

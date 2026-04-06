@@ -8,9 +8,7 @@ import { VscSend } from 'react-icons/vsc';
 //hooks
 import { useValidateJSON } from '~/hooks/useValidateJSON';
 import { useForm } from '~/components/form';
-
-//utils
-import { prettifyJSON } from '~/utils/prettifyJSON';
+import { useGraphQLExecution } from '~/hooks/useGraphQLExecution';
 
 //types
 import { FetchAndMutateConfig } from '~/types';
@@ -48,44 +46,53 @@ type ReturnType = {
 const EXECUTE_MUTATION = 'EXECUTE_MUTATION';
 
 export const useFetchAndMutate = ({ config, mutationOutputEditorRef, queryOutputEditorRef }: Params): ReturnType => {
-  const [fetching, setFetching] = useState(false);
   const [isQueryExecuted, setIsQueryExecuted] = useState(false);
-  const [mutating, setMutating] = useState(false);
-  const [fetchStats, setFetchStats] = useState<ExecutionStatsData | null>(null);
-  const [mutateStats, setMutateStats] = useState<ExecutionStatsData | null>(null);
 
   const { errors: queryResponseErrors, handleChange: handleQueryResponseChange } = useValidateJSON();
 
   const {
     fetchConfig: { fieldConfigMap, initialValues, validator, getVariables: getQueryVariables, query, cta },
     mutateConfig: { getVariables: getMutationVariables, mutation },
-
     client,
   } = config;
+
+  const fetchExecuteFn = useCallback(
+    async (variables: any) => {
+      const { data, error } = await client.query({ query, variables, fetchPolicy: 'network-only' });
+      return { data, errorMessage: error?.message };
+    },
+    [client, query]
+  );
+
+  const mutateExecuteFn = useCallback(
+    async (variables: any) => {
+      const { data, errors } = await client.mutate({ mutation, variables });
+      return { data, errorMessage: errors?.[0]?.message };
+    },
+    [client, mutation]
+  );
+
+  const {
+    loading: fetching,
+    stats: fetchStats,
+    execute: executeFetch,
+  } = useGraphQLExecution({ executeFn: fetchExecuteFn, outputEditorRef: queryOutputEditorRef });
+
+  const {
+    loading: mutating,
+    stats: mutateStats,
+    execute: executeMutate,
+  } = useGraphQLExecution({ executeFn: mutateExecuteFn, outputEditorRef: mutationOutputEditorRef });
 
   const onFetchSubmit = useCallback(
     async (vals: FormValues) => {
       const variables = getQueryVariables(vals);
-      setFetching(true);
-      setFetchStats(null);
-      const startTime = performance.now();
-      try {
-        const { data, error } = await client.query({ query, variables, fetchPolicy: 'network-only' });
-        const result = prettifyJSON(data) ?? error?.message ?? '';
-        queryOutputEditorRef.current?.setValue(result);
-        setFetchStats({
-          responseTimeMs: Math.round(performance.now() - startTime),
-          payloadSizeBytes: new Blob([result]).size,
-        });
-        if (data) {
-          setIsQueryExecuted(true);
-        }
-      } catch (e: unknown) {
-        queryOutputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
+      const result = await executeFetch(variables);
+      if (result) {
+        setIsQueryExecuted(true);
       }
-      setFetching(false);
     },
-    [client, getQueryVariables, queryOutputEditorRef, query]
+    [getQueryVariables, executeFetch]
   );
 
   const {
@@ -100,32 +107,19 @@ export const useFetchAndMutate = ({ config, mutationOutputEditorRef, queryOutput
   const onQueryActionClick = useCallback(
     async (action: string) => {
       switch (action) {
-        case EXECUTE_MUTATION:
-          try {
-            const mutationVariables = getMutationVariables(
-              JSON.parse(queryOutputEditorRef.current!.getValue() ?? ''),
-              latestFormValuesRef.current
-            );
-            setMutating(true);
-            setMutateStats(null);
-            const mutStart = performance.now();
-            const { data, errors } = await client.mutate({ mutation, variables: mutationVariables });
-            const mutResult = prettifyJSON(data) ?? errors?.[0]?.message ?? '';
-            mutationOutputEditorRef.current?.setValue(mutResult);
-            setMutateStats({
-              responseTimeMs: Math.round(performance.now() - mutStart),
-              payloadSizeBytes: new Blob([mutResult]).size,
-            });
-          } catch (e: unknown) {
-            mutationOutputEditorRef.current?.setValue(e instanceof Error ? e.message : 'Unknown error');
-          }
-          setMutating(false);
+        case EXECUTE_MUTATION: {
+          const mutationVariables = getMutationVariables(
+            JSON.parse(queryOutputEditorRef.current!.getValue() ?? ''),
+            latestFormValuesRef.current
+          );
+          await executeMutate(mutationVariables);
           break;
+        }
         default:
           break;
       }
     },
-    [client, getMutationVariables, mutation, mutationOutputEditorRef, queryOutputEditorRef]
+    [getMutationVariables, queryOutputEditorRef, executeMutate]
   );
 
   const queryActions = useMemo<Action[]>(

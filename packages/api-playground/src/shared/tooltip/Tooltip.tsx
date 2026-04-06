@@ -31,7 +31,7 @@ export const Tooltip = ({ content, children }: Props): JSX.Element => {
       {children({ onMouseEnter, onMouseLeave })}
       {coords ? (
         <div
-          className="explorer-tooltip-container"
+          className="expr-tooltip-container"
           style={{ top: `${coords.top + coords.height}px`, left: `${coords.left + coords.width / 2}px` }}
         >
           <div className="arrow-up" />

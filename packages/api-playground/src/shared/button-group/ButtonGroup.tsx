@@ -22,7 +22,7 @@ export const ButtonGroup = ({ style, className = '', config, selectedIdx, size, 
   return (
     <div>
       <div
-        className={`border-1 border-solid spr-border-03 flex rounded-8 ${className}`}
+        className={`border-1 border-solid expr-border-03 flex rounded-8 ${className}`}
         style={{ padding: '3px', gap: '3px', width: 'fit-content', ...style }}
       >
         {config.map((button, idx) => (

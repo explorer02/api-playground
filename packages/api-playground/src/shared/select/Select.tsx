@@ -31,7 +31,7 @@ export const Select = ({ options, onChange, placeholder = 'Select...', size = 'm
   }, [options, search, touched]);
 
   return (
-    <div className={`explorer-select relative ${className}`}>
+    <div className={`expr-select relative ${className}`}>
       <Popover
         content={({ close }) => (
           <Menu
@@ -61,7 +61,7 @@ export const Select = ({ options, onChange, placeholder = 'Select...', size = 'm
               }}
             />
             <div
-              className="absolute flex items-center cursor-pointer spr-ui-01"
+              className="absolute flex items-center cursor-pointer expr-ui-01"
               style={{ right: '8px', top: '4px', bottom: '4px' }}
             >
               <VscChevronDown
