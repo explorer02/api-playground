@@ -3,7 +3,7 @@
 A React component library for interactive GraphQL & REST API exploration.
 
 [![npm version](https://img.shields.io/npm/v/@explorer02/api-playground.svg)](https://www.npmjs.com/package/@explorer02/api-playground)
-[![Live Demo](https://img.shields.io/badge/demo-live-blue)](/demo)
+[![Live Demo](https://img.shields.io/badge/demo-live-blue)](https://api-playground-git-main-explorer02s-projects.vercel.app/demo)
 
 ---
 

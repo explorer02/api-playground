@@ -6,7 +6,7 @@ An interactive React component library for exploring GraphQL and REST APIs.
 
 ## Links
 
-- [Live Demo](/demo) — try the playground with the Rick & Morty GraphQL API
+- [Live Demo](https://api-playground-git-main-explorer02s-projects.vercel.app/demo) — try the playground with the Rick & Morty GraphQL API
 - [npm](https://www.npmjs.com/package/@explorer02/api-playground)
 - [GitHub](https://github.com/explorer02/api-playground)
 - [Full Documentation](./packages/api-playground/README.md)
