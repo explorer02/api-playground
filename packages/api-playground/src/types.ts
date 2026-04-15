@@ -127,6 +127,24 @@ export type RestApiConfig = CommonConfig & {
   defaultBody?: string;
 };
 
+export type SseConfig = CommonConfig & {
+  type: Template.SSE;
+  url?: string;
+  headers?: Record<string, string>;
+};
+
+export type RestWebsocketConfig = CommonConfig & {
+  type: Template.REST_WEBSOCKET;
+  url?: string;
+};
+
+export type GqlSubscriptionConfig = CommonConfig & {
+  type: Template.GQL_SUBSCRIPTION;
+  wsUrl?: string;
+  query?: string;
+  variables?: string;
+};
+
 type PlainTemplates =
   | StaticDataConfig
   | CacheViewerConfig
@@ -137,7 +155,10 @@ type PlainTemplates =
   | FetchAndMutateConfig
   | CustomTemplateConfig
   | SchemaViewerConfig
-  | RestApiConfig;
+  | RestApiConfig
+  | SseConfig
+  | RestWebsocketConfig
+  | GqlSubscriptionConfig;
 
 export type NestedTemplateConfig = CommonConfig & {
   type: Template.NESTED_TEMPLATE;
@@ -149,6 +170,10 @@ export type TemplateConfig = PlainTemplates | NestedTemplateConfig;
 export type APIPlaygroundProps = {
   config: TemplateConfig[];
 };
+
+/***************************** CONNECTION TYPES ***************************************/
+
+export type ConnectionStatus = 'disconnected' | 'connecting' | 'connected' | 'error';
 
 /***************************** FORM CONFIG ***************************************/
 

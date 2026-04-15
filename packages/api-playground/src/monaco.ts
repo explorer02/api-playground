@@ -9,4 +9,6 @@ export type MonacoEditorType = {
   focus: () => void;
   setValue: (v: string) => void;
   getAction: (action: string) => { run: () => void } | undefined;
+  revealLine: (lineNumber: number) => void;
+  getModel: () => { getLineCount: () => number } | null;
 };

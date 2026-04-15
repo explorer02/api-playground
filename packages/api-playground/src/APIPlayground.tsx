@@ -14,6 +14,9 @@ import { CustomMutation } from './components/customMutation';
 import { FetchAndMutate } from './components/fetchAndMutate';
 import { SchemaViewer } from './components/schemaViewer';
 import { RestApi } from './components/restApi';
+import { Sse } from './components/sse';
+import { RestWebsocket } from './components/restWebsocket';
+import { GqlSubscription } from './components/gqlSubscription';
 import { TabBar, TabInstance } from './components/tabBar/TabBar';
 import { SnackbarProvider } from './context/SnackbarContext';
 import { HistoryProvider } from './context/HistoryContext';
@@ -69,6 +72,9 @@ const TEMPLATE_COMPONENT_MAP: Partial<Record<Template, ComponentType<{ config: a
   [Template.FETCH_AND_MUTATE]: FetchAndMutate,
   [Template.SCHEMA_VIEWER]: SchemaViewer,
   [Template.REST_API]: RestApi,
+  [Template.SSE]: Sse,
+  [Template.REST_WEBSOCKET]: RestWebsocket,
+  [Template.GQL_SUBSCRIPTION]: GqlSubscription,
 };
 
 const APIPlaygroundView = ({ config }: { config: TemplateConfig[] }): JSX.Element => {
