@@ -12,6 +12,7 @@ import { Template } from '~/constants/template';
 import { MutationExecutorConfig } from '~/types';
 import { OnMutationSelect } from '../types';
 import { ExecutionStatsData } from '~/components/executionStats/types';
+import { MonacoEditorType } from '~/monaco';
 
 type ExecutionResult = {
   queryText: string;
@@ -34,10 +35,22 @@ type ReturnType = {
   loading: boolean;
   stats: ExecutionStatsData | null;
   onMutationSelect: OnMutationSelect;
+  inputEditorRef: React.MutableRefObject<MonacoEditorType | undefined>;
+  variableEditorRef: React.MutableRefObject<MonacoEditorType | undefined>;
 };
 
 export const useMutationExecutor = ({ config, tabId, onExecutionComplete }: Params): ReturnType => {
-  const { onSelect, onInputMount, onVariableMount, onOutputMount, onSubmit, loading, stats } = useGraphQLExecutor({
+  const {
+    onSelect,
+    onInputMount,
+    onVariableMount,
+    onOutputMount,
+    onSubmit,
+    loading,
+    stats,
+    inputEditorRef,
+    variableEditorRef,
+  } = useGraphQLExecutor({
     tabStateType: Template.MUTATION_EXECUTOR,
     client: config.client,
     tabId,
@@ -49,5 +62,15 @@ export const useMutationExecutor = ({ config, tabId, onExecutionComplete }: Para
     [onSelect]
   );
 
-  return { onInputMount, onVariableMount, onOutputMount, onSubmit, loading, stats, onMutationSelect };
+  return {
+    onInputMount,
+    onVariableMount,
+    onOutputMount,
+    onSubmit,
+    loading,
+    stats,
+    onMutationSelect,
+    inputEditorRef,
+    variableEditorRef,
+  };
 };

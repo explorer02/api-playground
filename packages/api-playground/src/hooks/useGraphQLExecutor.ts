@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { OnMount } from '@monaco-editor/react';
 import { parse } from 'graphql';
 import { ApolloClient } from '@apollo/client';
+import { MonacoEditorType } from '~/monaco';
 
 //hooks
 import { useMonacoMount } from '~/hooks/useMonacoMount';
@@ -43,6 +44,9 @@ type ReturnType = {
 
   loading: boolean;
   stats: ExecutionStatsData | null;
+
+  inputEditorRef: React.MutableRefObject<MonacoEditorType | undefined>;
+  variableEditorRef: React.MutableRefObject<MonacoEditorType | undefined>;
 };
 
 export const useGraphQLExecutor = ({ tabStateType, client, tabId, onExecutionComplete }: Params): ReturnType => {
@@ -124,8 +128,16 @@ export const useGraphQLExecutor = ({ tabStateType, client, tabId, onExecutionCom
     const result = await execute(variables);
     if (result) {
       const current = getState<EditorTabState>(tabId);
-      setState<EditorTabState>(tabId, { ...current!, stats: { responseTimeMs: result.elapsed, payloadSizeBytes: new Blob([result.result]).size } });
-      onExecutionComplete?.({ queryText, variables: variablesText, result: result.result, responseTimeMs: result.elapsed });
+      setState<EditorTabState>(tabId, {
+        ...current!,
+        stats: { responseTimeMs: result.elapsed, payloadSizeBytes: new Blob([result.result]).size },
+      });
+      onExecutionComplete?.({
+        queryText,
+        variables: variablesText,
+        result: result.result,
+        responseTimeMs: result.elapsed,
+      });
     }
   }, [inputEditorRef, variableEditorRef, execute, getState, setState, tabId, onExecutionComplete]);
 
@@ -146,5 +158,7 @@ export const useGraphQLExecutor = ({ tabStateType, client, tabId, onExecutionCom
     onSelect,
     loading,
     stats,
+    inputEditorRef,
+    variableEditorRef,
   };
 };

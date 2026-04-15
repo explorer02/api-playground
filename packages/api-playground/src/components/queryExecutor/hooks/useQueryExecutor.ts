@@ -12,6 +12,7 @@ import { Template } from '~/constants/template';
 import { QueryExecutorConfig } from '~/types';
 import { OnQuerySelect } from '../types';
 import { ExecutionStatsData } from '~/components/executionStats/types';
+import { MonacoEditorType } from '~/monaco';
 
 type ExecutionResult = {
   queryText: string;
@@ -34,10 +35,22 @@ type ReturnType = {
   onSubmit: () => void;
   loading: boolean;
   stats: ExecutionStatsData | null;
+  inputEditorRef: React.MutableRefObject<MonacoEditorType | undefined>;
+  variableEditorRef: React.MutableRefObject<MonacoEditorType | undefined>;
 };
 
 export const useQueryExecutor = ({ config, tabId, onExecutionComplete }: Params): ReturnType => {
-  const { onSelect, onInputMount, onVariableMount, onOutputMount, onSubmit, loading, stats } = useGraphQLExecutor({
+  const {
+    onSelect,
+    onInputMount,
+    onVariableMount,
+    onOutputMount,
+    onSubmit,
+    loading,
+    stats,
+    inputEditorRef,
+    variableEditorRef,
+  } = useGraphQLExecutor({
     tabStateType: Template.QUERY_EXECUTOR,
     client: config.client,
     tabId,
@@ -49,5 +62,15 @@ export const useQueryExecutor = ({ config, tabId, onExecutionComplete }: Params)
     [onSelect]
   );
 
-  return { onInputMount, onVariableMount, onOutputMount, onSubmit, loading, stats, onQuerySelect };
+  return {
+    onInputMount,
+    onVariableMount,
+    onOutputMount,
+    onSubmit,
+    loading,
+    stats,
+    onQuerySelect,
+    inputEditorRef,
+    variableEditorRef,
+  };
 };

@@ -2,6 +2,7 @@
   "name": "api-playground",
   "version": "0.1.0",
   "private": true,
+  "license": "SEE LICENSE IN LICENSE",
   "workspaces": [
     "packages/*"
   ],
@@ -12,20 +13,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "3.8.7",
     "@types/node": "20.4.6",
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7",
     "eslint": "8.46.0",
     "eslint-config-next": ">=15.2.4",
+    "graphql": "^16.7.1",
     "next": ">=15.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "6.0.2",
-    "@apollo/client": "3.8.7",
-    "graphql": "^16.7.1"
+    "sugar-high": "^1.1.0",
+    "typescript": "6.0.2"
   },
   "resolutions": {
     "@types/react": "18.2.18",
     "@types/react-dom": "18.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^4.2.2"
   }
 }

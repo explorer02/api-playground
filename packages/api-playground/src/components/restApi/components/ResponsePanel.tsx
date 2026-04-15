@@ -15,6 +15,7 @@ import type { RestApiStats } from '../types';
 import type { OnMount } from '@monaco-editor/react';
 import type { MutableRefObject } from 'react';
 import type { MonacoEditorType } from '~/monaco';
+import type { Action } from '~/components/snippet/types';
 
 type Props = {
   response: string;
@@ -22,9 +23,11 @@ type Props = {
   stats: RestApiStats | null;
   responseEditorRef: MutableRefObject<MonacoEditorType | undefined>;
   onResponseMount: OnMount;
+  actions?: Action[];
+  onActionClick?: (action: string) => void;
 };
 
-export const ResponsePanel = ({ response, loading, stats, responseEditorRef, onResponseMount }: Props) => {
+export const ResponsePanel = ({ response, loading, stats, responseEditorRef, onResponseMount, actions, onActionClick }: Props) => {
   useMemo(() => {
     responseEditorRef.current?.setValue(response);
   }, [response, responseEditorRef]);
@@ -40,6 +43,8 @@ export const ResponsePanel = ({ response, loading, stats, responseEditorRef, onR
           language: Language.JSON,
         }}
         loading={loading}
+        actions={actions}
+        onActionClick={onActionClick}
       />
       {stats ? (
         <div

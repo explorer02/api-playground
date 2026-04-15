@@ -1,5 +1,6 @@
 //lib
 import { useCallback } from 'react';
+import { useCopyToClipboard } from 'react-use';
 
 //components
 import { InputEditor } from './components/inputEditor';
@@ -8,12 +9,15 @@ import { OutputEditor } from './components/outputEditor';
 import { QuerySelector } from './components/querySelector';
 import { ExecutionStats } from '../executionStats';
 import { QueryHistory } from '../queryHistory';
-import { VscSend, VscSync } from 'react-icons/vsc';
+import { VscSend, VscSync, VscTerminal } from 'react-icons/vsc';
 import { Button } from '~/shared/button';
 
 //hooks
 import { useQueryExecutor } from './hooks/useQueryExecutor';
 import { useHistory } from '~/context/HistoryContext';
+
+//utils
+import { generateGraphQLCurl, getApolloUri } from '~/utils/generateCurl';
 
 //constants
 import { Template } from '~/constants/template';
@@ -35,11 +39,21 @@ export const QueryExecutor = ({ config, tabId }: { config: QueryExecutorConfig; 
     [addEntry, config.id]
   );
 
-  const { onInputMount, onOutputMount, onVariableMount, onSubmit, loading, onQuerySelect, stats } = useQueryExecutor({
+  const { onInputMount, onOutputMount, onVariableMount, onSubmit, loading, onQuerySelect, stats, inputEditorRef, variableEditorRef } = useQueryExecutor({
     config,
     tabId,
     onExecutionComplete,
   });
+
+  const [, copyToClipboard] = useCopyToClipboard();
+
+  const handleCopyCurl = useCallback(() => {
+    const query = inputEditorRef.current?.getValue() ?? '';
+    const variables = variableEditorRef.current?.getValue() ?? '';
+    const endpoint = getApolloUri(config.client);
+    const curl = generateGraphQLCurl({ endpoint, query, variables: variables || undefined });
+    copyToClipboard(curl);
+  }, [inputEditorRef, variableEditorRef, config.client, copyToClipboard]);
 
   const onHistorySelect = useCallback(
     (entry: HistoryEntry) => {
@@ -56,6 +70,9 @@ export const QueryExecutor = ({ config, tabId }: { config: QueryExecutorConfig; 
           <QueryHistory entries={entries} onSelect={onHistorySelect} onClear={clearHistory} />
           <Button tooltipContent="Refresh Queries" className="flex-none" size="xs" variant="secondary" icon>
             <VscSync size={16} strokeWidth={0.4} />
+          </Button>
+          <Button className="flex-none" size="xs" tooltipContent="Copy as cURL" onClick={handleCopyCurl} icon>
+            <VscTerminal size={16} />
           </Button>
           <Button className="flex-none" size="xs" tooltipContent="Execute" onClick={onSubmit} icon>
             <VscSend />

@@ -1,5 +1,6 @@
 //lib
 import { useCallback } from 'react';
+import { useCopyToClipboard } from 'react-use';
 
 //components
 import { InputEditor } from '../queryExecutor/components/inputEditor';
@@ -8,12 +9,15 @@ import { OutputEditor } from '../queryExecutor/components/outputEditor';
 import { MutationSelector } from './components/mutationSelector';
 import { ExecutionStats } from '../executionStats';
 import { QueryHistory } from '../queryHistory';
-import { VscSend } from 'react-icons/vsc';
+import { VscSend, VscTerminal } from 'react-icons/vsc';
 import { Button } from '~/shared/button';
 
 //hooks
 import { useMutationExecutor } from './hooks/useMutationExecutor';
 import { useHistory } from '~/context/HistoryContext';
+
+//utils
+import { generateGraphQLCurl, getApolloUri } from '~/utils/generateCurl';
 
 //constants
 import { Template } from '~/constants/template';
@@ -35,8 +39,18 @@ export const MutationExecutor = ({ config, tabId }: { config: MutationExecutorCo
     [addEntry, config.id]
   );
 
-  const { onInputMount, onOutputMount, onVariableMount, onSubmit, loading, onMutationSelect, stats } =
+  const { onInputMount, onOutputMount, onVariableMount, onSubmit, loading, onMutationSelect, stats, inputEditorRef, variableEditorRef } =
     useMutationExecutor({ config, tabId, onExecutionComplete });
+
+  const [, copyToClipboard] = useCopyToClipboard();
+
+  const handleCopyCurl = useCallback(() => {
+    const query = inputEditorRef.current?.getValue() ?? '';
+    const variables = variableEditorRef.current?.getValue() ?? '';
+    const endpoint = getApolloUri(config.client);
+    const curl = generateGraphQLCurl({ endpoint, query, variables: variables || undefined });
+    copyToClipboard(curl);
+  }, [inputEditorRef, variableEditorRef, config.client, copyToClipboard]);
 
   const onHistorySelect = useCallback(
     (entry: HistoryEntry) => {
@@ -51,6 +65,9 @@ export const MutationExecutor = ({ config, tabId }: { config: MutationExecutorCo
         <div className="flex-none flex gap-3">
           <MutationSelector config={config} onChange={onMutationSelect} className="flex-1" />
           <QueryHistory entries={entries} onSelect={onHistorySelect} onClear={clearHistory} />
+          <Button className="flex-none" size="xs" tooltipContent="Copy as cURL" onClick={handleCopyCurl} icon>
+            <VscTerminal size={16} />
+          </Button>
           <Button className="flex-none" size="xs" tooltipContent="Execute" onClick={onSubmit} icon>
             <VscSend />
           </Button>
