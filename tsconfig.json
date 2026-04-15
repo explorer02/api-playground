@@ -27,6 +27,9 @@
       "@/*": [
         "./*"
       ],
+      "@explorer02/api-playground": [
+        "./packages/api-playground/src/index.ts"
+      ],
       "@explorer02/api-playground/*": [
         "./packages/api-playground/src/*"
       ],

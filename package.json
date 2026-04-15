@@ -13,6 +13,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@explorer02/api-playground": "*",
     "@apollo/client": "3.8.7",
     "@types/node": "20.4.6",
     "@types/react": "18.2.18",
