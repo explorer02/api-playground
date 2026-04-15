@@ -1,20 +1,26 @@
 @import "tailwindcss";
 
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
+@layer base {
+  html,
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+      Helvetica Neue, sans-serif;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.code-block-theme {
+  --sh-class: #8be9fd;
+  --sh-identifier: #cbd5e1;
+  --sh-sign: #94a3b8;
+  --sh-property: #a5b4fc;
+  --sh-entity: #f9a8d4;
+  --sh-jsxliterals: #7dd3fc;
+  --sh-string: #86efac;
+  --sh-keyword: #c4b5fd;
+  --sh-comment: #475569;
 }
