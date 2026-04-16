@@ -9,11 +9,14 @@ A React component library for interactive GraphQL & REST API exploration.
 
 ## Features
 
-- **11 built-in template types** covering static data display, query/mutation execution, form-driven workflows, REST API testing, schema introspection, and more
+- **14 built-in template types** covering static data display, query/mutation execution, form-driven workflows, REST API testing, streaming (SSE, WebSocket, GraphQL Subscriptions), schema introspection, and more
 - **Monaco Editor** integration with syntax highlighting for JSON, GraphQL, JavaScript, and TypeScript
 - **Apollo Cache Viewer** for inspecting and editing the Apollo Client normalized cache
 - **Form-driven queries and mutations** with validation, initial values, and configurable field layouts
 - **REST API client** with support for GET, POST, PUT, DELETE, and PATCH methods
+- **Server-Sent Events (SSE)** streaming with real-time event display and connection statistics
+- **WebSocket client** for bidirectional messaging with message log and connection management
+- **GraphQL Subscriptions** over WebSocket (graphql-ws protocol) with live message streaming
 - **Schema introspection** via the SCHEMA_VIEWER template
 - **Execution timing** displayed for query and mutation operations
 - **Query history** for previously executed operations
@@ -565,6 +568,99 @@ type RestApiConfig = {
 
 ---
 
+### SSE
+
+A Server-Sent Events (SSE) client for streaming data from an HTTP endpoint. Displays incoming events in real-time with connection statistics.
+
+**Config type:**
+
+```ts
+type SseConfig = {
+  id: string;
+  title: string;
+  type: Template.SSE;
+  url?: string;
+  headers?: Record<string, string>;
+};
+```
+
+**Example:**
+
+```ts
+{
+  id: 'sse',
+  type: Template.SSE,
+  title: 'SSE Stream',
+  url: 'https://stream.wikimedia.org/v2/stream/recentchange',
+}
+```
+
+---
+
+### REST_WEBSOCKET
+
+A raw WebSocket client for sending and receiving messages over a WebSocket connection. Includes a message log and connection status indicator.
+
+**Config type:**
+
+```ts
+type RestWebsocketConfig = {
+  id: string;
+  title: string;
+  type: Template.REST_WEBSOCKET;
+  url?: string;
+};
+```
+
+**Example:**
+
+```ts
+{
+  id: 'rest_websocket',
+  type: Template.REST_WEBSOCKET,
+  title: 'WebSocket',
+  url: 'wss://ws.postman-echo.com/raw',
+}
+```
+
+---
+
+### GQL_SUBSCRIPTION
+
+Executes GraphQL subscriptions over WebSocket using the graphql-ws protocol. Provides editors for the subscription query and variables, and streams incoming messages in real-time.
+
+**Config type:**
+
+```ts
+type GqlSubscriptionConfig = {
+  id: string;
+  title: string;
+  type: Template.GQL_SUBSCRIPTION;
+  wsUrl?: string;
+  query?: string;
+  variables?: string;
+};
+```
+
+**Example:**
+
+```ts
+{
+  id: 'gql_subscription',
+  type: Template.GQL_SUBSCRIPTION,
+  title: 'GQL Subscription',
+  wsUrl: 'wss://demo-router.fly.dev/graphql',
+  query: `subscription {
+  currentTime {
+    unixTime
+  }
+}`,
+  variables: '{}',
+}
+```
+
+---
+
 ## API Reference
 
 ### Exported Component
@@ -575,11 +671,11 @@ type RestApiConfig = {
 
 ### Enums
 
-| Enum            | Values                                                                                                                                                                                |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Template`      | `STATIC_DATA`, `CACHE_VIEWER`, `QUERY_EXECUTOR`, `MUTATION_EXECUTOR`, `CUSTOM_QUERY`, `CUSTOM_MUTATION`, `FETCH_AND_MUTATE`, `NESTED_TEMPLATE`, `CUSTOM`, `SCHEMA_VIEWER`, `REST_API` |
-| `Language`      | `JSON`, `GRAPHQL`, `JAVASCRIPT`, `TYPESCRIPT`                                                                                                                                         |
-| `FormFieldType` | `TEXT`, `NUMBER`, `JSON`                                                                                                                                                              |
+| Enum            | Values                                                                                                                                                                                                                             |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Template`      | `STATIC_DATA`, `CACHE_VIEWER`, `QUERY_EXECUTOR`, `MUTATION_EXECUTOR`, `CUSTOM_QUERY`, `CUSTOM_MUTATION`, `FETCH_AND_MUTATE`, `NESTED_TEMPLATE`, `CUSTOM`, `SCHEMA_VIEWER`, `REST_API`, `SSE`, `REST_WEBSOCKET`, `GQL_SUBSCRIPTION` |
+| `Language`      | `JSON`, `GRAPHQL`, `JAVASCRIPT`, `TYPESCRIPT`                                                                                                                                                                                      |
+| `FormFieldType` | `TEXT`, `NUMBER`, `JSON`                                                                                                                                                                                                           |
 
 ### Exported Types
 
@@ -598,6 +694,9 @@ type RestApiConfig = {
 | `CustomTemplateConfig`   | Config for `CUSTOM` template            |
 | `SchemaViewerConfig`     | Config for `SCHEMA_VIEWER` template     |
 | `RestApiConfig`          | Config for `REST_API` template          |
+| `SseConfig`              | Config for `SSE` template               |
+| `RestWebsocketConfig`    | Config for `REST_WEBSOCKET` template    |
+| `GqlSubscriptionConfig`  | Config for `GQL_SUBSCRIPTION` template  |
 
 ### Utilities
 
