@@ -42,7 +42,7 @@ The following peer dependencies must be installed in your project:
 > **Important:** You must import the stylesheet for the playground to render correctly. Without this import, components will appear unstyled.
 
 ```ts
-import '@explorer02/api-playground/dist/index.css';
+import '@explorer02/api-playground/dist/styles/index.css';
 ```
 
 ---
@@ -52,7 +52,7 @@ import '@explorer02/api-playground/dist/index.css';
 ```tsx
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { APIPlayground, Template } from '@explorer02/api-playground';
-import '@explorer02/api-playground/dist/index.css';
+import '@explorer02/api-playground/dist/styles/index.css';
 
 const client = new ApolloClient({
   uri: 'https://your-graphql-endpoint.com/graphql',

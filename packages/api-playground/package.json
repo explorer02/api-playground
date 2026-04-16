@@ -21,6 +21,7 @@
       "source": "./src/styles/*",
       "default": "./dist/styles/*"
     },
+    "./dist/styles/index.css": "./dist/styles/index.css",
     "./styles.css": "./dist/styles/tailwind.css",
     "./root.css": "./dist/styles/root.css"
   },
