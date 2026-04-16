@@ -47,6 +47,13 @@ export const MenuItem = ({ config, activeNavItem, activeSubNavItem, onNavItemCli
     [config.id, onNavItemClick]
   );
 
+  const onChildAddTab = useCallback(
+    (child: string) => {
+      onAddTab?.(config.id, child);
+    },
+    [config.id, onAddTab]
+  );
+
   return (
     <li className="border-0 border-solid expr-border-03 border-b-1" role="none">
       <div
@@ -96,6 +103,7 @@ export const MenuItem = ({ config, activeNavItem, activeSubNavItem, onNavItemCli
               onClick={onChildItemClick}
               config={child}
               selected={activeSubNavItem === child.id}
+              onAddTab={onAddTab ? onChildAddTab : undefined}
             />
           ))}
         </ul>

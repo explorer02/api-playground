@@ -1,6 +1,7 @@
 // components
 import { Typography } from '~/shared/typography';
 import { BsArrowReturnRight } from 'react-icons/bs';
+import { VscAdd } from 'react-icons/vsc';
 
 // utils
 import { handleKeyDown } from '../utils';
@@ -12,9 +13,10 @@ type Props = {
   config: TemplateConfig;
   selected?: boolean;
   onClick: (id: string) => void;
+  onAddTab?: (id: string) => void;
 };
 
-export const ChildMenuItem = ({ config: { id, title }, selected, onClick }: Props) => {
+export const ChildMenuItem = ({ config: { id, title }, selected, onClick, onAddTab }: Props) => {
   return (
     <li
       role="menuitem"
@@ -28,9 +30,19 @@ export const ChildMenuItem = ({ config: { id, title }, selected, onClick }: Prop
       data-child={id}
     >
       <BsArrowReturnRight size={12} />
-      <Typography variant="body-14" className="truncate">
+      <Typography variant="body-14" className="flex-1 truncate">
         {title}
       </Typography>
+      {onAddTab ? (
+        <VscAdd
+          size={14}
+          className={`${selected ? 'expr-text-05' : 'expr-text-03'} cursor-pointer`}
+          onClick={(e: React.MouseEvent) => {
+            e.stopPropagation();
+            onAddTab(id);
+          }}
+        />
+      ) : null}
     </li>
   );
 };
