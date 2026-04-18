@@ -26,8 +26,8 @@ export const MessageLog = ({ messages, connectionStatus, stats }: Props) => {
   }, [messages]);
 
   return (
-    <div className="flex-1 flex flex-col border-solid border-1 rounded-8 expr-ui-01 expr-border-03 relative">
-      <div className="flex-none flex px-3 py-2 items-center border-0 border-b-1 border-solid expr-border-03">
+    <div className="flex-1 flex flex-col border-solid border rounded-8 expr-ui-01 expr-border-03 relative">
+      <div className="flex-none flex px-3 py-2 items-center border-0 border-b border-solid expr-border-03">
         <Typography variant="h5" className="ml-1">
           Messages
         </Typography>
@@ -43,13 +43,14 @@ export const MessageLog = ({ messages, connectionStatus, stats }: Props) => {
           messages.map(msg => (
             <div
               key={msg.id}
-              className="rounded-8 px-3 py-2 border-solid border-1 expr-border-03"
+              className="rounded-8 px-3 py-2 border-solid border expr-border-03"
               style={{
                 backgroundColor: msg.direction === 'sent' ? 'rgba(59, 130, 246, 0.06)' : 'rgba(34, 197, 94, 0.06)',
               }}
             >
               <div className="flex items-center gap-2 mb-1" style={{ fontSize: '11px' }}>
                 <span
+                  aria-label={msg.direction === 'sent' ? 'Sent message' : 'Received message'}
                   className="flex items-center gap-1 font-semibold"
                   style={{ color: msg.direction === 'sent' ? '#3b82f6' : '#22c55e' }}
                 >
@@ -73,9 +74,11 @@ export const MessageLog = ({ messages, connectionStatus, stats }: Props) => {
           ))
         )}
       </div>
-      {(stats || connectionStatus !== 'disconnected') ? (
+      {stats || connectionStatus !== 'disconnected' ? (
         <div
-          className="flex-none px-3 py-1 expr-ui-02 border-0 border-t-1 border-solid expr-border-03 flex gap-3 items-center expr-text-03"
+          role="status"
+          aria-live="polite"
+          className="flex-none px-3 py-1 expr-ui-02 border-0 border-t border-solid expr-border-03 flex gap-3 items-center expr-text-03"
           style={{ fontSize: '12px' }}
         >
           <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -93,7 +96,9 @@ export const MessageLog = ({ messages, connectionStatus, stats }: Props) => {
           {stats ? (
             <>
               <span>|</span>
-              <span>▲{stats.messagesSent} ▼{stats.messagesReceived}</span>
+              <span>
+                ▲{stats.messagesSent} ▼{stats.messagesReceived}
+              </span>
               <span>|</span>
               <span>{formatDuration(stats.connectionDuration)}</span>
             </>

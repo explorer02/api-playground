@@ -1,16 +1,62 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { ConnectionStatus, WsMessage, WsStats } from '../types';
+import { RestWebsocketTabState, useTabState } from '~/context/TabStateContext';
+
+import { WsMessage, WsStats } from '../types';
+import { ConnectionStatus } from '~/types';
 
 type Params = {
+  tabId: string;
   defaultUrl?: string;
 };
 
-export const useRestWebsocket = ({ defaultUrl }: Params) => {
-  const [url, setUrl] = useState(defaultUrl ?? '');
-  const [messages, setMessages] = useState<WsMessage[]>([]);
+export const useRestWebsocket = ({ tabId, defaultUrl }: Params) => {
+  const { getState, setState } = useTabState();
+  const saved = getState<RestWebsocketTabState>(tabId);
+
+  const [url, setUrl] = useState(saved?.url ?? defaultUrl ?? '');
+  const [messageDraft, setMessageDraft] = useState(saved?.messageDraft ?? '');
+  const [messages, setMessages] = useState<WsMessage[]>(saved?.messages ?? []);
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('disconnected');
   const [stats, setStats] = useState<WsStats | null>(null);
+
+  const persist = useCallback(
+    (patch: Partial<Omit<RestWebsocketTabState, 'type'>>) => {
+      const current = getState<RestWebsocketTabState>(tabId);
+      setState<RestWebsocketTabState>(tabId, {
+        type: 'REST_WEBSOCKET',
+        url: '',
+        messageDraft: '',
+        messages: [],
+        connectionStatus: 'disconnected',
+        ...current,
+        ...patch,
+      });
+    },
+    [tabId, getState, setState]
+  );
+
+  const setUrlPersist = useCallback(
+    (next: string | ((prev: string) => string)) => {
+      setUrl(prev => {
+        const value = typeof next === 'function' ? next(prev) : next;
+        persist({ url: value });
+        return value;
+      });
+    },
+    [persist]
+  );
+
+  const setMessageDraftPersist = useCallback(
+    (next: string | ((prev: string) => string)) => {
+      setMessageDraft(prev => {
+        const value = typeof next === 'function' ? next(prev) : next;
+        persist({ messageDraft: value });
+        return value;
+      });
+    },
+    [persist]
+  );
 
   const wsRef = useRef<WebSocket | null>(null);
   const durationIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -36,6 +82,17 @@ export const useRestWebsocket = ({ defaultUrl }: Params) => {
     }
   }, []);
 
+  const appendMessage = useCallback(
+    (msg: WsMessage) => {
+      setMessages(prev => {
+        const next = [...prev, msg];
+        persist({ messages: next });
+        return next;
+      });
+    },
+    [persist]
+  );
+
   const connect = useCallback(() => {
     if (!url.trim()) return;
 
@@ -44,6 +101,7 @@ export const useRestWebsocket = ({ defaultUrl }: Params) => {
     setMessages([]);
     statsRef.current = { connectionDuration: 0, messagesSent: 0, messagesReceived: 0 };
     setStats(null);
+    persist({ connectionStatus: 'connecting', messages: [] });
 
     try {
       const ws = new WebSocket(url);
@@ -52,6 +110,7 @@ export const useRestWebsocket = ({ defaultUrl }: Params) => {
 
       ws.onopen = () => {
         setConnectionStatus('connected');
+        persist({ connectionStatus: 'connected' });
         durationIntervalRef.current = setInterval(() => {
           statsRef.current = {
             ...statsRef.current,
@@ -68,7 +127,7 @@ export const useRestWebsocket = ({ defaultUrl }: Params) => {
           data: typeof event.data === 'string' ? event.data : String(event.data),
           timestamp: Date.now(),
         };
-        setMessages(prev => [...prev, msg]);
+        appendMessage(msg);
         statsRef.current = {
           ...statsRef.current,
           messagesReceived: statsRef.current.messagesReceived + 1,
@@ -78,49 +137,58 @@ export const useRestWebsocket = ({ defaultUrl }: Params) => {
 
       ws.onclose = () => {
         setConnectionStatus('disconnected');
+        persist({ connectionStatus: 'disconnected' });
         cleanup();
       };
 
       ws.onerror = () => {
         setConnectionStatus('error');
+        persist({ connectionStatus: 'error' });
         cleanup();
       };
     } catch {
       setConnectionStatus('error');
+      persist({ connectionStatus: 'error' });
       cleanup();
     }
-  }, [url, cleanup]);
+  }, [url, cleanup, appendMessage, persist]);
 
   const disconnect = useCallback(() => {
     cleanup();
     setConnectionStatus('disconnected');
-  }, [cleanup]);
+    persist({ connectionStatus: 'disconnected' });
+  }, [cleanup, persist]);
 
   useEffect(() => {
     return () => cleanup();
   }, [cleanup]);
 
-  const sendMessage = useCallback((data: string) => {
-    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN || !data.trim()) return;
+  const sendMessage = useCallback(
+    (data: string) => {
+      if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN || !data.trim()) return;
 
-    wsRef.current.send(data);
-    const msg: WsMessage = {
-      id: nextMessageId(),
-      direction: 'sent',
-      data,
-      timestamp: Date.now(),
-    };
-    setMessages(prev => [...prev, msg]);
-    statsRef.current = {
-      ...statsRef.current,
-      messagesSent: statsRef.current.messagesSent + 1,
-    };
-    setStats({ ...statsRef.current });
-  }, []);
+      wsRef.current.send(data);
+      const msg: WsMessage = {
+        id: nextMessageId(),
+        direction: 'sent',
+        data,
+        timestamp: Date.now(),
+      };
+      appendMessage(msg);
+      statsRef.current = {
+        ...statsRef.current,
+        messagesSent: statsRef.current.messagesSent + 1,
+      };
+      setStats({ ...statsRef.current });
+    },
+    [appendMessage]
+  );
 
   return {
     url,
-    setUrl,
+    setUrl: setUrlPersist,
+    messageDraft,
+    setMessageDraft: setMessageDraftPersist,
     messages,
     connectionStatus,
     stats,

@@ -6,10 +6,12 @@ import { useRestWebsocket } from './hooks/useRestWebsocket';
 
 import { RestWebsocketConfig } from '~/types';
 
-export const RestWebsocket = ({ config }: { config: RestWebsocketConfig }) => {
+export const RestWebsocket = ({ config, tabId }: { config: RestWebsocketConfig; tabId: string }) => {
   const {
     url,
     setUrl,
+    messageDraft,
+    setMessageDraft,
     messages,
     connectionStatus,
     stats,
@@ -17,6 +19,7 @@ export const RestWebsocket = ({ config }: { config: RestWebsocketConfig }) => {
     disconnect,
     sendMessage,
   } = useRestWebsocket({
+    tabId,
     defaultUrl: config.url,
   });
 
@@ -31,7 +34,12 @@ export const RestWebsocket = ({ config }: { config: RestWebsocketConfig }) => {
           onDisconnect={disconnect}
           placeholder="Enter WebSocket URL (ws:// or wss://)"
         />
-        <MessageInput connectionStatus={connectionStatus} onSend={sendMessage} />
+        <MessageInput
+          connectionStatus={connectionStatus}
+          onSend={sendMessage}
+          draft={messageDraft}
+          setDraft={setMessageDraft}
+        />
       </div>
       <MessageLog messages={messages} connectionStatus={connectionStatus} stats={stats} />
     </div>

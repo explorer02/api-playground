@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { SseTabState, useTabState } from '~/context/TabStateContext';
 import { Header } from '~/components/restApi/types';
 
-import { ConnectionStatus, SseStats } from '../types';
+import { SseStats } from '../types';
+import { ConnectionStatus } from '~/types';
 
 type Params = {
+  tabId: string;
   defaultUrl?: string;
   defaultHeaders?: Record<string, string>;
 };
@@ -15,12 +18,53 @@ const toHeaderArray = (headers?: Record<string, string>): Header[] => {
   return entries.length > 0 ? entries : [{ key: '', value: '' }];
 };
 
-export const useSse = ({ defaultUrl, defaultHeaders }: Params) => {
-  const [url, setUrl] = useState(defaultUrl ?? '');
-  const [headers, setHeaders] = useState<Header[]>(toHeaderArray(defaultHeaders));
-  const [events, setEvents] = useState('');
+export const useSse = ({ tabId, defaultUrl, defaultHeaders }: Params) => {
+  const { getState, setState } = useTabState();
+  const saved = getState<SseTabState>(tabId);
+
+  const [url, setUrl] = useState(saved?.url ?? defaultUrl ?? '');
+  const [headers, setHeaders] = useState<Header[]>(saved?.headers ?? toHeaderArray(defaultHeaders));
+  const [events, setEvents] = useState(saved?.events ?? '');
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('disconnected');
   const [stats, setStats] = useState<SseStats | null>(null);
+
+  const persist = useCallback(
+    (patch: Partial<Omit<SseTabState, 'type'>>) => {
+      const current = getState<SseTabState>(tabId);
+      setState<SseTabState>(tabId, {
+        type: 'SSE',
+        url: '',
+        headers: [{ key: '', value: '' }],
+        events: '',
+        connectionStatus: 'disconnected',
+        ...current,
+        ...patch,
+      });
+    },
+    [tabId, getState, setState]
+  );
+
+  const setUrlPersist = useCallback(
+    (next: string | ((prev: string) => string)) => {
+      setUrl(prev => {
+        const value = typeof next === 'function' ? next(prev) : next;
+        persist({ url: value });
+        return value;
+      });
+    },
+    [persist]
+  );
+
+  const persistHeaders = useCallback(
+    (updater: (prev: Header[]) => Header[]) => {
+      setHeaders(prev => {
+        const next = updater(prev);
+        persist({ headers: next });
+        return next;
+      });
+    },
+    [persist]
+  );
 
   const abortControllerRef = useRef<AbortController | null>(null);
   const durationIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -29,16 +73,22 @@ export const useSse = ({ defaultUrl, defaultHeaders }: Params) => {
   const statsRef = useRef<SseStats>({ connectionDuration: 0, eventsReceived: 0, totalBytes: 0 });
 
   const addHeader = useCallback(() => {
-    setHeaders(prev => [...prev, { key: '', value: '' }]);
-  }, []);
+    persistHeaders(prev => [...prev, { key: '', value: '' }]);
+  }, [persistHeaders]);
 
-  const removeHeader = useCallback((index: number) => {
-    setHeaders(prev => prev.filter((_, i) => i !== index));
-  }, []);
+  const removeHeader = useCallback(
+    (index: number) => {
+      persistHeaders(prev => prev.filter((_, i) => i !== index));
+    },
+    [persistHeaders]
+  );
 
-  const updateHeader = useCallback((index: number, field: 'key' | 'value', val: string) => {
-    setHeaders(prev => prev.map((h, i) => (i === index ? { ...h, [field]: val } : h)));
-  }, []);
+  const updateHeader = useCallback(
+    (index: number, field: 'key' | 'value', val: string) => {
+      persistHeaders(prev => prev.map((h, i) => (i === index ? { ...h, [field]: val } : h)));
+    },
+    [persistHeaders]
+  );
 
   const cleanup = useCallback(() => {
     if (durationIntervalRef.current) {
@@ -51,15 +101,24 @@ export const useSse = ({ defaultUrl, defaultHeaders }: Params) => {
     }
   }, []);
 
+  const writeEvents = useCallback(
+    (next: string) => {
+      eventsRef.current = next;
+      setEvents(next);
+      persist({ events: next });
+    },
+    [persist]
+  );
+
   const connect = useCallback(async () => {
     if (!url.trim()) return;
 
     cleanup();
     setConnectionStatus('connecting');
-    setEvents('');
-    eventsRef.current = '';
+    writeEvents('');
     statsRef.current = { connectionDuration: 0, eventsReceived: 0, totalBytes: 0 };
     setStats(null);
+    persist({ connectionStatus: 'connecting' });
 
     const headerObj: Record<string, string> = {};
     headers.forEach(h => {
@@ -87,19 +146,22 @@ export const useSse = ({ defaultUrl, defaultHeaders }: Params) => {
 
       if (!res.ok) {
         setConnectionStatus('error');
-        setEvents(`Error: ${res.status} ${res.statusText}`);
+        writeEvents(`Error: ${res.status} ${res.statusText}`);
+        persist({ connectionStatus: 'error' });
         cleanup();
         return;
       }
 
       if (!res.body) {
         setConnectionStatus('error');
-        setEvents('Error: No response body (streaming not supported)');
+        writeEvents('Error: No response body (streaming not supported)');
+        persist({ connectionStatus: 'error' });
         cleanup();
         return;
       }
 
       setConnectionStatus('connected');
+      persist({ connectionStatus: 'connected' });
 
       const reader = res.body.getReader();
       const decoder = new TextDecoder();
@@ -122,14 +184,14 @@ export const useSse = ({ defaultUrl, defaultHeaders }: Params) => {
             if (!data) continue;
 
             const separator = eventsRef.current ? '\n---\n' : '';
-            eventsRef.current += separator + data;
+            const nextEvents = eventsRef.current + separator + data;
             statsRef.current = {
               ...statsRef.current,
               eventsReceived: statsRef.current.eventsReceived + 1,
               totalBytes: statsRef.current.totalBytes + new Blob([data]).size,
             };
 
-            setEvents(eventsRef.current);
+            writeEvents(nextEvents);
             setStats({ ...statsRef.current });
           }
         }
@@ -137,25 +199,28 @@ export const useSse = ({ defaultUrl, defaultHeaders }: Params) => {
 
       // Stream ended naturally
       setConnectionStatus('disconnected');
+      persist({ connectionStatus: 'disconnected' });
       cleanup();
     } catch (e: unknown) {
       if (e instanceof DOMException && e.name === 'AbortError') {
         setConnectionStatus('disconnected');
+        persist({ connectionStatus: 'disconnected' });
       } else {
         setConnectionStatus('error');
         const msg = e instanceof Error ? e.message : 'Connection failed';
         const separator = eventsRef.current ? '\n---\n' : '';
-        eventsRef.current += separator + `Error: ${msg}`;
-        setEvents(eventsRef.current);
+        writeEvents(eventsRef.current + separator + `Error: ${msg}`);
+        persist({ connectionStatus: 'error' });
       }
       cleanup();
     }
-  }, [url, headers, cleanup]);
+  }, [url, headers, cleanup, writeEvents, persist]);
 
   const disconnect = useCallback(() => {
     cleanup();
     setConnectionStatus('disconnected');
-  }, [cleanup]);
+    persist({ connectionStatus: 'disconnected' });
+  }, [cleanup, persist]);
 
   useEffect(() => {
     return () => cleanup();
@@ -163,7 +228,7 @@ export const useSse = ({ defaultUrl, defaultHeaders }: Params) => {
 
   return {
     url,
-    setUrl,
+    setUrl: setUrlPersist,
     headers,
     addHeader,
     removeHeader,

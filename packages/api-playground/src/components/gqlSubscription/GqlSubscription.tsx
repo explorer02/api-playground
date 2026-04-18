@@ -24,7 +24,9 @@ const StatsBar = ({
 
   return (
     <div
-      className="absolute bottom-0 left-0 right-0 px-3 py-1 expr-ui-02 border-0 border-t-1 border-solid expr-border-03 flex gap-3 items-center expr-text-03"
+      role="status"
+      aria-live="polite"
+      className="absolute bottom-0 left-0 right-0 px-3 py-1 expr-ui-02 border-0 border-t border-solid expr-border-03 flex gap-3 items-center expr-text-03"
       style={{ fontSize: '12px', zIndex: 1 }}
     >
       <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -51,32 +53,54 @@ const StatsBar = ({
   );
 };
 
-export const GqlSubscription = ({ config }: { config: GqlSubscriptionConfig }) => {
-  const { wsUrl, setWsUrl, defaultQuery, defaultVariables, events, connectionStatus, stats, connect, disconnect } =
-    useGqlSubscription({
-      defaultWsUrl: config.wsUrl,
-      defaultQuery: config.query,
-      defaultVariables: config.variables,
-    });
+export const GqlSubscription = ({ config, tabId }: { config: GqlSubscriptionConfig; tabId: string }) => {
+  const {
+    wsUrl,
+    setWsUrl,
+    initialQuery,
+    initialVariables,
+    saveQuery,
+    saveVariables,
+    events,
+    connectionStatus,
+    stats,
+    connect,
+    disconnect,
+  } = useGqlSubscription({
+    tabId,
+    defaultWsUrl: config.wsUrl,
+    defaultQuery: config.query,
+    defaultVariables: config.variables,
+  });
 
   const { editorRef: queryEditorRef, onMount: onQueryMountBase } = useMonacoMount();
   const { editorRef: variableEditorRef, onMount: onVariableMountBase } = useMonacoMount();
-  const { editorRef: outputEditorRef, onMount: onOutputMount } = useMonacoMount();
+  const { editorRef: outputEditorRef, onMount: onOutputMountBase } = useMonacoMount();
+
+  const onOutputMount = useCallback<OnMount>(
+    (editor, monaco) => {
+      onOutputMountBase(editor, monaco);
+      if (events) editor.setValue(events);
+    },
+    [onOutputMountBase, events]
+  );
 
   const onQueryMount = useCallback<OnMount>(
     (editor, monaco) => {
       onQueryMountBase(editor, monaco);
-      if (defaultQuery) editor.setValue(defaultQuery);
+      if (initialQuery) editor.setValue(initialQuery);
+      editor.onDidChangeModelContent(() => saveQuery(editor.getValue()));
     },
-    [onQueryMountBase, defaultQuery]
+    [onQueryMountBase, initialQuery, saveQuery]
   );
 
   const onVariableMount = useCallback<OnMount>(
     (editor, monaco) => {
       onVariableMountBase(editor, monaco);
-      if (defaultVariables) editor.setValue(defaultVariables);
+      if (initialVariables) editor.setValue(initialVariables);
+      editor.onDidChangeModelContent(() => saveVariables(editor.getValue()));
     },
-    [onVariableMountBase, defaultVariables]
+    [onVariableMountBase, initialVariables, saveVariables]
   );
 
   const handleConnect = useCallback(() => {

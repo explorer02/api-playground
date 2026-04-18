@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 import { VscSend } from 'react-icons/vsc';
+import { OnMount } from '@monaco-editor/react';
 
 import { Snippet } from '~/components/snippet';
 import { Language } from '~/constants/language';
@@ -11,11 +12,22 @@ import { ConnectionStatus } from '../types';
 type Props = {
   connectionStatus: ConnectionStatus;
   onSend: (data: string) => void;
+  draft: string;
+  setDraft: (value: string) => void;
 };
 
-export const MessageInput = ({ connectionStatus, onSend }: Props) => {
-  const { editorRef, onMount } = useMonacoMount();
+export const MessageInput = ({ connectionStatus, onSend, draft, setDraft }: Props) => {
+  const { editorRef, onMount: rawMount } = useMonacoMount();
   const isConnected = connectionStatus === 'connected';
+
+  const onMount = useCallback<OnMount>(
+    (editor, monaco) => {
+      rawMount(editor, monaco);
+      if (draft) editor.setValue(draft);
+      editor.onDidChangeModelContent(() => setDraft(editor.getValue()));
+    },
+    [rawMount, draft, setDraft]
+  );
 
   const handleSend = useCallback(() => {
     const value = editorRef.current?.getValue();
@@ -42,7 +54,7 @@ export const MessageInput = ({ connectionStatus, onSend }: Props) => {
             disabled: !isConnected,
           },
         ]}
-        onActionClick={(action) => {
+        onActionClick={action => {
           if (action === 'SEND') handleSend();
         }}
       />

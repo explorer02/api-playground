@@ -1,1 +1,1 @@
-export const prettifyJSON = (obj: Object): string => JSON.stringify(obj, null, 4);
+export const prettifyJSON = (obj: unknown): string => JSON.stringify(obj, null, 4);

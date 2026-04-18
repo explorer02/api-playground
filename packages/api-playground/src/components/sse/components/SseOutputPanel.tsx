@@ -46,7 +46,9 @@ export const SseOutputPanel = ({ events, connectionStatus, stats, editorRef, onM
       />
       {stats || connectionStatus !== 'disconnected' ? (
         <div
-          className="absolute bottom-0 left-0 right-0 px-3 py-1 expr-ui-02 border-0 border-t-1 border-solid expr-border-03 flex gap-3 items-center expr-text-03"
+          role="status"
+          aria-live="polite"
+          className="absolute bottom-0 left-0 right-0 px-3 py-1 expr-ui-02 border-0 border-t border-solid expr-border-03 flex gap-3 items-center expr-text-03"
           style={{ fontSize: '12px', zIndex: 1 }}
         >
           <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
