@@ -1,6 +1,6 @@
 {
   "name": "@explorer02/api-playground",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "API Playground component",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
