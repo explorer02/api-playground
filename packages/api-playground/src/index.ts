@@ -18,6 +18,9 @@ export type {
   CustomTemplateConfig,
   SchemaViewerConfig,
   RestApiConfig,
+  SseConfig,
+  RestWebsocketConfig,
+  GqlSubscriptionConfig,
 } from './types';
 
 export { FieldConfigMapBuilder } from './utils/FieldConfigMapBuilder';

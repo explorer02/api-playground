@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'API Playground - Interactive GraphQL & REST API Explorer',
   description:
     'A React component library for interactive GraphQL and REST API exploration. Built with Apollo Client, Monaco Editor, and TypeScript.',
+  icons: {
+    icon: '/favicon.svg',
+  },
   openGraph: {
     title: 'API Playground',
     description: 'Interactive GraphQL & REST API Explorer',

@@ -331,4 +331,34 @@ type Query {
     defaultMethod: 'GET',
     defaultHeaders: { 'Content-Type': 'application/json' },
   },
+
+  // 13. SSE - Server-Sent Events streaming
+  {
+    id: 'sse',
+    type: Template.SSE,
+    title: 'SSE Stream',
+    url: 'https://stream.wikimedia.org/v2/stream/recentchange',
+  },
+
+  // 14. REST_WEBSOCKET - Raw WebSocket client
+  {
+    id: 'rest_websocket',
+    type: Template.REST_WEBSOCKET,
+    title: 'WebSocket',
+    url: 'wss://ws.postman-echo.com/raw',
+  },
+
+  // 15. GQL_SUBSCRIPTION - GraphQL subscriptions over WebSocket
+  {
+    id: 'gql_subscription',
+    type: Template.GQL_SUBSCRIPTION,
+    title: 'GQL Subscription',
+    wsUrl: 'wss://demo-router.fly.dev/graphql',
+    query: `subscription {
+  currentTime {
+    unixTime
+  }
+}`,
+    variables: '{}',
+  },
 ];
