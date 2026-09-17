@@ -7,6 +7,7 @@ export default defineConfig(options => ({
   splitting: false,
   sourcemap: true,
   clean: true,
+  outExtension: ({ format }) => ({ js: format === 'cjs' ? '.cjs' : '.mjs' }),
   onSuccess: options.watch ? 'node scripts/buildStyles.js' : undefined,
   minify: true,
   external: [

@@ -37,7 +37,7 @@ The following peer dependencies must be installed in your project:
 
 - `react` (>=18.0.0)
 - `react-dom` (>=18.0.0)
-- `@apollo/client` (>=3.8.0)
+- `@apollo/client` (>=3.8.0 <4)
 - `graphql` (>=16.0.0)
 
 ### CSS Imports
