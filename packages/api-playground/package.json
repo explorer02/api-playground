@@ -18,7 +18,6 @@
     },
     "./styles/*": "./dist/styles/*",
     "./dist/index.css": "./dist/index.css",
-    "./dist/styles/index.css": "./dist/styles/index.css",
     "./styles.css": "./dist/styles/tailwind.css",
     "./root.css": "./dist/styles/root.css"
   },

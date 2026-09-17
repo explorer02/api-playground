@@ -1,11 +1,11 @@
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useIsClientSide = () => {
   const [isMounted, setMounted] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setMounted(true);
   }, []);
 
-  return isMounted || typeof window !== 'undefined';
+  return isMounted;
 };

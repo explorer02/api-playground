@@ -45,7 +45,7 @@ The following peer dependencies must be installed in your project:
 > **Important:** You must import the stylesheet for the playground to render correctly. Without this import, components will appear unstyled.
 
 ```ts
-import '@explorer02/api-playground/dist/styles/index.css';
+import '@explorer02/api-playground/dist/index.css';
 ```
 
 ---
@@ -55,7 +55,7 @@ import '@explorer02/api-playground/dist/styles/index.css';
 ```tsx
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { APIPlayground, Template } from '@explorer02/api-playground';
-import '@explorer02/api-playground/dist/styles/index.css';
+import '@explorer02/api-playground/dist/index.css';
 
 const client = new ApolloClient({
   uri: 'https://your-graphql-endpoint.com/graphql',
@@ -129,7 +129,7 @@ You can also display a raw string with a specific language for syntax highlighti
 }
 ```
 
-![STATIC_DATA template](./docs/screenshots/static-data.png)
+![STATIC_DATA template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/static-data.png)
 
 ---
 
@@ -160,7 +160,7 @@ type CacheViewerConfig = {
 }
 ```
 
-![CACHE_VIEWER template](./docs/screenshots/cache-viewer.png)
+![CACHE_VIEWER template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/cache-viewer.png)
 
 ---
 
@@ -200,7 +200,7 @@ type QueryExecutorConfig = {
 }
 ```
 
-![QUERY_EXECUTOR template](./docs/screenshots/query-executor.png)
+![QUERY_EXECUTOR template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/query-executor.png)
 
 ---
 
@@ -244,7 +244,7 @@ type MutationExecutorConfig = {
 }
 ```
 
-![MUTATION_EXECUTOR template](./docs/screenshots/mutation-executor.png)
+![MUTATION_EXECUTOR template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/mutation-executor.png)
 
 ---
 
@@ -305,7 +305,7 @@ const fieldConfigMap = new FieldConfigMapBuilder()
 }
 ```
 
-![CUSTOM_QUERY template](./docs/screenshots/custom-query.png)
+![CUSTOM_QUERY template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/custom-query.png)
 
 ---
 
@@ -347,7 +347,7 @@ type CustomMutationConfig = {
 }
 ```
 
-![CUSTOM_MUTATION template](./docs/screenshots/custom-mutation.png)
+![CUSTOM_MUTATION template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/custom-mutation.png)
 
 ---
 
@@ -409,7 +409,7 @@ type FetchAndMutateConfig = {
 }
 ```
 
-![FETCH_AND_MUTATE template](./docs/screenshots/fetch-and-mutate.png)
+![FETCH_AND_MUTATE template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/fetch-and-mutate.png)
 
 ---
 
@@ -462,7 +462,7 @@ type NestedTemplateConfig = {
 }
 ```
 
-![NESTED_TEMPLATE template](./docs/screenshots/nested-template.png)
+![NESTED_TEMPLATE template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/nested-template.png)
 
 ---
 
@@ -499,7 +499,7 @@ const AboutPanel = () => (
 }
 ```
 
-![CUSTOM template](./docs/screenshots/custom.png)
+![CUSTOM template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/custom.png)
 
 ---
 
@@ -529,7 +529,7 @@ type SchemaViewerConfig = {
 }
 ```
 
-![SCHEMA_VIEWER template](./docs/screenshots/schema-viewer.png)
+![SCHEMA_VIEWER template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/schema-viewer.png)
 
 ---
 
@@ -564,7 +564,7 @@ type RestApiConfig = {
 }
 ```
 
-![REST_API template](./docs/screenshots/rest-api.png)
+![REST_API template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/rest-api.png)
 
 ---
 
@@ -595,6 +595,8 @@ type SseConfig = {
 }
 ```
 
+![SSE template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/sse.png)
+
 ---
 
 ### REST_WEBSOCKET
@@ -622,6 +624,8 @@ type RestWebsocketConfig = {
   url: 'wss://ws.postman-echo.com/raw',
 }
 ```
+
+![REST_WEBSOCKET template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/rest-websocket.png)
 
 ---
 
@@ -658,6 +662,8 @@ type GqlSubscriptionConfig = {
   variables: '{}',
 }
 ```
+
+![GQL_SUBSCRIPTION template](https://raw.githubusercontent.com/explorer02/api-playground/main/packages/api-playground/docs/screenshots/gql-subscription.png)
 
 ---
 
